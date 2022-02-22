@@ -15,58 +15,20 @@ pageEncoding="UTF-8"%>
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="../css/base.css" />
         <style>
-            * {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
+            .right-box {
+                flex-direction: column;
+                align-items: flex-start;
             }
             .container {
-                padding-top: 32px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .main-img {
-                width: 250px;
-                height: 250px;
-                object-fit: cover;
-                margin-top: 16px;
-                border-radius: 16px;
-            }
-            .des-box {
-                margin-top: 24px;
-                margin-bottom: 24px;
-            }
-            .left-box {
-                margin-right: 32px;
-            }
-            #bonus {
-                color: rgb(163, 0, 0);
-            }
-            #back-btn i {
-                margin-right: 4px;
-            }
-            #back-btn {
-                color: black;
-                text-decoration: none;
-                font-size: 12px;
-                text-transform: uppercase;
-                font-weight: 500;
-                margin-bottom: 32px;
-            }
-            #price {
-                margin: 8px 0px;
-            }
-            .btn {
-                background-color: white;
-                padding: 6px 12px;
-                border-radius: 12px;
-                cursor: pointer;
-            }
-            #bonus {
-                font-size: 12px;
+                flex-direction: row;
             }
         </style>
     </head>
@@ -103,6 +65,11 @@ pageEncoding="UTF-8"%>
                 </button>
             </div>
         </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"
+        ></script>
     </body>
     <script>
         checkDur = () => {
@@ -115,7 +82,7 @@ pageEncoding="UTF-8"%>
             if (dur.value == 12) bonusText.innerHTML = 'Tặng thêm 3 tháng';
             priceText.innerHTML = price * dur.value + " vnd";
         };
-        
+
         checkDur();
 
         chotDon = () => {

@@ -9,100 +9,12 @@ pageEncoding="UTF-8"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Giỏ hàng</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/base.css">
         <style>
-            * {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-            body {
-                display: flex;
-                justify-content: center;
-            }
-            .container {
-                padding-top: 32px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+            .item-container{
                 width: 500px;
-            }
-            .main-img {
-                width: 250px;
-                height: 250px;
-                object-fit: cover;
-                margin-top: 16px;
-                border-radius: 16px;
-            }
-            .des-box {
-                margin-top: 24px;
-                margin-bottom: 24px;
-            }
-            .left-box {
-                margin-right: 32px;
-            }
-            #bonus {
-                color: rgb(163, 0, 0);
-            }
-            #back-btn i {
-                margin-right: 4px;
-            }
-            #back-btn {
-                color: black;
-                text-decoration: none;
-                font-size: 16px;
-                text-transform: uppercase;
-                font-weight: 500;
-                margin-bottom: 24px;
-                display: block;
-            }
-            #price {
-                margin: 8px 0px;
-            }
-            .btn {
-                background-color: white;
-                padding: 6px 12px;
-                border-radius: 12px;
-                cursor: pointer;
-            }
-            #bonus {
-                font-size: 12px;
-            }
-            .item-container {
-                padding: 8px 16px;
-                margin: 4px 0px;
-                display: flex;
-                width: 500px;
-                border: solid #ccc 1px;
-                justify-content: center;
-            }
-            .right-box {
-                display: flex;
-                flex: 1;
-                justify-content: flex-end;
-                align-items: center;
-            }
-            .final-price {
-                margin: 0px 16px;
-            }
-            #purchase {
-                margin: 32px 0px 32px 16px;
-                align-self: flex-end;
-            }
-            .item-list {
-                margin-top: 32px;
-            }
-            #total{
-                margin: 0 2px 0 8px;
-            }
-            .purchase-box{
-                display: flex;
-                align-items: center;
-                align-self: flex-end;
-            }
-            .remove-btn{
-                cursor: pointer;
+                flex-direction: row;
             }
         </style>
         <link
@@ -151,6 +63,7 @@ pageEncoding="UTF-8"%>
                 <button class="btn" id="purchase">Thanh toán</button>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
     <script>
             let totalPrice = document.getElementById("total");

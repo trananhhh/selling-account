@@ -62,36 +62,25 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        int planIndex = Integer.parseInt(request.getParameter("plan"));
-//        int duration = Integer.parseInt(request.getParameter("dur"));
+        int planIndex = Integer.parseInt(request.getParameter("plan")) - 1;
+        int duration = Integer.parseInt(request.getParameter("dur"));
 
-int planIndex = 1;
-//        HttpSession session = request.getSession();
+//        int planIndex = 1;
+        HttpSession session = request.getSession();
         PlansDAO pd = new PlansDAO();
         List<Plan> list = pd.getAllPlans();
         Plan x = list.get(planIndex);
-        List<Item> listItems = new ArrayList<>() ;
-        
-        listItems.add(new Item(x, 6));
-        listItems.add(new Item(x, 12));
-        listItems.add(new Item(x, 6));
-        listItems.add(new Item(x, 12));
-        listItems.add(new Item(x, 6));
-        listItems.add(new Item(x, 12));
-        listItems.add(new Item(x, 6));
-        listItems.add(new Item(x, 12));
-//        try {
-//            listItems = (ArrayList) session.getAttribute("itemsInCart");
-//        } catch (Exception e) {
-//            System.err.println(e);
-//        }
-            
-//        listItems.add(new Item(x, duration));
-        
-//        session.setAttribute("itemsInCart", listItems);
-        request.setAttribute("itemsInCart", listItems);
-//        request.setAttribute("plan", planIndex);
-//        request.setAttribute("dur", duration);
+        try {
+            List<Item> listItems = (List<Item>) session.getAttribute("itemsInCart");
+            if(listItems == null)
+                listItems = new ArrayList<>();
+            listItems.add(new Item(x, duration));
+            session.setAttribute("itemsInCart", listItems);
+            request.setAttribute("itemsInCart", listItems);
+        } catch (Exception e) {
+            System.err.println(e);
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
+        }
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
