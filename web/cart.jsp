@@ -73,7 +73,7 @@ pageEncoding="UTF-8"%>
             totalPrice.innerHTML = s.toLocaleString();
 
             removeItem = (id) => {
-                if(confirm("Bạn muốn xoá sản phẩm này?")){
+                if(confirm("Bạn muốn xoá sản phẩm này?ahihi")){
                     window.location = "./delete-item-in-cart?id=" + id;
                 }
 
