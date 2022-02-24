@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
     </head>
     <body>
         <div class="container">
-            <h1>Giỏ hàng của bạn</h1>
+            <h1>Giỏ hàng</h1>
             <div class="item-list">
                 <a href="./plans" id="back-btn"
                     ><i class="fa-solid fa-arrow-left"></i>Mua thêm</a

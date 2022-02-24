@@ -24,6 +24,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>controller.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminUserManangementServlet</servlet-name>
+        <servlet-class>controller.AdminUserManangementServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserSearchServlet</servlet-name>
+        <servlet-class>controller.AdminUserSearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserManangementServlet</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserSearchServlet</servlet-name>
+        <url-pattern>/admin/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

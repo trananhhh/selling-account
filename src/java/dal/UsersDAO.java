@@ -37,6 +37,31 @@ public class UsersDAO extends DBContext{
         return list;
     }
     
+    
+    public List<User> getUsersByKey(String key){
+        List<User> list = new ArrayList<>();
+        String SQLCommand = "SELECT * FROM Users WHERE Username like ? OR Password Like ? OR Phone like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            st.setString(1, '%' + key + '%');
+            st.setString(2, '%' + key + '%');
+            st.setString(3, '%' + key + '%');
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                int id           = rs.getInt(1);
+                String username  = rs.getNString(2);
+                String password  = rs.getNString(3);
+                String email     = rs.getNString(4);
+                String phone     = rs.getNString(5);
+                int role         = rs.getInt(6);
+                list.add(new User(id, username, password, email, phone, role));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+    
     public int checkLogin(String user, String pass){
         List<User> list = getAllUsers();
         for(User u : list){
@@ -52,8 +77,7 @@ public class UsersDAO extends DBContext{
     
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
-        List<User> list = pd.getAllUsers();
-        System.out.println(list.get(1).getUsername());
-        System.out.println(pd.checkLogin("userr", "1234"));
+        List<User> list = pd.getUsersByKey("a");
+        System.out.println(list.get(0).getUsername());
     }
 }
