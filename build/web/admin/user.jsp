@@ -55,6 +55,8 @@
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Eye</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,10 +67,11 @@
                 <tr>
                     <td><%= x.getId() %></td>
                     <td><%= x.getUsername()%></td>
-                    <td><input type="password" value="<%=  x.getPassword()%>" disabled></td>
+                    <td><input type="password" value="<%=x.getPassword()%>" disabled></td>
                     <td><%= x.getEmail()%></td>
                     <td><%= x.getPhone()%></td>
                     <td><%= x.getRole()%></td>
+                    <td><a href="/account/admin/useredit?id=<%=x.getId()%>">Edit</a></td>
                 </tr>
                 <%
                     }

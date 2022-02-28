@@ -37,6 +37,33 @@ public class UsersDAO extends DBContext{
         return list;
     }
     
+    public User getUserByID(String xCode) {
+        String xSql = "select * from Train where code=?";
+        User res=null;
+        
+        try {
+         PreparedStatement ps = connection.prepareStatement(xSql);
+         ps.setString(1, xCode);
+         ResultSet rs = ps.executeQuery();
+         
+         
+         if(rs.next()) {
+            int id           = rs.getInt(1);
+            String username  = rs.getNString(2);
+            String password  = rs.getNString(3);
+            String email     = rs.getNString(4);
+            String phone     = rs.getNString(5);
+            int role         = rs.getInt(6);
+            res=new User(id,username,password,email,phone,role);
+          }
+          rs.close();        
+          ps.close();
+         }
+         catch(Exception e) {
+           e.printStackTrace();
+         }       
+        return res;
+    }
     
     public List<User> getUsersByKey(String key){
         List<User> list = new ArrayList<>();
