@@ -37,8 +37,17 @@ public class UsersDAO extends DBContext{
         return list;
     }
     
+    public List<User> getListByPage(List<User> list,int start,int end){
+        List<User> arr=new ArrayList<>();
+        for(int i=start;i<end;i++){
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    
     public User getUserByID(String xCode) {
-        String xSql = "select * from Train where code=?";
+        String xSql = "select * from Users where id=?";
         User res=null;
         
         try {

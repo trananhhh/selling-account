@@ -14,20 +14,23 @@
     </head>
     <body>
         <%
-            User temp=(User)request.getAttribute("id");
-            if(temp==null)return;
+            User user=(User)request.getAttribute("user");
+            if(user==null)return;
         %>
-        <form action="/account/admin/user" method="POST">
+        <form action="/admin/user" method="POST">
            ID:
-           <input type="text" name="code" value="<%= temp.getCode() %> " placeholder="Ex:A1"/></br>
+           <input type="text" name="code" value="<%= user.getId() %> " disabled/></br>
            Username:
-           <input type="text" name="driver" value="<%= temp.getDriver() %>" placeholder="Ex:A1"/></br>
-           Rate of the train:
-           <input type="text" name="rate" value="<%= temp.getRate() %>" placeholder="Ex:A1"/></br>
+           <input type="text" name="driver" value="<%= user.getUsername() %>" disabled/></br>
+           Password:
+           <input type="text" name="rate" value="<%= user.getPassword() %>" /></br>
+           Email:
+           <input type="text" name="rate" value="<%= user.getEmail() %>" /></br>
+           Phone:
+           <input type="text" name="rate" value="<%= user.getPhone() %>" /></br>
+           Role:
+           <input type="text" name="rate" value="<%= user.getRole() %>" /></br>
            <input type="submit" value="Update"/>
         </form>
-        <a href="listTrain">View all train</a>
-        <p><button onclick='window.history.go(-1);'>Back to previous page</button>
-        <p><a href="index.html">Back to homepage</a>
     </body>
 </html>

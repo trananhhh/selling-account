@@ -61,7 +61,27 @@ public class AdminUserManangementServlet extends HttpServlet {
             throws ServletException, IOException {
         UsersDAO ud = new UsersDAO();
         List<User> list = ud.getAllUsers();
-        request.setAttribute("users", list);
+        int numPs=list.size();
+        int numperPage=20;
+        int numpage=numPs/numperPage+(numPs%numperPage==0?0:1);
+        int start,end;
+        String tpage=request.getParameter("page");
+        int page;
+        try{
+            page=Integer.parseInt(tpage);
+        }catch(NumberFormatException e){
+            page=1;
+        }
+        start=(page-1)*numperPage;
+        if(page*numperPage>numPs){
+            end=numPs;
+        }else
+            end=page*numperPage;
+        List<User> arr=ud.getListByPage(list, start, end);
+        //so phan tu cua 1 trang
+        request.setAttribute("data", arr);
+        //so trang
+        request.setAttribute("num", numpage);
         request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
     }
 

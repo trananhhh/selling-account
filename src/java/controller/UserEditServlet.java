@@ -66,7 +66,7 @@ public class UserEditServlet extends HttpServlet {
         
         if(temp==null){
             pr.print("<h2>User not exist</h2>");
-            request.getRequestDispatcher("/admin/user").include(request, response);
+            //request.getRequestDispatcher("/admin/user").include(request, response);
         }else{
             request.setAttribute("user", temp);
             request.getRequestDispatcher("/admin/userUpdate.jsp").include(request, response);

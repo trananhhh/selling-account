@@ -45,7 +45,14 @@
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-            
+        <%
+          int numPage= (Integer) request.getAttribute("num");
+          for(int i=1;i<=numPage;i++){
+        %>
+            <a href="/account/admin/user?page=<%=i%>" > Page <%=i%> </a>
+        <%
+          }
+        %>    
         <table class="table table-responsive">
             <thead>
                 <tr>
@@ -61,7 +68,7 @@
             </thead>
             <tbody>
                 <%
-                    List<User> list = (List<User>) request.getAttribute("users");
+                    List<User> list = (List<User>) request.getAttribute("data");
                     for(User x : list){
                 %>
                 <tr>
