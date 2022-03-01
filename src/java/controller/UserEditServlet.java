@@ -5,22 +5,20 @@
  */
 package controller;
 
-import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.User;
+import dal.*;
 
 /**
  *
- * @author _trananhhh
+ * @author NVT
  */
-public class AdminUserManangementServlet extends HttpServlet {
+public class UserEditServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +37,10 @@ public class AdminUserManangementServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminUserManangementServlet</title>");            
+            out.println("<title>Servlet UserEditServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminUserManangementServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserEditServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,47 +58,19 @@ public class AdminUserManangementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-        HttpSession session = request.getSession();
-        try {
-            int userRole = Integer.parseInt(session.getAttribute("role").toString());
-            if(userRole == 0){
-                UsersDAO ud = new UsersDAO();
-                List<User> list = ud.getAllUsers();
-                request.setAttribute("users", list);
-                request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
-            }
-            else
-                response.sendRedirect("../index.jsp");
-        } catch (Exception e) {
-            response.sendRedirect("../login");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr = response.getWriter();
+        String id=request.getParameter("id");
+        UsersDAO f = new UsersDAO();
+        User temp=f.getUserByID(id);
+        
+        if(temp==null){
+            pr.print("<h2>User not exist</h2>");
+            //request.getRequestDispatcher("/admin/user").include(request, response);
+        }else{
+            request.setAttribute("user", temp);
+            request.getRequestDispatcher("/admin/userUpdate.jsp").include(request, response);
         }
-=======
-        UsersDAO ud = new UsersDAO();
-        List<User> list = ud.getAllUsers();
-        int numPs=list.size();
-        int numperPage=20;
-        int numpage=numPs/numperPage+(numPs%numperPage==0?0:1);
-        int start,end;
-        String tpage=request.getParameter("page");
-        int page;
-        try{
-            page=Integer.parseInt(tpage);
-        }catch(NumberFormatException e){
-            page=1;
-        }
-        start=(page-1)*numperPage;
-        if(page*numperPage>numPs){
-            end=numPs;
-        }else
-            end=page*numperPage;
-        List<User> arr=ud.getListByPage(list, start, end);
-        //so phan tu cua 1 trang
-        request.setAttribute("data", arr);
-        //so trang
-        request.setAttribute("num", numpage);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
->>>>>>> 3b279d38055d3c03e4207c68b5bb71f7ec0ea750
     }
 
     /**
@@ -114,7 +84,7 @@ public class AdminUserManangementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
