@@ -63,8 +63,6 @@ public class PlansServlet extends HttpServlet {
 //        PlansDAO pd = new PlansDAO();
 //        List<Plan> list = pd.getAllPlans();
 //        request.setAttribute("plans", list);
-        HttpSession session=request.getSession();
-        session.setAttribute("username", "Alex");
         request.getRequestDispatcher("./plans/index.jsp").forward(request, response);
     }
 

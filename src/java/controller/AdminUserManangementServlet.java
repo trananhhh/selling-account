@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 
 /**
@@ -59,10 +60,20 @@ public class AdminUserManangementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UsersDAO ud = new UsersDAO();
-        List<User> list = ud.getAllUsers();
-        request.setAttribute("users", list);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        try {
+            int userRole = Integer.parseInt(session.getAttribute("role").toString());
+            if(userRole == 0){
+                UsersDAO ud = new UsersDAO();
+                List<User> list = ud.getAllUsers();
+                request.setAttribute("users", list);
+                request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+            }
+            else
+                response.sendRedirect("../index.jsp");
+        } catch (Exception e) {
+            response.sendRedirect("../login");
+        }
     }
 
     /**

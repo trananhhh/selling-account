@@ -23,13 +23,12 @@ public class UsersDAO extends DBContext{
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                int id           = rs.getInt(1);
-                String username  = rs.getNString(2);
-                String password  = rs.getNString(3);
-                String email     = rs.getNString(4);
-                String phone     = rs.getNString(5);
-                int role         = rs.getInt(6);
-                list.add(new User(id, username, password, email, phone, role));
+                String username  = rs.getNString(1);
+                String password  = rs.getNString(2);
+                String email     = rs.getNString(3);
+                String phone     = rs.getNString(4);
+                int role         = rs.getInt(5);
+                list.add(new User(username, password, email, phone, role));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -48,13 +47,12 @@ public class UsersDAO extends DBContext{
             st.setString(3, '%' + key + '%');
             ResultSet rs = st.executeQuery();
             while(rs.next()){
-                int id           = rs.getInt(1);
-                String username  = rs.getNString(2);
-                String password  = rs.getNString(3);
-                String email     = rs.getNString(4);
-                String phone     = rs.getNString(5);
-                int role         = rs.getInt(6);
-                list.add(new User(id, username, password, email, phone, role));
+                String username  = rs.getNString(1);
+                String password  = rs.getNString(2);
+                String email     = rs.getNString(3);
+                String phone     = rs.getNString(4);
+                int role         = rs.getInt(5);
+                list.add(new User(username, password, email, phone, role));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -77,6 +75,7 @@ public class UsersDAO extends DBContext{
     
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
+//        List<User> list = pd.getUsersByKey("a");
         List<User> list = pd.getUsersByKey("a");
         System.out.println(list.get(0).getUsername());
     }

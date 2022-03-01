@@ -11,14 +11,12 @@ package model;
  */
 public class User {
     /*
-	ID int NOT NULL PRIMARY KEY,
-	Username nvarchar (500) NOT NULL,
+	Username nvarchar (500) NOT NULL PRIMARY KEY,
 	Password nvarchar (500) NOT NULL,
 	Email nvarchar (500) NOT NULL,
 	Phone nvarchar (500) NOT NULL,
 	Role int NOT NULL,
     */
-    private int id;
     private String username;
     private String password;
     private String email;
@@ -28,23 +26,14 @@ public class User {
     public User() {
     }
 
-    public User(int id, String username, String password, String email, String phone, int role) {
-        this.id = id;
+    public User(String username, String password, String email, String phone, int role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.role = role;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
     public String getUsername() {
         return username;
     }

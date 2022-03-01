@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -59,8 +60,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        request.getRequestDispatcher("./login.jsp").forward(request, response);
+        response.sendRedirect("./login.jsp");
+//        request.getRequestDispatcher("./login.jsp").forward(request, response);
     }
 
     /**
@@ -74,13 +75,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session=request.getSession();
         try {
             String username = request.getParameter("username").toString();
             String password = request.getParameter("password").toString();
         
             UsersDAO ud = new UsersDAO();
             int status = ud.checkLogin(username, password);
-            request.setAttribute("username", username);
             switch(status){
                 case -2:
                     request.setAttribute("err", "Username bạn vừa nhập không tồn tại, hãy kiểm tra lại hoặc tạo tài khoản mới!");
@@ -93,19 +95,25 @@ public class LoginServlet extends HttpServlet {
                     break;
 
                 case 0:{
-                    request.getRequestDispatcher("./index.jsp").forward(request, response);
+                    session.setAttribute("username", username);
+                    session.setAttribute("role", 0);
+//                    response.sendRedirect("./admin/index.jsp");
+                    request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
                 }
 
                 case 1:{
-                    request.getRequestDispatcher("./index.jsp").forward(request, response);
+                    session.setAttribute("username", username);
+                    session.setAttribute("role", 1);
+                    response.sendRedirect("./index.jsp");
+//                    request.getRequestDispatcher("./index.jsp").forward(request, response);
                 }
             }
             
         } catch (Exception e) { 
-                request.getRequestDispatcher("./login.jsp").forward(request, response);
+            response.sendRedirect("./login.jsp");
+//                request.getRequestDispatcher("./login.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("./login.jsp").forward(request, response);
-        processRequest(request, response);
+        response.sendRedirect("./login.jsp");
     }
 
     /**
