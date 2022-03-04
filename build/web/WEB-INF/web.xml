@@ -36,6 +36,10 @@
         <servlet-name>UserEditServlet</servlet-name>
         <servlet-class>controller.UserEditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>UserEditServlet</servlet-name>
         <url-pattern>/admin/useredit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

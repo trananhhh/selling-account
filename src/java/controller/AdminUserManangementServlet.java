@@ -60,14 +60,38 @@ public class AdminUserManangementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
         HttpSession session = request.getSession();
         try {
-            int userRole = Integer.parseInt(session.getAttribute("role").toString());
-            if(userRole == 0){
+            String userRole = session.getAttribute("role").toString();
+            if(userRole.equals("0")){
                 UsersDAO ud = new UsersDAO();
                 List<User> list = ud.getAllUsers();
-                request.setAttribute("users", list);
+                
+                int numPs = list.size();
+                int numperPage = 20;
+                int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
+                int start, end;
+                int page;
+                
+                PrintWriter out = response.getWriter();
+                String tpage = request.getParameter("page");
+                
+                try{
+                    page = Integer.parseInt(tpage);
+                }catch(NumberFormatException e){
+                    page = 1;
+                }
+                start = (page-1)*numperPage;
+                if(page*numperPage > numPs)
+                    end = numPs;
+                else
+                    end = page*numperPage;
+                List<User> arr = ud.getListByPage(list, start, end);
+                //so phan tu cua 1 trang
+                request.setAttribute("data", arr);
+                //so trang
+                request.setAttribute("num", numpage);
+                request.setAttribute("curPage", page);
                 request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
             }
             else
@@ -75,32 +99,6 @@ public class AdminUserManangementServlet extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("../login");
         }
-=======
-        UsersDAO ud = new UsersDAO();
-        List<User> list = ud.getAllUsers();
-        int numPs=list.size();
-        int numperPage=20;
-        int numpage=numPs/numperPage+(numPs%numperPage==0?0:1);
-        int start,end;
-        String tpage=request.getParameter("page");
-        int page;
-        try{
-            page=Integer.parseInt(tpage);
-        }catch(NumberFormatException e){
-            page=1;
-        }
-        start=(page-1)*numperPage;
-        if(page*numperPage>numPs){
-            end=numPs;
-        }else
-            end=page*numperPage;
-        List<User> arr=ud.getListByPage(list, start, end);
-        //so phan tu cua 1 trang
-        request.setAttribute("data", arr);
-        //so trang
-        request.setAttribute("num", numpage);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
->>>>>>> 3b279d38055d3c03e4207c68b5bb71f7ec0ea750
     }
 
     /**

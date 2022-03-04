@@ -5,7 +5,6 @@
  */
 package controller;
 
-import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author _trananhhh
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +36,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-//            out.println("<title>" +request.getAttribute("username").toString() +  "</title>");            
+            out.println("<title>Servlet LogoutServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1> hello </h1>");
-//            out.println("<h1>" + request.getAttribute("username").toString() + "</h1>");
-//            out.println("<h1>" + request.getAttribute("password").toString() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,8 +57,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("./login.jsp");
-//        request.getRequestDispatcher("./login.jsp").forward(request, response);
+        
+        HttpSession session = request.getSession();
+        session.removeAttribute("username");
+        session.removeAttribute("role");
+        response.sendRedirect("./index.jsp");
     }
 
     /**
@@ -75,47 +75,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session=request.getSession();
-        try {
-            String username = request.getParameter("username").toString();
-            String password = request.getParameter("password").toString();
-        
-            UsersDAO ud = new UsersDAO();
-            int status = ud.checkLogin(username, password);
-            switch(status){
-                case -2:
-                    request.setAttribute("err", "Username bạn vừa nhập không tồn tại, hãy kiểm tra lại hoặc tạo tài khoản mới!");
-                    request.getRequestDispatcher("./login.jsp").forward(request, response);
-                    break;
-
-                case -1:
-                    request.setAttribute("err", "Password bạn vừa nhập không khớp,<br/>vui lòng thử lại!");
-                    request.getRequestDispatcher("./login.jsp").forward(request, response);
-                    break;
-
-                case 0:{
-                    session.setAttribute("username", username);
-                    session.setAttribute("role", 0);
-//                    response.sendRedirect("./admin/index.jsp");
-                    request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
-                    break;
-                }
-
-                case 1:{
-                    session.setAttribute("username", username);
-                    session.setAttribute("role", 1);
-//                    response.sendRedirect("./index.jsp");
-                    request.getRequestDispatcher("./index.jsp").forward(request, response);
-                    break;
-                }
-            }
-            
-        } catch (Exception e) { 
-            response.sendRedirect("./login.jsp");
-//                request.getRequestDispatcher("./login.jsp").forward(request, response);
-        }
-        response.sendRedirect("./login.jsp");
+        processRequest(request, response);
     }
 
     /**

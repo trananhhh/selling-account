@@ -56,13 +56,12 @@ public class UsersDAO extends DBContext{
          
          
          if(rs.next()) {
-            int id           = rs.getInt(1);
-            String username  = rs.getNString(2);
-            String password  = rs.getNString(3);
-            String email     = rs.getNString(4);
-            String phone     = rs.getNString(5);
-            int role         = rs.getInt(6);
-            res=new User(id,username,password,email,phone,role);
+            String username  = rs.getNString(1);
+            String password  = rs.getNString(2);
+            String email     = rs.getNString(3);
+            String phone     = rs.getNString(4);
+            int role         = rs.getInt(5);
+            res=new User(username,password,email,phone,role);
           }
           rs.close();        
           ps.close();

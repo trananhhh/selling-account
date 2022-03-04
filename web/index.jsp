@@ -44,7 +44,7 @@
                                     transform: translateY(-17%);
                                 }
 
-                                /* #navbar {
+                                #navbar {
                                     min-height: 88px;
                                     min-width: 100%;
                                     position: absolute;
@@ -55,7 +55,7 @@
                                     align-items: center;
                                     justify-content: flex-end;
                                     padding-right: 180px;
-                                } */
+                                }
 
                                 #header-logo {
                                     position: absolute;
@@ -88,24 +88,12 @@
                                 <!-- Header-->
                                 <header class="vh-100 row justify-content-center" id="header">
                                     <div class="container px-5">
-
                                         <nav id="navbar">
                                             <% if(session.getAttribute("username") !=null) { %>
-                                                <div class="btn-group">
-                                                    <button type="button"
-                                                        class="btn btn-outline-secondary dropdown-toggle"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="bi bi-person-circle"></i>
-                                                        <%= session.getAttribute("username") %>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="./user/overview" class="dropdown-item"
-                                                            type="button">Overview</button>
-                                                            <a href="./logout" class="dropdown-item"
-                                                                type="button">Logout</button>
-                                                    </div>
-                                                </div>
+                                                <a id="login-btn" class="btn btn-outline-secondary"><i
+                                                        class="bi bi-person-circle"></i>
+                                                    <%= session.getAttribute("username") %>
+                                                </a>
                                                 <% } else { %>
 
                                                     <a id="login-btn" class="btn btn-secondary hidden" href="./login">
@@ -115,7 +103,7 @@
                                                         class="btn btn-outline-secondary hidden">
                                                         Register
                                                     </a>
-                                                    <% } %>
+                                                <% } %>
                                         </nav>
                                         <div class="row gx-10 align-items-center justify-content-center"
                                             id="main-home-content">
