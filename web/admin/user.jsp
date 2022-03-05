@@ -1,5 +1,6 @@
 <%-- Document : user Created on : Feb 24, 2022, 8:31:59 AM Author : _trananhhh
---%> <%@page import="model.User"%>
+--%> <%@page import="dal.UsersDAO"%>
+<%@page import="model.User"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
     <body>
         <div class="container">
         <h1>User list</h1>
-        <form action="./search" id="search-form" class="align-items-center">
+        <form action="" method="POST" id="search-form" class="align-items-center">
             <div class="mb-3" id="search-bar">
                 <input type="text" class="form-control" id="key" name="key"/>
             </div>
@@ -51,7 +52,7 @@
             if(curPage == 1){
         %>
         <button class="btn btn-secondary" disabled>
-            <a href="/account/admin/user?page=1" > <i class="bi bi-caret-left-fill"> </i></a>
+                <i class="bi bi-caret-left-fill"> </i>
         </button>
             <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage + 1%>" > <i class="bi bi-caret-right-fill"> </i> </a>    
         <%
@@ -61,7 +62,7 @@
             <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage - 1%>" > <i class="bi bi-caret-left-fill"> </i></a>
             
             <button class="btn btn-secondary" disabled>
-                <a href="/account/admin/user?page=" > <i class="bi bi-caret-right-fill"> </i> </a>    
+                <i class="bi bi-caret-right-fill"> </i>
             </button>
         <%
           }
@@ -84,6 +85,8 @@
             </thead>
             <tbody>
                 <%
+                    UsersDAO ud = new UsersDAO();
+                    
                     List<User> list = (List<User>) request.getAttribute("data");
                     for(User x : list){
                 %>

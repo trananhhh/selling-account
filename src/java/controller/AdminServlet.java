@@ -5,21 +5,19 @@
  */
 package controller;
 
-import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author _trananhhh
  */
-public class AdminUserSearchServlet extends HttpServlet {
+public class AdminServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +36,10 @@ public class AdminUserSearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminUserSearchServlet</title>");            
+            out.println("<title>Servlet AdminServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminUserSearchServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,11 +57,17 @@ public class AdminUserSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UsersDAO ud = new UsersDAO();
-        String key = request.getParameter("key");
-        List<User> list = ud.getUsersByKey(key);
-        request.setAttribute("users", list);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+        
+        HttpSession session = request.getSession();
+        try {
+            String userRole = session.getAttribute("role").toString();
+            if(userRole.equals("0"))
+                response.sendRedirect("./admin/index.jsp");
+            else 
+                response.sendRedirect("./index.jsp");
+        } catch (Exception e) {
+            response.sendRedirect("./login");
+        }
     }
 
     /**

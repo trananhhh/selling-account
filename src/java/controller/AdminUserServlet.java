@@ -20,7 +20,7 @@ import model.User;
  *
  * @author _trananhhh
  */
-public class AdminUserManangementServlet extends HttpServlet {
+public class AdminUserServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -112,7 +112,38 @@ public class AdminUserManangementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+            /* TODO output your page here. You may use following sample code. */
+        
+        UsersDAO ud = new UsersDAO();
+        String key = request.getParameter("key");
+        List<User> list = ud.getUsersByKey(key); 
+//        out.println(list);
+        int numPs = list.size();
+        int numperPage = 20;
+        int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
+        int start, end;
+        int page;
+
+        String tpage = request.getParameter("page");
+
+        try{
+            page = Integer.parseInt(tpage);
+        }catch(NumberFormatException e){
+            page = 1;
+        }
+        start = (page-1)*numperPage;
+        if(page*numperPage > numPs)
+            end = numPs;
+        else
+            end = page*numperPage;
+        List<User> arr = ud.getListByPage(list, start, end);
+        //so phan tu cua 1 trang
+        request.setAttribute("data", arr);
+        //so trang
+        request.setAttribute("num", numpage);
+        request.setAttribute("curPage", page);
+        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
     }
 
     /**

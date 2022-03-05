@@ -15,11 +15,9 @@
     <body>
         <%
             User user=(User)request.getAttribute("user");
-            if(user==null)return;
+            if(user == null)return;
         %>
         <form action="/admin/user" method="POST">
-           ID:
-           <input type="text" name="code" value="<%= user.getId() %> " disabled/></br>
            Username:
            <input type="text" name="driver" value="<%= user.getUsername() %>" disabled/></br>
            Password:

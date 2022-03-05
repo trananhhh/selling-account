@@ -46,14 +46,12 @@ public class UsersDAO extends DBContext{
 
     
     public User getUserByID(String xCode) {
-        String xSql = "select * from Users where id=?";
-        User res=null;
+        String xSql = "select * from Users where username like '%" + xCode + "%'";
+        User res = null;
         
         try {
          PreparedStatement ps = connection.prepareStatement(xSql);
-         ps.setString(1, xCode);
          ResultSet rs = ps.executeQuery();
-         
          
          if(rs.next()) {
             String username  = rs.getNString(1);
@@ -61,7 +59,7 @@ public class UsersDAO extends DBContext{
             String email     = rs.getNString(3);
             String phone     = rs.getNString(4);
             int role         = rs.getInt(5);
-            res=new User(username,password,email,phone,role);
+            res = new User(username,password,email,phone,role);
           }
           rs.close();        
           ps.close();
@@ -74,12 +72,9 @@ public class UsersDAO extends DBContext{
     
     public List<User> getUsersByKey(String key){
         List<User> list = new ArrayList<>();
-        String SQLCommand = "SELECT * FROM Users WHERE Username like ? OR Password Like ? OR Phone like ?";
+        String SQLCommand = "SELECT * FROM Users WHERE Username like  '%" + key + "%' OR Password Like '%" + key + "%' OR Phone like '%" + key + "%'";
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
-            st.setString(1, '%' + key + '%');
-            st.setString(2, '%' + key + '%');
-            st.setString(3, '%' + key + '%');
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 String username  = rs.getNString(1);
@@ -111,7 +106,7 @@ public class UsersDAO extends DBContext{
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
 //        List<User> list = pd.getUsersByKey("a");
-        List<User> list = pd.getUsersByKey("a");
-        System.out.println(list.get(0).getUsername());
+        User u = pd.getUserByID("aamaya1u");
+        System.out.println(u.getEmail());
     }
 }

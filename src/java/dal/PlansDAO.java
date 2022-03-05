@@ -35,6 +35,25 @@ public class PlansDAO extends DBContext{
         }
         return list;
     }
+    public Plan getPlanById(int xId){
+        Plan res = new Plan();
+        String SQLCommand = "SELECT * FROM Plans where id = " + xId;
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                int id              = rs.getInt(1);
+                String name         = rs.getNString(2);
+                String description  = rs.getNString(3);
+                int price           = rs.getInt(4);
+                String url          = rs.getNString(5);
+                res = new Plan(id, name, description, price, url);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return res;
+    }
     public static void main(String[] args) {
         PlansDAO pd = new PlansDAO();
         List<Plan> list = pd.getAllPlans();

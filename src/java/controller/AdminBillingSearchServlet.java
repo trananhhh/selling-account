@@ -5,20 +5,24 @@
  */
 package controller;
 
+import dal.BillingsDAO;
+import dal.PlansDAO;
+import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Billing;
 import model.User;
-import dal.*;
 
 /**
  *
- * @author NVT
+ * @author _trananhhh
  */
-public class UserEditServlet extends HttpServlet {
+public class AdminBillingSearchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +41,10 @@ public class UserEditServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserEditServlet</title>");            
+            out.println("<title>Servlet AdminUserSearchServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserEditServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminUserSearchServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,20 +62,6 @@ public class UserEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr = response.getWriter();
-        String id = request.getParameter("id");
-        UsersDAO f = new UsersDAO();
-        User temp = f.getUserByID(id);
-        pr.print(request.getParameter("id"));
-        
-        if(temp == null){
-            pr.print("<h2>User not exist</h2>");
-            //request.getRequestDispatcher("/admin/user").include(request, response);
-        }else{
-            request.setAttribute("user", temp);
-            request.getRequestDispatcher("/admin/userUpdate.jsp").include(request, response);
-        }
     }
 
     /**
@@ -85,7 +75,7 @@ public class UserEditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
