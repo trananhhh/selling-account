@@ -112,14 +112,14 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </a>\n");
       out.write("                        </li>\n");
       out.write("                        <li class=\"nav-item\">\n");
-      out.write("                            <a href=\"./admin/user\" class=\"nav-link \" aria-current=\"page\">\n");
+      out.write("                            <a href=\"./user\" class=\"nav-link \" aria-current=\"page\">\n");
       out.write("\n");
       out.write("                                <i class=\"bi bi-people-fill\"></i>\n");
       out.write("                                User management\n");
       out.write("                            </a>\n");
       out.write("                        </li>\n");
       out.write("                        <li class=\"nav-item\">\n");
-      out.write("                            <a href=\"./admin/billing\" class=\"nav-link \" aria-current=\"page\">\n");
+      out.write("                            <a href=\"./billing\" class=\"nav-link \" aria-current=\"page\">\n");
       out.write("\n");
       out.write("                                <i class=\"bi bi-receipt\"></i>\n");
       out.write("                                Billing management\n");

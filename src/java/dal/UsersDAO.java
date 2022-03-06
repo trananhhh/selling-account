@@ -103,10 +103,38 @@ public class UsersDAO extends DBContext{
         return -2;
     }
     
+    public int checkInfo(String data){
+        List<User> list = getAllUsers();
+        String SQLCommand = "SELECT * FROM Users WHERE Username = '" + data + "' OR Email = '" + data + "' OR Phone = '" + data + "'";
+        
+        System.out.println(SQLCommand);
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                return 1;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return 0;
+    }
+    
+    public void createAccount(String username, String password, String email, String phone){
+        String SQLCommand = "INSERT INTO Users VALUES ('" + username + "', '" + password + "', '" + email + "', '" + phone + "', 1);";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
 //        List<User> list = pd.getUsersByKey("a");
-        User u = pd.getUserByID("aamaya1u");
-        System.out.println(u.getEmail());
+//        User u = pd.getUserByID("aamaya1u");
+//        System.out.println(u.getEmail());
+        System.out.println(pd.checkInfo("admin"));
     }
 }

@@ -90,20 +90,31 @@
                                     <div class="container px-5">
                                         <nav id="navbar">
                                             <% if(session.getAttribute("username") !=null) { %>
-                                                <a id="login-btn" class="btn btn-outline-secondary"><i
-                                                        class="bi bi-person-circle"></i>
-                                                    <%= session.getAttribute("username") %>
-                                                </a>
+                                                <div class="dropdown">
+                                                    <a class="btn btn-outline-secondary dropdown-toggle" href="#"
+                                                        role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                                        aria-expanded="false">
+                                                        <i class="bi bi-person-circle"></i>
+                                                        <%= session.getAttribute("username") %>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+                                                        aria-labelledby="dropdownMenuLink">
+                                                        <li><a class="dropdown-item" href="#">Overview</a></li>
+                                                        <li><a class="dropdown-item" href="./logout">Sign out</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                                 <% } else { %>
 
-                                                    <a id="login-btn" class="btn btn-secondary hidden" href="./login">
+                                                    <a id="login-btn" class="btn btn-secondary" href="./login">
                                                         Login
                                                     </a>
                                                     <a href="./register" id="login-btn"
-                                                        class="btn btn-outline-secondary hidden">
+                                                        class="btn btn-outline-secondary">
                                                         Register
                                                     </a>
-                                                <% } %>
+                                                    <% } %>
                                         </nav>
                                         <div class="row gx-10 align-items-center justify-content-center"
                                             id="main-home-content">

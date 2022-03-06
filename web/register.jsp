@@ -512,6 +512,11 @@
                                     type="text"
                                     name="username"
                                     placeholder="Username"
+                                    <%
+                                        if(request.getAttribute("username") != null){
+                                    %>
+                                    value="<%= request.getAttribute("username").toString() %>"
+                                    <% } %>
                                     required
                                 />
                                 <span class="focus-input100"></span>
@@ -563,6 +568,11 @@
                                     type="email"
                                     name="email"
                                     placeholder="Email"
+                                    <%
+                                        if(request.getAttribute("email") != null){
+                                    %>
+                                    value="<%= request.getAttribute("email").toString() %>"
+                                    <% } %>
                                     required
                                 />
                                 <span class="focus-input100"></span>
@@ -578,6 +588,11 @@
                                     type="text"
                                     name="phone"
                                     placeholder="Phone"
+                                    <%
+                                        if(request.getAttribute("phone") != null){
+                                    %>
+                                    value="<%= request.getAttribute("phone").toString() %>"
+                                    <% } %>
                                     required
                                 />
                                 <span class="focus-input100"></span>

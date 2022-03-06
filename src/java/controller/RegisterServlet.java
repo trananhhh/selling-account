@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -70,7 +71,37 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./register.jsp").forward(request, response);
+//        PrintWriter out = response.getWriter();
+//        out.println(request.getParameter("username"));
+//        out.println(request.getParameter("password"));
+//        out.println(request.getParameter("email"));
+//        out.println(request.getParameter("phone"));
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        
+        UsersDAO ud = new UsersDAO();
+        if(ud.checkInfo(username) == 1){
+            request.setAttribute("username", username);
+            request.setAttribute("err", "Username already exist!!!");
+            request.getRequestDispatcher("./register.jsp").forward(request, response);
+        }
+        if(ud.checkInfo(email) == 1){
+            request.setAttribute("email", email);
+            request.setAttribute("err", "Email already exist!!!");
+            request.getRequestDispatcher("./register.jsp").forward(request, response);
+        }
+        if(ud.checkInfo(phone) == 1){
+            request.setAttribute("phone", phone);
+            request.setAttribute("err", "Phone already exist!!!");
+            request.getRequestDispatcher("./register.jsp").forward(request, response);
+        }
+        
+        ud.createAccount(username, password, email, phone);
+        request.setAttribute("username", username);
+        request.setAttribute("notice", "Register successfully!!!");
+        request.getRequestDispatcher("./login.jsp").forward(request, response);
     }
 
     /**
