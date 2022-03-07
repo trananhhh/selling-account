@@ -64,10 +64,11 @@ public class AdminBillingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         try {
             String userRole = session.getAttribute("role").toString();
+            
             if(userRole.equals("0")){
                 BillingsDAO ud = new BillingsDAO();
                 PlansDAO pd = new PlansDAO();
@@ -78,8 +79,7 @@ public class AdminBillingServlet extends HttpServlet {
                 int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
                 int start, end;
                 int page;
-                
-                PrintWriter out = response.getWriter();
+    
                 String tpage = request.getParameter("page");
                 
                 try{
@@ -96,7 +96,7 @@ public class AdminBillingServlet extends HttpServlet {
                 request.setAttribute("bill", billList);
                 request.setAttribute("num", numpage);
                 request.setAttribute("curPage", page);
-                request.getRequestDispatcher("/admin/billing.jsp").forward(request, response);
+                request.getRequestDispatcher("./billing.jsp").forward(request, response);
             }
             else
                 response.sendRedirect("../index.jsp");
