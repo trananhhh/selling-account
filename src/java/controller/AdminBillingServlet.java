@@ -68,20 +68,31 @@ public class AdminBillingServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String userRole = session.getAttribute("role").toString();
-            
             if(userRole.equals("0")){
                 BillingsDAO ud = new BillingsDAO();
                 PlansDAO pd = new PlansDAO();
-                List<Billing> list = ud.getAllBillings();
+                String sort;
+
+                try{
+                    sort=request.getParameter("sort").trim();
+                }catch(Exception e){
+                    sort = "";
+                }
+                
+                List<Billing> list ;
+                if(sort.equals("")){
+                    list = ud.getAllBillings();
+                }else {
+                    list= ud.getAllBillingsSort(sort);
+                }
                 
                 int numPs = list.size();
-                int numperPage = 20;
+                int numperPage = 5;
                 int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
                 int start, end;
                 int page;
     
                 String tpage = request.getParameter("page");
-                
                 try{
                     page = Integer.parseInt(tpage);
                 }catch(NumberFormatException e){
@@ -96,6 +107,7 @@ public class AdminBillingServlet extends HttpServlet {
                 request.setAttribute("bill", billList);
                 request.setAttribute("num", numpage);
                 request.setAttribute("curPage", page);
+                request.setAttribute("sort", sort);
                 request.getRequestDispatcher("./billing.jsp").forward(request, response);
             }
             else

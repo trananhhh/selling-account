@@ -33,19 +33,51 @@ public class AdminUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminUserManangementServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminUserManangementServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+//        response.setContentType("text/html;charset=UTF-8");
+//        try {
+//            HttpSession session = request.getSession();
+//            String userRole = session.getAttribute("role").toString();
+//            if (userRole.equals("0")) {
+//                UsersDAO ud = new UsersDAO();
+//                String key = request.getParameter("key");
+//                if (key == null) {
+//                    key = "";
+//                }
+//                List<User> list = ud.getUsersByKey(key);
+////        out.println(list);
+//                int numPs = list.size();
+//                int numperPage = 20;
+//                int numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
+//                int start, end;
+//                int page;
+//
+//                String tpage = request.getParameter("page");
+//
+//                try {
+//                    page = Integer.parseInt(tpage);
+//                } catch (NumberFormatException e) {
+//                    page = 1;
+//                }
+//                start = (page - 1) * numperPage;
+//                if (page * numperPage > numPs) {
+//                    end = numPs;
+//                } else {
+//                    end = page * numperPage;
+//                }
+//                List<User> arr = ud.getListByPage(list, start, end);
+//                //so phan tu cua 1 trang
+//                request.setAttribute("data", arr);
+//                //so trang
+//                request.setAttribute("num", numpage);
+//                request.setAttribute("curPage", page);
+//                request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+//            } else {
+//                response.sendRedirect("../index.jsp");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            response.sendRedirect("../login");
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,39 +95,44 @@ public class AdminUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String userRole = session.getAttribute("role").toString();
-            if(userRole.equals("0")){
+            if (userRole.equals("0")) {
                 UsersDAO ud = new UsersDAO();
-                List<User> list = ud.getAllUsers();
-                
+                String key = request.getParameter("key");
+                if (key == null) {
+                    key = "";
+                }
+                List<User> list = ud.getUsersByKey(key);
                 int numPs = list.size();
                 int numperPage = 20;
-                int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
+                int numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
                 int start, end;
                 int page;
-                
+
                 PrintWriter out = response.getWriter();
                 String tpage = request.getParameter("page");
-                
-                try{
+
+                try {
                     page = Integer.parseInt(tpage);
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     page = 1;
                 }
-                start = (page-1)*numperPage;
-                if(page*numperPage > numPs)
+                start = (page - 1) * numperPage;
+                if (page * numperPage > numPs) {
                     end = numPs;
-                else
-                    end = page*numperPage;
+                } else {
+                    end = page * numperPage;
+                }
                 List<User> arr = ud.getListByPage(list, start, end);
                 //so phan tu cua 1 trang
                 request.setAttribute("data", arr);
                 //so trang
                 request.setAttribute("num", numpage);
                 request.setAttribute("curPage", page);
+                request.setAttribute("key", key);
                 request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
-            }
-            else
+            } else {
                 response.sendRedirect("../index.jsp");
+            }
         } catch (Exception e) {
             response.sendRedirect("../login");
         }
@@ -112,38 +149,52 @@ public class AdminUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-            /* TODO output your page here. You may use following sample code. */
-        
-        UsersDAO ud = new UsersDAO();
-        String key = request.getParameter("key");
-        List<User> list = ud.getUsersByKey(key); 
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            HttpSession session = request.getSession();
+            String userRole = session.getAttribute("role").toString();
+            if (userRole.equals("0")) {
+                UsersDAO ud = new UsersDAO();
+                String key = request.getParameter("key1");
+                if (key == null) {
+                    key = "";
+                }
+                List<User> list = ud.getUsersByKey(key);
 //        out.println(list);
-        int numPs = list.size();
-        int numperPage = 20;
-        int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
-        int start, end;
-        int page;
+                int numPs = list.size();
+                int numperPage = 20;
+                int numpage = numPs / numperPage + (numPs % numperPage == 0 ? 0 : 1);
+                int start, end;
+                int page=1;
 
-        String tpage = request.getParameter("page");
-
-        try{
-            page = Integer.parseInt(tpage);
-        }catch(NumberFormatException e){
-            page = 1;
+//                String tpage = request.getParameter("page");
+//
+//                try {
+//                    page = Integer.parseInt(tpage);
+//                } catch (NumberFormatException e) {
+//                    page = 1;
+//                }
+                start = (page - 1) * numperPage;
+                if (page * numperPage > numPs) {
+                    end = numPs;
+                } else {
+                    end = page * numperPage;
+                }
+                List<User> arr = ud.getListByPage(list, start, end);
+                //so phan tu cua 1 trang
+                request.setAttribute("data", arr);
+                //so trang
+                request.setAttribute("num", numpage);
+                request.setAttribute("curPage", page);
+                request.setAttribute("key", key);
+                request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("../index.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("../login");
         }
-        start = (page-1)*numperPage;
-        if(page*numperPage > numPs)
-            end = numPs;
-        else
-            end = page*numperPage;
-        List<User> arr = ud.getListByPage(list, start, end);
-        //so phan tu cua 1 trang
-        request.setAttribute("data", arr);
-        //so trang
-        request.setAttribute("num", numpage);
-        request.setAttribute("curPage", page);
-        request.getRequestDispatcher("/admin/user.jsp").forward(request, response);
     }
 
     /**

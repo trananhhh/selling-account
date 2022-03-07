@@ -63,7 +63,6 @@ public class UserEditServlet extends HttpServlet {
         String id = request.getParameter("id");
         UsersDAO f = new UsersDAO();
         User temp = f.getUserByID(id);
-        pr.print(request.getParameter("id"));
         
         if(temp == null){
             pr.print("<h2>User not exist</h2>");
