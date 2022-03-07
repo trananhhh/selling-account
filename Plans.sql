@@ -5,18 +5,19 @@ GO
 USE PRJ301_SellingAccountWebsite
 GO
 CREATE TABLE Plans(
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1,1) PRIMARY KEY,
 	Name nvarchar (500) NOT NULL,
 	Description nvarchar (500) NOT NULL,
 	Price int NOT NULL,
 	Url nvarchar (500) NOT NULL,
+	Capacity int NOT NULL,
 )
 GO
-INSERT INTO Plans VALUES ('1', 'Netflix', N'Tài khoản gói UltraHD xem 4K;Có profile riêng, tuỳ biến;Không giới hạn phim', 70000, N'netflix');
+INSERT INTO Plans VALUES ('1', 'Netflix', N'Tài khoản gói UltraHD xem 4K;Có profile riêng, tuỳ biến;Không giới hạn phim', 70000, N'netflix', 5);
 GO
-INSERT INTO Plans VALUES ('2', 'Spotify Premium', N'Nghe nhạc offline;Chuyển bài không giới hạn;AI gợi ý bài hát', 30000, N'spotify');
+INSERT INTO Plans VALUES ('2', 'Spotify Premium', N'Nghe nhạc offline;Chuyển bài không giới hạn;AI gợi ý bài hát', 30000, N'spotify', 6);
 GO
-INSERT INTO Plans VALUES ('3', 'Youtube Premium', N'Phát nhạc trong nền;Không quảng cáo;Download tất cả video', 50000, N'youtube');
+INSERT INTO Plans VALUES ('3', 'Youtube Premium', N'Phát nhạc trong nền;Không quảng cáo;Download tất cả video', 50000, N'youtube', 6);
 GO
 CREATE TABLE Users(
 	Username nvarchar (500) NOT NULL PRIMARY KEY,
@@ -130,7 +131,7 @@ insert into Users values ('rprendeville2q', 'fdub5lQtke7y', 'wspeaks2q@census.go
 insert into Users values ('plillyman2r', 'vP6t2m49y', 'ctownshend2r@imgur.com', '9236549966', 1);
 GO
 CREATE TABLE Billings(
-	ID int NOT NULL PRIMARY KEY,
+	ID int IDENTITY(1,1) PRIMARY KEY,
 	Username nvarchar (500) NOT NULL,
 	PlanID int NOT NULL,
 	AccountID int NOT NULL,
@@ -242,117 +243,117 @@ insert into Billings values (99, 'Lucius',			 2, 70, '12/16/2021', 5, 70);
 insert into Billings values (100, 'Ollie',			 2, 90, '3/13/2021', 2, 70);
 GO
 create table Accounts (
-	id  int NOT NULL PRIMARY KEY,
+	id  int IDENTITY(1,1) PRIMARY KEY,
 	PlanID INT NOT NULL,
 	account nvarchar(500),
 	password nvarchar(500),
 	date DATE,
 	Status int,
-	currentUsers INT,
-	Capacity INT
+	currentUsers INT
 )
 GO
-insert into Accounts values (1, 1, 'jbuckner0@earthlink.net', '3abv1oupe', '8/16/2021', 1, 3, 5);
-insert into Accounts values (2, 1, 'bkingcott1@stumbleupon.com', 'Ohmto3FI5j', '10/1/2020', 0, 2, 5);
-insert into Accounts values (3, 3, 'playtham2@wix.com', 'z9SuB5xbKo', '2/28/2022', 1, 1, 6);
-insert into Accounts values (4, 3, 'tklessmann3@ning.com', 'BYUpIS', '8/31/2020', 1, 2, 6);
-insert into Accounts values (5, 3, 'lbeagles4@webnode.com', 'tEVrTQ', '9/6/2020', 0, 3, 6);
-insert into Accounts values (6, 3, 'dmaclardie5@sina.com.cn', 'B9oCThz', '9/27/2020', 1, 2, 5);
-insert into Accounts values (7, 2, 'islatford6@icq.com', 'vdvkGeRTLXC', '5/21/2021', 1, 4, 5);
-insert into Accounts values (8, 1, 'jjeeks7@cafepress.com', '2dPrKi0', '3/3/2022', 0, 2, 6);
-insert into Accounts values (9, 1, 'mgilli8@webs.com', 'm8YbnZq3', '4/10/2021', 1, 5, 6);
-insert into Accounts values (10, 3, 'tpulbrook9@oaic.gov.au', 'fLA9Nsx', '5/22/2021', 1, 2, 5);
-insert into Accounts values (11, 1, 'spattiea@gnu.org', 'rPqGiMFmDYeg', '10/29/2020', 1, 3, 6);
-insert into Accounts values (12, 3, 'lmingaudb@symantec.com', 'fsO3CnG', '3/21/2021', 0, 2, 5);
-insert into Accounts values (13, 1, 'sinkpinc@pbs.org', '4vI4E1J2B1r', '9/18/2021', 0, 3, 6);
-insert into Accounts values (14, 2, 'jseverd@exblog.jp', 'E1rJmPX99', '12/29/2021', 1, 3, 6);
-insert into Accounts values (15, 1, 'dberrymane@utexas.edu', 'QyvSlA6i', '7/5/2021', 0, 4, 5);
-insert into Accounts values (16, 3, 'pgrushinf@comcast.net', 'fCvaJeORvy', '7/26/2020', 0, 5, 5);
-insert into Accounts values (17, 2, 'mbradneckg@patch.com', 'bf4D9WJeNc', '1/27/2021', 0, 2, 5);
-insert into Accounts values (18, 2, 'hsowoodh@booking.com', 'JWhQ00zkOEAb', '7/27/2021', 0, 5, 5);
-insert into Accounts values (19, 3, 'tharnetti@pagesperso-orange.fr', 'eg29uxL1', '11/19/2020', 0, 4, 6);
-insert into Accounts values (20, 1, 'dmacalasterj@oakley.com', 'Sp000ENpO', '10/10/2020', 0, 2, 5);
-insert into Accounts values (21, 2, 'jlethburyk@ehow.com', '9Wq9kojt', '6/9/2021', 1, 4, 5);
-insert into Accounts values (22, 3, 'ecaldowl@photobucket.com', 'T4iLqRghoc6', '8/24/2020', 0, 2, 6);
-insert into Accounts values (23, 3, 'gmcknielym@cloudflare.com', '7zrzYj', '5/30/2021', 1, 2, 5);
-insert into Accounts values (24, 3, 'ekopelmann@paginegialle.it', 'qfUz617H0', '2/21/2022', 0, 2, 5);
-insert into Accounts values (25, 3, 'cruprechto@cnbc.com', 'bDJ1hQmgo', '3/12/2021', 1, 5, 5);
-insert into Accounts values (26, 2, 'jclokep@scientificamerican.com', 'eD8QpwrQA', '6/30/2020', 0, 4, 6);
-insert into Accounts values (27, 1, 'mlaslettq@odnoklassniki.ru', 'j9YafL4x', '8/15/2021', 0, 4, 6);
-insert into Accounts values (28, 3, 'gdugor@cornell.edu', 'YzviRlS2aU', '12/15/2021', 0, 5, 6);
-insert into Accounts values (29, 1, 'ggalilees@google.fr', 'VL46BwNsV9', '12/16/2020', 0, 2, 5);
-insert into Accounts values (30, 3, 'kottert@noaa.gov', 'XmGXUYbZ3s8', '12/28/2021', 0, 2, 5);
-insert into Accounts values (31, 1, 'dmaxtedu@cam.ac.uk', 'TjoKN8Pt', '11/7/2020', 1, 1, 6);
-insert into Accounts values (32, 3, 'nmcdirmidv@wunderground.com', 'QYiFTxIX2', '9/20/2021', 0, 2, 6);
-insert into Accounts values (33, 3, 'aosirinw@webeden.co.uk', 'y5TLJLjCN3u', '10/17/2020', 0, 4, 5);
-insert into Accounts values (34, 2, 'fbrassingtonx@plala.or.jp', 'l47sG3Jmtr', '9/4/2021', 0, 5, 5);
-insert into Accounts values (35, 2, 'kcaisleyy@addthis.com', 'HLZx8F3U5aSZ', '3/9/2021', 0, 2, 5);
-insert into Accounts values (36, 3, 'gpizzeyz@joomla.org', 'X0P09sztYXh', '6/15/2020', 0, 5, 6);
-insert into Accounts values (37, 1, 'tpinyon10@github.io', 'Gf9CTbM4uop', '9/18/2021', 1, 5, 6);
-insert into Accounts values (38, 2, 'pgossipin11@wiley.com', '9NxRj9s8', '7/10/2021', 0, 4, 6);
-insert into Accounts values (39, 1, 'mgrinaugh12@geocities.jp', 'fA78mz', '5/7/2021', 0, 5, 6);
-insert into Accounts values (40, 1, 'cwybourne13@pbs.org', 'zgwNMs', '9/1/2021', 0, 2, 5);
-insert into Accounts values (41, 3, 'cwallis14@ameblo.jp', 'Lui3bO7E2y', '8/10/2020', 0, 2, 5);
-insert into Accounts values (42, 2, 'aburnep15@stumbleupon.com', 'Lf8hTHx7m', '2/23/2022', 1, 1, 6);
-insert into Accounts values (43, 3, 'bfisbey16@google.com.au', 'aF4WTtHBHaF', '9/18/2020', 0, 3, 6);
-insert into Accounts values (44, 3, 'sdambrosio17@cnet.com', 'pS6ihkVx7', '9/13/2020', 0, 2, 5);
-insert into Accounts values (45, 2, 'framalhete18@homestead.com', 'br0LL3tU', '12/11/2021', 1, 1, 6);
-insert into Accounts values (46, 3, 'ngerrelt19@go.com', 'YPxZ9D', '6/29/2020', 1, 1, 6);
-insert into Accounts values (47, 3, 'fkentwell1a@gravatar.com', '8UWoLF50c1s', '1/8/2022', 0, 5, 5);
-insert into Accounts values (48, 2, 'cpeople1b@wiley.com', 'v86yZ8NpNWM', '10/4/2020', 0, 3, 5);
-insert into Accounts values (49, 3, 'omyrtle1c@acquirethisname.com', 'ioGjub', '1/11/2022', 1, 1, 6);
-insert into Accounts values (50, 1, 'gfransson1d@github.io', 'MJYbLu', '9/19/2020', 1, 4, 6);
-insert into Accounts values (51, 2, 'bohartnedy1e@i2i.jp', 'jMRdFB8mvQ', '9/20/2021', 1, 1, 5);
-insert into Accounts values (52, 3, 'qconduit1f@comcast.net', 'AQkQxTPxa', '2/15/2021', 1, 4, 5);
-insert into Accounts values (53, 3, 'jbeeken1g@tuttocitta.it', 'gOqz8hq9', '1/20/2021', 0, 5, 5);
-insert into Accounts values (54, 2, 'wbyres1h@ucla.edu', '108OTjVX', '3/13/2021', 0, 4, 6);
-insert into Accounts values (55, 3, 'gedgerley1i@dropbox.com', '9HPHLN', '10/10/2020', 1, 5, 5);
-insert into Accounts values (56, 3, 'mreame1j@booking.com', 'mjx9aOCDYF', '9/10/2020', 0, 4, 6);
-insert into Accounts values (57, 1, 'bfitchell1k@xing.com', 'Col7pDaH', '9/23/2021', 0, 2, 5);
-insert into Accounts values (58, 3, 'eweatherall1l@fastcompany.com', 'tseUDEPK', '8/21/2020', 1, 1, 6);
-insert into Accounts values (59, 3, 'medgcombe1m@vinaora.com', 'Ug3iHU2D', '12/30/2020', 1, 5, 5);
-insert into Accounts values (60, 3, 'vdewitt1n@slate.com', 'yDm5D0qpI', '8/10/2020', 1, 1, 5);
-insert into Accounts values (61, 3, 'lhanway1o@nps.gov', '5TMNMfPG', '6/3/2021', 0, 5, 5);
-insert into Accounts values (62, 1, 'wgregoretti1p@yolasite.com', 'RdAhWSYdEJlb', '7/30/2020', 0, 3, 6);
-insert into Accounts values (63, 2, 'aworsham1q@tamu.edu', 'f8JSEw5z6Zl', '3/12/2021', 0, 5, 6);
-insert into Accounts values (64, 1, 'adonneely1r@tumblr.com', 'abRZ1DNPwuuL', '10/28/2020', 1, 1, 6);
-insert into Accounts values (65, 2, 'lruppeli1s@cargocollective.com', 'iB8hsAhl', '8/22/2021', 1, 5, 6);
-insert into Accounts values (66, 1, 'salpes1t@un.org', 'w1VeJSZLIR', '5/23/2021', 1, 2, 6);
-insert into Accounts values (67, 1, 'eoakland1u@1und1.de', 'y8Hch3', '1/17/2021', 1, 4, 5);
-insert into Accounts values (68, 1, 'fmccaughen1v@psu.edu', 'NwVW1WMG4L', '12/20/2020', 0, 4, 5);
-insert into Accounts values (69, 3, 'fcollinson1w@scientificamerican.com', 'Ydc6qE', '2/9/2022', 0, 1, 6);
-insert into Accounts values (70, 1, 'istallan1x@mozilla.org', 'urOOYMcXS', '10/5/2020', 1, 5, 5);
-insert into Accounts values (71, 1, 'vgarroch1y@theatlantic.com', 'sCGXdqdG', '1/3/2022', 0, 3, 6);
-insert into Accounts values (72, 3, 'fodunniom1z@nbcnews.com', '7Qj4kO9Z', '2/14/2022', 1, 4, 5);
-insert into Accounts values (73, 3, 'lfull20@istockphoto.com', 'mlo5M277rRM4', '9/11/2021', 1, 4, 6);
-insert into Accounts values (74, 1, 'vnarracott21@zimbio.com', '244FVcV8f', '8/16/2020', 1, 2, 5);
-insert into Accounts values (75, 2, 'gmacrory22@edublogs.org', 'xSuqQ6Pd3Piz', '7/16/2021', 0, 3, 6);
-insert into Accounts values (76, 1, 'sferier23@blog.com', 'YlvPKAqn9', '12/30/2021', 1, 4, 6);
-insert into Accounts values (77, 3, 'wfarris24@mac.com', 'jcUcuif', '6/6/2021', 0, 1, 6);
-insert into Accounts values (78, 3, 'tlampet25@4shared.com', 'jDMMjL', '7/2/2021', 1, 5, 5);
-insert into Accounts values (79, 2, 'mmustin26@usda.gov', 'LdIjbJgqdchm', '10/17/2021', 1, 5, 6);
-insert into Accounts values (80, 3, 'dinman27@fda.gov', 'UmUxzQjG1', '11/14/2021', 0, 5, 6);
-insert into Accounts values (81, 1, 'ndyson28@weebly.com', 'yzTDcs7', '9/25/2020', 1, 5, 5);
-insert into Accounts values (82, 1, 'vrivalland29@accuweather.com', '64DP40gbwC', '7/11/2020', 0, 5, 6);
-insert into Accounts values (83, 3, 'frotherforth2a@engadget.com', 'S7qUrZQw', '6/29/2020', 0, 3, 6);
-insert into Accounts values (84, 3, 'gfayers2b@toplist.cz', 'R9PQ17u', '2/12/2022', 0, 3, 5);
-insert into Accounts values (85, 3, 'rhardan2c@nymag.com', 'QtBbUSQh', '12/5/2020', 0, 2, 5);
-insert into Accounts values (86, 1, 'bleteurtre2d@google.com.au', 'K08nEmQv7', '12/12/2020', 0, 3, 5);
-insert into Accounts values (87, 2, 'istoller2e@ucoz.com', 'Rpzhg9E9LWX', '8/23/2021', 0, 2, 6);
-insert into Accounts values (88, 2, 'ajoyson2f@opera.com', 'Qp4MNV2', '2/17/2021', 1, 5, 6);
-insert into Accounts values (89, 2, 'igwynne2g@pcworld.com', 'zY6pT0lZ', '8/20/2020', 1, 3, 6);
-insert into Accounts values (90, 1, 'cpeekevout2h@gnu.org', '146ogMDIz', '6/14/2020', 0, 1, 6);
-insert into Accounts values (91, 3, 'iblackham2i@addtoany.com', 'NblSvM5z', '2/18/2022', 1, 1, 5);
-insert into Accounts values (92, 2, 'slindro2j@google.ru', 'CSXncCJ', '4/27/2021', 0, 4, 5);
-insert into Accounts values (93, 2, 'msymon2k@archive.org', 'UYVUifW9YCE', '2/26/2021', 0, 2, 6);
-insert into Accounts values (94, 3, 'iredwall2l@mayoclinic.com', 'tNCZCj23h9', '1/24/2022', 1, 5, 5);
-insert into Accounts values (95, 1, 'jcreddon2m@ning.com', 'F1EpnXGRhY0q', '2/23/2021', 0, 4, 5);
-insert into Accounts values (96, 2, 'gtomkys2n@cargocollective.com', 'Zx5ZLAT', '1/23/2022', 0, 3, 6);
-insert into Accounts values (97, 3, 'ahardwich2o@sbwire.com', 'JL6olvkQR2hY', '6/29/2020', 0, 3, 6);
-insert into Accounts values (98, 2, 'esarl2p@tripadvisor.com', 'pUshAy', '1/31/2022', 0, 2, 5);
-insert into Accounts values (99, 3, 'jinns2q@time.com', 'IZTRqze', '4/26/2021', 1, 5, 6);
-insert into Accounts values (100, 1, 'mhaysham2r@cornell.edu', 'iCdTfhD', '11/29/2021', 1, 4, 5);
+insert into Accounts values (1, 1, 'jbuckner0@earthlink.net', '3abv1oupe', '8/16/2021', 1, 3);
+insert into Accounts values (2, 1, 'bkingcott1@stumbleupon.com', 'Ohmto3FI5j', '10/1/2020', 0, 2);
+insert into Accounts values (3, 3, 'playtham2@wix.com', 'z9SuB5xbKo', '2/28/2022', 1, 1);
+insert into Accounts values (4, 3, 'tklessmann3@ning.com', 'BYUpIS', '8/31/2020', 1, 2);
+insert into Accounts values (5, 3, 'lbeagles4@webnode.com', 'tEVrTQ', '9/6/2020', 0, 3);
+insert into Accounts values (6, 3, 'dmaclardie5@sina.com.cn', 'B9oCThz', '9/27/2020', 1, 2);
+insert into Accounts values (7, 2, 'islatford6@icq.com', 'vdvkGeRTLXC', '5/21/2021', 1, 4);
+insert into Accounts values (8, 1, 'jjeeks7@cafepress.com', '2dPrKi0', '3/3/2022', 0, 2);
+insert into Accounts values (9, 1, 'mgilli8@webs.com', 'm8YbnZq3', '4/10/2021', 1, 5);
+insert into Accounts values (10, 3, 'tpulbrook9@oaic.gov.au', 'fLA9Nsx', '5/22/2021', 1, 2);
+insert into Accounts values (11, 1, 'spattiea@gnu.org', 'rPqGiMFmDYeg', '10/29/2020', 1, 3);
+insert into Accounts values (12, 3, 'lmingaudb@symantec.com', 'fsO3CnG', '3/21/2021', 0, 2);
+insert into Accounts values (13, 1, 'sinkpinc@pbs.org', '4vI4E1J2B1r', '9/18/2021', 0, 3);
+insert into Accounts values (14, 2, 'jseverd@exblog.jp', 'E1rJmPX99', '12/29/2021', 1, 3);
+insert into Accounts values (15, 1, 'dberrymane@utexas.edu', 'QyvSlA6i', '7/5/2021', 0, 4);
+insert into Accounts values (16, 3, 'pgrushinf@comcast.net', 'fCvaJeORvy', '7/26/2020', 0, 5);
+insert into Accounts values (17, 2, 'mbradneckg@patch.com', 'bf4D9WJeNc', '1/27/2021', 0, 2);
+insert into Accounts values (18, 2, 'hsowoodh@booking.com', 'JWhQ00zkOEAb', '7/27/2021', 0, 5);
+insert into Accounts values (19, 3, 'tharnetti@pagesperso-orange.fr', 'eg29uxL1', '11/19/2020', 0, 4);
+insert into Accounts values (20, 1, 'dmacalasterj@oakley.com', 'Sp000ENpO', '10/10/2020', 0, 2);
+insert into Accounts values (21, 2, 'jlethburyk@ehow.com', '9Wq9kojt', '6/9/2021', 1, 4);
+insert into Accounts values (22, 3, 'ecaldowl@photobucket.com', 'T4iLqRghoc6', '8/24/2020', 0, 2);
+insert into Accounts values (23, 3, 'gmcknielym@cloudflare.com', '7zrzYj', '5/30/2021', 1, 2);
+insert into Accounts values (24, 3, 'ekopelmann@paginegialle.it', 'qfUz617H0', '2/21/2022', 0, 2);
+insert into Accounts values (25, 3, 'cruprechto@cnbc.com', 'bDJ1hQmgo', '3/12/2021', 1, 5);
+insert into Accounts values (26, 2, 'jclokep@scientificamerican.com', 'eD8QpwrQA', '6/30/2020', 0, 4);
+insert into Accounts values (27, 1, 'mlaslettq@odnoklassniki.ru', 'j9YafL4x', '8/15/2021', 0, 4);
+insert into Accounts values (28, 3, 'gdugor@cornell.edu', 'YzviRlS2aU', '12/15/2021', 0, 5);
+insert into Accounts values (29, 1, 'ggalilees@google.fr', 'VL46BwNsV9', '12/16/2020', 0, 2);
+insert into Accounts values (30, 3, 'kottert@noaa.gov', 'XmGXUYbZ3s8', '12/28/2021', 0, 2);
+insert into Accounts values (31, 1, 'dmaxtedu@cam.ac.uk', 'TjoKN8Pt', '11/7/2020', 1, 1);
+insert into Accounts values (32, 3, 'nmcdirmidv@wunderground.com', 'QYiFTxIX2', '9/20/2021', 0, 2);
+insert into Accounts values (33, 3, 'aosirinw@webeden.co.uk', 'y5TLJLjCN3u', '10/17/2020', 0, 4);
+insert into Accounts values (34, 2, 'fbrassingtonx@plala.or.jp', 'l47sG3Jmtr', '9/4/2021', 0, 5);
+insert into Accounts values (35, 2, 'kcaisleyy@addthis.com', 'HLZx8F3U5aSZ', '3/9/2021', 0, 2);
+insert into Accounts values (36, 3, 'gpizzeyz@joomla.org', 'X0P09sztYXh', '6/15/2020', 0, 5);
+insert into Accounts values (37, 1, 'tpinyon10@github.io', 'Gf9CTbM4uop', '9/18/2021', 1, 5);
+insert into Accounts values (38, 2, 'pgossipin11@wiley.com', '9NxRj9s8', '7/10/2021', 0, 4);
+insert into Accounts values (39, 1, 'mgrinaugh12@geocities.jp', 'fA78mz', '5/7/2021', 0, 5);
+insert into Accounts values (40, 1, 'cwybourne13@pbs.org', 'zgwNMs', '9/1/2021', 0, 2);
+insert into Accounts values (41, 3, 'cwallis14@ameblo.jp', 'Lui3bO7E2y', '8/10/2020', 0, 2);
+insert into Accounts values (42, 2, 'aburnep15@stumbleupon.com', 'Lf8hTHx7m', '2/23/2022', 1, 1);
+insert into Accounts values (43, 3, 'bfisbey16@google.com.au', 'aF4WTtHBHaF', '9/18/2020', 0, 3);
+insert into Accounts values (44, 3, 'sdambrosio17@cnet.com', 'pS6ihkVx7', '9/13/2020', 0, 2);
+insert into Accounts values (45, 2, 'framalhete18@homestead.com', 'br0LL3tU', '12/11/2021', 1, 1);
+insert into Accounts values (46, 3, 'ngerrelt19@go.com', 'YPxZ9D', '6/29/2020', 1, 1);
+insert into Accounts values (47, 3, 'fkentwell1a@gravatar.com', '8UWoLF50c1s', '1/8/2022', 0, 5);
+insert into Accounts values (48, 2, 'cpeople1b@wiley.com', 'v86yZ8NpNWM', '10/4/2020', 0, 3);
+insert into Accounts values (49, 3, 'omyrtle1c@acquirethisname.com', 'ioGjub', '1/11/2022', 1, 1);
+insert into Accounts values (50, 1, 'gfransson1d@github.io', 'MJYbLu', '9/19/2020', 1, 4);
+insert into Accounts values (51, 2, 'bohartnedy1e@i2i.jp', 'jMRdFB8mvQ', '9/20/2021', 1, 1);
+insert into Accounts values (52, 3, 'qconduit1f@comcast.net', 'AQkQxTPxa', '2/15/2021', 1, 4);
+insert into Accounts values (53, 3, 'jbeeken1g@tuttocitta.it', 'gOqz8hq9', '1/20/2021', 0, 5);
+insert into Accounts values (54, 2, 'wbyres1h@ucla.edu', '108OTjVX', '3/13/2021', 0, 4);
+insert into Accounts values (55, 3, 'gedgerley1i@dropbox.com', '9HPHLN', '10/10/2020', 1, 5);
+insert into Accounts values (56, 3, 'mreame1j@booking.com', 'mjx9aOCDYF', '9/10/2020', 0, 4);
+insert into Accounts values (57, 1, 'bfitchell1k@xing.com', 'Col7pDaH', '9/23/2021', 0, 2);
+insert into Accounts values (58, 3, 'eweatherall1l@fastcompany.com', 'tseUDEPK', '8/21/2020', 1, 1);
+insert into Accounts values (59, 3, 'medgcombe1m@vinaora.com', 'Ug3iHU2D', '12/30/2020', 1, 5);
+insert into Accounts values (60, 3, 'vdewitt1n@slate.com', 'yDm5D0qpI', '8/10/2020', 1, 1);
+insert into Accounts values (61, 3, 'lhanway1o@nps.gov', '5TMNMfPG', '6/3/2021', 0, 5);
+insert into Accounts values (62, 1, 'wgregoretti1p@yolasite.com', 'RdAhWSYdEJlb', '7/30/2020', 0, 3);
+insert into Accounts values (63, 2, 'aworsham1q@tamu.edu', 'f8JSEw5z6Zl', '3/12/2021', 0, 5);
+insert into Accounts values (64, 1, 'adonneely1r@tumblr.com', 'abRZ1DNPwuuL', '10/28/2020', 1, 1);
+insert into Accounts values (65, 2, 'lruppeli1s@cargocollective.com', 'iB8hsAhl', '8/22/2021', 1, 5);
+insert into Accounts values (66, 1, 'salpes1t@un.org', 'w1VeJSZLIR', '5/23/2021', 1, 2);
+insert into Accounts values (67, 1, 'eoakland1u@1und1.de', 'y8Hch3', '1/17/2021', 1, 4);
+insert into Accounts values (68, 1, 'fmccaughen1v@psu.edu', 'NwVW1WMG4L', '12/20/2020', 0, 4);
+insert into Accounts values (69, 3, 'fcollinson1w@scientificamerican.com', 'Ydc6qE', '2/9/2022', 0, 1);
+insert into Accounts values (70, 1, 'istallan1x@mozilla.org', 'urOOYMcXS', '10/5/2020', 1, 5);
+insert into Accounts values (71, 1, 'vgarroch1y@theatlantic.com', 'sCGXdqdG', '1/3/2022', 0, 3);
+insert into Accounts values (72, 3, 'fodunniom1z@nbcnews.com', '7Qj4kO9Z', '2/14/2022', 1, 4);
+insert into Accounts values (73, 3, 'lfull20@istockphoto.com', 'mlo5M277rRM4', '9/11/2021', 1, 4);
+insert into Accounts values (74, 1, 'vnarracott21@zimbio.com', '244FVcV8f', '8/16/2020', 1, 2);
+insert into Accounts values (75, 2, 'gmacrory22@edublogs.org', 'xSuqQ6Pd3Piz', '7/16/2021', 0, 3);
+insert into Accounts values (76, 1, 'sferier23@blog.com', 'YlvPKAqn9', '12/30/2021', 1, 4);
+insert into Accounts values (77, 3, 'wfarris24@mac.com', 'jcUcuif', '6/6/2021', 0, 1);
+insert into Accounts values (78, 3, 'tlampet25@4shared.com', 'jDMMjL', '7/2/2021', 1, 5);
+insert into Accounts values (79, 2, 'mmustin26@usda.gov', 'LdIjbJgqdchm', '10/17/2021', 1, 5);
+insert into Accounts values (80, 3, 'dinman27@fda.gov', 'UmUxzQjG1', '11/14/2021', 0, 5);
+insert into Accounts values (81, 1, 'ndyson28@weebly.com', 'yzTDcs7', '9/25/2020', 1, 5);
+insert into Accounts values (82, 1, 'vrivalland29@accuweather.com', '64DP40gbwC', '7/11/2020', 0, 5);
+insert into Accounts values (83, 3, 'frotherforth2a@engadget.com', 'S7qUrZQw', '6/29/2020', 0, 3);
+insert into Accounts values (84, 3, 'gfayers2b@toplist.cz', 'R9PQ17u', '2/12/2022', 0, 3);
+insert into Accounts values (85, 3, 'rhardan2c@nymag.com', 'QtBbUSQh', '12/5/2020', 0, 2);
+insert into Accounts values (86, 1, 'bleteurtre2d@google.com.au', 'K08nEmQv7', '12/12/2020', 0, 3);
+insert into Accounts values (87, 2, 'istoller2e@ucoz.com', 'Rpzhg9E9LWX', '8/23/2021', 0, 2);
+insert into Accounts values (88, 2, 'ajoyson2f@opera.com', 'Qp4MNV2', '2/17/2021', 1, 5);
+insert into Accounts values (89, 2, 'igwynne2g@pcworld.com', 'zY6pT0lZ', '8/20/2020', 1, 3);
+insert into Accounts values (90, 1, 'cpeekevout2h@gnu.org', '146ogMDIz', '6/14/2020', 0, 1);
+insert into Accounts values (91, 3, 'iblackham2i@addtoany.com', 'NblSvM5z', '2/18/2022', 1, 1);
+insert into Accounts values (92, 2, 'slindro2j@google.ru', 'CSXncCJ', '4/27/2021', 0, 4);
+insert into Accounts values (93, 2, 'msymon2k@archive.org', 'UYVUifW9YCE', '2/26/2021', 0, 2);
+insert into Accounts values (94, 3, 'iredwall2l@mayoclinic.com', 'tNCZCj23h9', '1/24/2022', 1, 5);
+insert into Accounts values (95, 1, 'jcreddon2m@ning.com', 'F1EpnXGRhY0q', '2/23/2021', 0, 4);
+insert into Accounts values (96, 2, 'gtomkys2n@cargocollective.com', 'Zx5ZLAT', '1/23/2022', 0, 3);
+insert into Accounts values (97, 3, 'ahardwich2o@sbwire.com', 'JL6olvkQR2hY', '6/29/2020', 0, 3);
+insert into Accounts values (98, 2, 'esarl2p@tripadvisor.com', 'pUshAy', '1/31/2022', 0, 2);
+insert into Accounts values (99, 3, 'jinns2q@time.com', 'IZTRqze', '4/26/2021', 1, 5);
+insert into Accounts values (100, 1, 'mhaysham2r@cornell.edu', 'iCdTfhD', '11/29/2021', 1, 4);
 
+DROP TABLE Accounts
+DROP TABLE Plans
 
-
-SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id AND Billings.
+SELECT * FROM Users where Username = 'adminn'

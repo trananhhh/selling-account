@@ -103,6 +103,25 @@ public class BillingsDAO extends DBContext{
         return list;
     }
     
+    
+    public void createBill(String username, int planId, int accountId, String date, int duration, int price){
+        /*
+	Username nvarchar (500) NOT NULL,
+	PlanID int NOT NULL,
+	AccountID int NOT NULL,
+	Date date NOT NULL,
+	Duration int NOT NULL,
+	Price int NOT NULL,
+        */
+        String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "," + duration + "," + price + ");";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
     public static void main(String[] args) {
         BillingsDAO bd = new BillingsDAO();
         List<Billing> list = bd.getAllBillings();
