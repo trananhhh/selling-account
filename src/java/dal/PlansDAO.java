@@ -29,13 +29,29 @@ public class PlansDAO extends DBContext{
                 int price           = rs.getInt(4);
                 String url          = rs.getNString(5);
                 int capacity        = rs.getInt(6);
-                res = new Plan(id, name, description, price, url, capacity);
+                list.add(new Plan(id, name, description, price, url, capacity));
             }
         } catch (Exception e) {
             System.err.println(e);
         }
         return list;
     }
+    
+    public int getCapacity(int planId){
+        String SQLCommand = "SELECT Capacity FROM Plans where id = " + planId;
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                int capacity              = rs.getInt(1);
+                return capacity;
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return 0;
+    }
+    
     public Plan getPlanById(int xId){
         Plan res = new Plan();
         String SQLCommand = "SELECT * FROM Plans where id = " + xId;

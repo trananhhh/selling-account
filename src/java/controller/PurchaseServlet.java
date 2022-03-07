@@ -7,6 +7,7 @@ package controller;
 
 import dal.AccountsDAO;
 import dal.BillingsDAO;
+import dal.PlansDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -83,11 +84,23 @@ public class PurchaseServlet extends HttpServlet {
         String username         = (String) session.getAttribute("username");
         BillingsDAO bd = new BillingsDAO();
         AccountsDAO ad = new AccountsDAO();
-        for(Item i : listItems)
-            bd.createBill(username, i.getPlan().getId(), ad.getAccountAvailable(), , 0, 0);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        PlansDAO pd = new PlansDAO();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
         Date date = new Date();  
-        System.out.println(formatter.format(date).toString());  
+        System.out.println();  
+        for(Item i : listItems){
+            int planId = i.getPlan().getId();
+            bd.createBill(
+                username, 
+                planId, 
+                ad.getAccountAvailable(planId), 
+                formatter.format(date).toString(),
+                i.getDuration() + i.getBonus(), 
+                i.getDuration()*pd.getPlanById(planId).getPrice()
+            );
+        }
+        request.setAttribute("notice", "Your purchase was successful!!!");
+        request.getRequestDispatcher("overview.jsp").forward(request, response);
     }
 
     /**

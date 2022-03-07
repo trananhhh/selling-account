@@ -7,7 +7,10 @@ package dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import model.Account;
@@ -63,17 +66,54 @@ public class AccountsDAO extends DBContext{
         return res;
     }
     
+    public int addAccount(int planId, String account, String password){
+        /*
+            PlanID INT NOT NULL,
+            account nvarchar(500),
+            password nvarchar(500),
+            date DATE,
+            Status int,
+            currentUsers INT,
+        */
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, +30);
+        Date date = cal.getTime();
+        String SQLCommand = "INSERT INTO Accounts VALUES (" + planId + ", '" + account + "', '" + password + "', '" + formatter.format(date).toString() + "'," + 1 + "," + 0 + ")";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            st.executeUpdate();
+            SQLCommand = "SELECT ID FROM Accounts WHERE account = '" + account + "'";
+            
+            st = connection.prepareStatement(SQLCommand);
+            
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return -1;
+    }
+    
     public int generateAccount(int planId){
         Random generator = new Random(); 
-        String res = "@gmail.com";
+        String account = "@gmail.com";
+        String pass = "";
         for(int i = 0; i < 10; i++)
-            res = ((generator.nextInt() % 10 + 10) % 10) + res;
-        return ;
+            account = ((generator.nextInt() % 10 + 10) % 10) + account;
+        for(int i = 0; i < 6; i++)
+            pass = pass + ((generator.nextInt() % 10 + 10) % 10);
+        System.out.println(account);
+        System.out.println(pass);
+        return addAccount(planId, account, pass);
     }
     
     public int getAccountAvailable(int planId){
         Account res = null;
-        String SQLCommand = "SELECT id FROM Accounts where Capacity - currentUsers > 0";
+        PlansDAO pd = new PlansDAO();
+        String SQLCommand = "SELECT id FROM Accounts where Capacity - " + pd.getCapacity(planId) + " > 0";
         
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
@@ -95,8 +135,6 @@ public class AccountsDAO extends DBContext{
     
     public static void main(String[] args) {
         AccountsDAO ad = new AccountsDAO();
-//        List<Account> list = ad.getAllAccounts();
-//        System.out.println(list.get(0).getAccount());
-        ad.generateAccount();
+        System.out.println(ad.generateAccount(1));
     }
 }

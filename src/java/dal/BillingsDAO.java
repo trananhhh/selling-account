@@ -75,25 +75,25 @@ public class BillingsDAO extends DBContext{
         Billing res = null;
         
         try {
-         PreparedStatement ps = connection.prepareStatement(xSql);
-         ResultSet rs = ps.executeQuery();
-         
-         if(rs.next()) {
-            int id = rs.getInt(1);
-            String username = rs.getNString(2);
-            int planId = rs.getInt(3);
-            int accountId = rs.getInt(4);
-            String date = rs.getString(5);
-            int duration = rs.getInt(6);
-            int price = rs.getInt(7);
-            res = new Billing(id, username, planId, accountId, date, duration, price);
+            PreparedStatement ps = connection.prepareStatement(xSql);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                int id = rs.getInt(1);
+                String username = rs.getNString(2);
+                int planId = rs.getInt(3);
+                int accountId = rs.getInt(4);
+                String date = rs.getString(5);
+                int duration = rs.getInt(6);
+                int price = rs.getInt(7);
+                res = new Billing(id, username, planId, accountId, date, duration, price);
             }
-          rs.close();        
-          ps.close();
-         }
-         catch(Exception e) {
-           e.printStackTrace();
-         }       
+            rs.close();        
+            ps.close();
+        }
+            catch(Exception e) {
+            e.printStackTrace();
+        }       
         return res;
     }
     
@@ -143,12 +143,12 @@ public class BillingsDAO extends DBContext{
     
     public void createBill(String username, int planId, int accountId, String date, int duration, int price){
         /*
-	Username nvarchar (500) NOT NULL,
-	PlanID int NOT NULL,
-	AccountID int NOT NULL,
-	Date date NOT NULL,
-	Duration int NOT NULL,
-	Price int NOT NULL,
+            Username nvarchar (500) NOT NULL,
+            PlanID int NOT NULL,
+            AccountID int NOT NULL,
+            Date date NOT NULL,
+            Duration int NOT NULL,
+            Price int NOT NULL,
         */
         String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "," + duration + "," + price + ");";
         try {
