@@ -227,17 +227,14 @@ insert into Billings values (84, 'Jobey',			 3, 82, '10/12/2020', 8, 70);
 insert into Billings values (85, 'Brian',			 3, 41, '10/5/2020', 5, 70);
 insert into Billings values (86, 'Meagan',			 1, 60, '2/6/2022', 5, 70);
 insert into Billings values (87, 'Pate',			 1, 66, '10/6/2020', 9, 70);
-insert into Billings values (88, 'Bernette',			 1, 193, '3/25/2021', 8, 70);
 insert into Billings values (89, 'Nahum',			 3, 15, '9/26/2020', 9, 70);
 insert into Billings values (90, 'Reginauld',			 3, 42, '9/2/2020', 5, 70);
 insert into Billings values (91, 'Zoe',			 	 2, 80, '4/12/2021', 2, 70);
-insert into Billings values (92, 'Sapphire',			 1, 175, '8/10/2020', 7, 70);
 insert into Billings values (93, 'Christa',			 1, 16, '8/1/2021', 9, 70);
 insert into Billings values (94, 'Abby',			 3, 51, '3/3/2022', 5, 70);
 insert into Billings values (95, 'Hadleigh',			 2, 30, '8/30/2021', 10, 70);
 insert into Billings values (96, 'Chilton',			 1, 65, '4/30/2021', 6, 70);
 insert into Billings values (97, 'Mikel',			 2, 8, '4/14/2021', 5, 70);
-insert into Billings values (98, 'Jamison',			 2, 166, '10/16/2020', 1, 70);
 insert into Billings values (99, 'Lucius',			 2, 70, '12/16/2021', 5, 70);
 insert into Billings values (100, 'Ollie',			 2, 90, '3/13/2021', 2, 70);
 GO
@@ -355,4 +352,4 @@ insert into Accounts values (100, 1, 'mhaysham2r@cornell.edu', 'iCdTfhD', '11/29
 
 
 
-SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id AND Billings.
+SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id
