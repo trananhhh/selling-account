@@ -352,4 +352,4 @@ insert into Accounts values (100, 1, 'mhaysham2r@cornell.edu', 'iCdTfhD', '11/29
 
 
 
-SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id AND Billings.
+SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id
