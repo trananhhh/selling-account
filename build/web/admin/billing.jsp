@@ -50,16 +50,18 @@
                                         <% 
                                             int numPage = Integer.parseInt(request.getAttribute("num").toString()); 
                                             int curPage = Integer.parseInt(request.getAttribute("curPage").toString());
+                                            PlansDAO pl=new PlansDAO();
+                                            List<Plan> lst= (List<Plan>) pl.getAllPlans();
                                             if(curPage == 1){ 
                                         %>
                                             <button class="btn btn-secondary" disabled>
                                                 <i class="bi bi-caret-left-fill"> </i>
                                             </button>
-                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage + 1%>"> 
+                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
                                                 <i class="bi bi-caret-right-fill"> </i> 
                                             </a>
                                         <% } else if(curPage == numPage){ %>
-                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage - 1%>">
+                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>">
                                                 <i class="bi bi-caret-left-fill"> </i>
                                             </a>
 
@@ -67,10 +69,10 @@
                                                 <i class="bi bi-caret-right-fill"> </i>
                                             </button>
                                         <% } else { %>
-                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage - 1%>"> 
+                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
                                                 <i class="bi bi-caret-left-fill"> </i>
                                             </a>
-                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage + 1%>"> 
+                                            <a class="btn btn-secondary" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
                                                 <i class="bi bi-caret-right-fill"> </i> 
                                             </a>
                                         <% } %>
@@ -78,12 +80,17 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Plan</th>
+                                                    <th scope="col">Date<button><a href="?sort=Date">sort</a></button></th>
+                                                    <th scope="col">Plan<select name="pro_id">
+                                                                        <option value="0"> All </option>
+                                                                        <% for(Plan x: lst) { %>
+                                                                        <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
+                                                                        <% } %>
+                                                                        </select></th>
                                                     <th scope="col">Account</th>
                                                     <th scope="col">Username</th>
-                                                    <th scope="col">Duration</th>
-                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Duration<button><a href="?sort=Duration">sort</a></button></th>
+                                                    <th scope="col">Price<button><a href="?sort=Price">sort</a></button></th>
                                                     <th scope="col"></th>
                                                 </tr>
                                             </thead>
@@ -117,9 +124,6 @@
                                                         </td>
                                                         <td>
                                                             <%= x.getPrice()%>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-secondary" href="/account/admin/billingedit?id=<%=x.getUsername()%>">Edit</a>
                                                         </td>
                                                     </tr>
                                                     <% } %>

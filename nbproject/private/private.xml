@@ -3,15 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/dal/BillingsDAO.java</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/AdminBillingServlet.java</file>
-            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/DetailsServlet.java</file>
-            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/model/Billing.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/AdminServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/AdminUserServlet.java</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/admin/billing.jsp</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/admin/user.jsp</file>
-            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/admin/index.jsp</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/UserEditServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/DeleteItemInCartServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/login.jsp</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/dal/UsersDAO.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/controller/DetailsServlet.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/admin/userUpdate.jsp</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/model/Billing.java</file>
+            <file>file:/C:/Users/NVT/Desktop/prj/selling-account/web/admin/index.jsp</file>
             <file>file:/C:/Users/NVT/Desktop/prj/selling-account/src/java/dal/AccountsDAO.java</file>
         </group>
     </open-files>
