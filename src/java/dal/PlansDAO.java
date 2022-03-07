@@ -28,7 +28,8 @@ public class PlansDAO extends DBContext{
                 String description  = rs.getNString(3);
                 int price           = rs.getInt(4);
                 String url          = rs.getNString(5);
-                list.add(new Plan(id, name, description, price, url));
+                int capacity        = rs.getInt(6);
+                res = new Plan(id, name, description, price, url, capacity);
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -47,7 +48,8 @@ public class PlansDAO extends DBContext{
                 String description  = rs.getNString(3);
                 int price           = rs.getInt(4);
                 String url          = rs.getNString(5);
-                res = new Plan(id, name, description, price, url);
+                int capacity        = rs.getInt(6);
+                res = new Plan(id, name, description, price, url, capacity);
             }
         } catch (Exception e) {
             System.err.println(e);

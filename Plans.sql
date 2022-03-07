@@ -130,118 +130,6 @@ insert into Users values ('emcallester2p', 'DSR144P3Uzw0', 'emacguire2p@ameblo.j
 insert into Users values ('rprendeville2q', 'fdub5lQtke7y', 'wspeaks2q@census.gov', '9382729942', 1);
 insert into Users values ('plillyman2r', 'vP6t2m49y', 'ctownshend2r@imgur.com', '9236549966', 1);
 GO
-CREATE TABLE Billings(
-	ID int IDENTITY(1,1) PRIMARY KEY,
-	Username nvarchar (500) NOT NULL,
-	PlanID int NOT NULL,
-	AccountID int NOT NULL,
-	Date date NOT NULL,
-	Duration int NOT NULL,
-	Price int NOT NULL,
-)
-
-GO
-insert into Billings values (1, 'plillyman2r',		3, 1, '12/22/2021', 12, 840);
-insert into Billings values (2, 'emcallester2p',	3, 1, '3/14/2021', 11, 770);
-insert into Billings values (3, 'ratcheson2l',		1, 3, '11/15/2021', 3, 210);
-insert into Billings values (4, 'pcarlill2k',		1, 4, '7/3/2020'	, 1, 70);
-insert into Billings values (5, 'dtonnesen2h',		3, 4, '6/28/2020', 1, 70);
-insert into Billings values (6, 'thazlewood2g',		3, 2, '1/17/2022', 3, 210);
-insert into Billings values (7, 'Roseanne',			 3, 40, '7/26/2020', 1, 70);
-insert into Billings values (8, 'Teodoro',			 1, 66, '11/1/2020', 8, 70);
-insert into Billings values (9, 'Ransom',			 2, 69, '9/26/2021', 10, 70);
-insert into Billings values (10, 'Janith',			 3, 11, '12/9/2020', 7, 70);
-insert into Billings values (11, 'Riordan',			 3, 68, '1/12/2022', 6, 70);
-insert into Billings values (12, 'Leland',			 1,81, '10/29/2021', 8, 70);
-insert into Billings values (13, 'Sonnnie',			 1, 64, '8/20/2020', 8, 70);
-insert into Billings values (14, 'Jena',			 3, 1, '3/7/2021', 8, 70);
-insert into Billings values (15, 'Erik',			 1, 81, '8/25/2021', 3, 70);
-insert into Billings values (16, 'Garvy',			 3, 27, '6/17/2021', 7, 70);
-insert into Billings values (17, 'Odette',			 3, 10, '1/13/2022', 12, 70);
-insert into Billings values (18, 'Annora',			 2, 19, '9/25/2021', 8, 70);
-insert into Billings values (19, 'Goldy',			 2, 42, '6/19/2021', 5, 70);
-insert into Billings values (20, 'Ethe',			 3, 11, '3/13/2021', 3, 70);
-insert into Billings values (21, 'Elwyn',			 1, 11, '3/22/2021', 4, 70);
-insert into Billings values (22, 'Waneta',			 2, 35, '8/10/2021', 2, 70);
-insert into Billings values (23, 'Adolph',			 3, 12, '7/25/2021', 8, 70);
-insert into Billings values (24, 'Milo',			 2, 90, '7/29/2021', 12, 70);
-insert into Billings values (25, 'Muire',			 2, 59, '2/11/2022', 8, 70);
-insert into Billings values (26, 'Scotty',			 2, 14, '11/29/2021', 12, 70);
-insert into Billings values (27, 'Sabine',			 3, 63, '3/20/2021', 2, 70);
-insert into Billings values (28, 'Brianna',			 2, 54, '11/8/2021', 1, 70);
-insert into Billings values (29, 'Izabel',			 2, 10, '11/12/2021', 1, 70);
-insert into Billings values (30, 'Filippo',			 2, 41, '1/11/2021', 11, 70);
-insert into Billings values (31, 'Roana',			 3, 72, '11/23/2020', 11, 70);
-insert into Billings values (32, 'Bradney',			 2, 77, '6/6/2021', 12, 70);
-insert into Billings values (33, 'Cheri',			 1, 68, '5/1/2021', 4, 70);
-insert into Billings values (34, 'Bella',			 1, 32, '5/18/2020', 8, 70);
-insert into Billings values (35, 'Care',			 3, 19, '4/23/2021', 8, 70);
-insert into Billings values (36, 'Tiff',			 1, 12, '9/19/2021', 7, 70);
-insert into Billings values (37, 'Kendal',			 2, 18, '12/12/2021', 6, 70);
-insert into Billings values (38, 'Estele',			 2, 67, '8/20/2020', 3, 70);
-insert into Billings values (39, 'Christiano',			 3, 17, '9/14/2021', 4, 70);
-insert into Billings values (40, 'Kevin',			 3, 12, '10/21/2020', 1, 70);
-insert into Billings values (41, 'Pat',			 3, 43, '5/22/2020', 3, 70);
-insert into Billings values (42, 'Thane',			 1, 65, '7/24/2020', 9, 70);
-insert into Billings values (43, 'Britte',			 3, 26, '7/11/2020', 11, 70);
-insert into Billings values (44, 'Zarah',			 1, 84, '6/21/2021', 2, 70);
-insert into Billings values (45, 'Thacher',			 2, 41, '6/20/2020', 10, 70);
-insert into Billings values (46, 'Gardiner',			 3, 94, '8/6/2020', 1, 70);
-insert into Billings values (47, 'Denny',			 2, 26, '7/6/2021', 6, 70);
-insert into Billings values (48, 'Florence',			 1, 13, '6/29/2021', 3, 70);
-insert into Billings values (49, 'Leslie',			 1, 82, '9/25/2020', 7, 70);
-insert into Billings values (50, 'Paxton',			 3, 30, '2/19/2021', 6, 70);
-insert into Billings values (51, 'Coretta',			 2, 34, '6/23/2020', 8, 70);
-insert into Billings values (52, 'Jana',			 1, 44, '4/3/2021', 3, 70);
-insert into Billings values (53, 'Chickie',			 1, 3, '3/8/2021', 11, 70);
-insert into Billings values (54, 'Benton',			 1, 98, '5/3/2021', 11, 70);
-insert into Billings values (55, 'Joelly',			 3, 62, '9/11/2020', 9, 70);
-insert into Billings values (56, 'Antonin',			 2, 63, '10/28/2021', 12, 70);
-insert into Billings values (57, 'Noell',			 1, 32, '2/28/2021', 2, 70);
-insert into Billings values (58, 'Dion',			 2, 72, '9/1/2020', 12, 70);
-insert into Billings values (59, 'Rora',			 1, 20, '2/18/2021', 10, 70);
-insert into Billings values (60, 'Marya',			 3, 50, '3/28/2021', 11, 70);
-insert into Billings values (61, 'Jasmine',			 2, 60, '9/2/2020', 6, 70);
-insert into Billings values (62, 'Halsy',			 3, 10, '10/11/2020', 2, 70);
-insert into Billings values (63, 'Bertine',			 1, 6, '8/9/2020', 11, 70);
-insert into Billings values (64, 'Karena',			 1, 69, '5/1/2021', 12, 70);
-insert into Billings values (65, 'Base',			 1, 46, '1/7/2021', 5, 70);
-insert into Billings values (66, 'Merrill',			 2, 39, '2/23/2021', 6, 70);
-insert into Billings values (67, 'Sheryl',			 1, 86, '11/12/2020', 5, 70);
-insert into Billings values (68, 'Bartram',			 2, 5, '3/14/2021', 6, 70);
-insert into Billings values (69, 'Perri',			 2, 34, '8/25/2020', 4, 70);
-insert into Billings values (70, 'Lennie',			 1, 3, '10/2/2020', 6, 70);
-insert into Billings values (71, 'Helge',			 3, 56, '10/13/2020', 6, 70);
-insert into Billings values (72, 'Laurence',			 2, 17, '2/10/2022', 10, 70);
-insert into Billings values (73, 'Chantalle',			 3, 89, '9/27/2021', 6, 70);
-insert into Billings values (74, 'Aimee',			 3, 53, '6/26/2020', 11, 70);
-insert into Billings values (75, 'Bernette',			 1, 4, '11/18/2020', 2, 70);
-insert into Billings values (76, 'Lark',			 3, 27, '8/18/2021', 8, 70);
-insert into Billings values (77, 'Dick',			 1, 7, '10/14/2020', 9, 70);
-insert into Billings values (78, 'Bethina',			 2, 64, '8/21/2021', 4, 70);
-insert into Billings values (79, 'Rolland',			 2, 74, '1/19/2022', 5, 70);
-insert into Billings values (80, 'Merle',			 3, 29, '5/24/2020', 3, 70);
-insert into Billings values (81, 'Diana',			 2, 83, '11/27/2020', 4, 70);
-insert into Billings values (82, 'Fanny',			 2, 39, '6/12/2021', 12, 70);
-insert into Billings values (83, 'Irvine',			 1, 42, '6/19/2020', 9, 70);
-insert into Billings values (84, 'Jobey',			 3, 82, '10/12/2020', 8, 70);
-insert into Billings values (85, 'Brian',			 3, 41, '10/5/2020', 5, 70);
-insert into Billings values (86, 'Meagan',			 1, 60, '2/6/2022', 5, 70);
-insert into Billings values (87, 'Pate',			 1, 66, '10/6/2020', 9, 70);
-insert into Billings values (88, 'Bernette',			 1, 193, '3/25/2021', 8, 70);
-insert into Billings values (89, 'Nahum',			 3, 15, '9/26/2020', 9, 70);
-insert into Billings values (90, 'Reginauld',			 3, 42, '9/2/2020', 5, 70);
-insert into Billings values (91, 'Zoe',			 	 2, 80, '4/12/2021', 2, 70);
-insert into Billings values (92, 'Sapphire',			 1, 175, '8/10/2020', 7, 70);
-insert into Billings values (93, 'Christa',			 1, 16, '8/1/2021', 9, 70);
-insert into Billings values (94, 'Abby',			 3, 51, '3/3/2022', 5, 70);
-insert into Billings values (95, 'Hadleigh',			 2, 30, '8/30/2021', 10, 70);
-insert into Billings values (96, 'Chilton',			 1, 65, '4/30/2021', 6, 70);
-insert into Billings values (97, 'Mikel',			 2, 8, '4/14/2021', 5, 70);
-insert into Billings values (98, 'Jamison',			 2, 166, '10/16/2020', 1, 70);
-insert into Billings values (99, 'Lucius',			 2, 70, '12/16/2021', 5, 70);
-insert into Billings values (100, 'Ollie',			 2, 90, '3/13/2021', 2, 70);
-GO
 create table Accounts (
 	id  int IDENTITY(1,1) PRIMARY KEY,
 	PlanID INT NOT NULL,
@@ -249,7 +137,9 @@ create table Accounts (
 	password nvarchar(500),
 	date DATE,
 	Status int,
-	currentUsers INT
+	currentUsers INT,
+	Capacity INT,
+	FOREIGN KEY (PlanID) REFERENCES Plans(ID)
 )
 GO
 insert into Accounts values (1, 1, 'jbuckner0@earthlink.net', '3abv1oupe', '8/16/2021', 1, 3);
@@ -356,4 +246,121 @@ insert into Accounts values (100, 1, 'mhaysham2r@cornell.edu', 'iCdTfhD', '11/29
 DROP TABLE Accounts
 DROP TABLE Plans
 
-SELECT * FROM Users where Username = 'adminn'
+CREATE TABLE Billings(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	Username nvarchar (500) NOT NULL,
+	PlanID int NOT NULL,
+	AccountID int NOT NULL,
+	Date date NOT NULL,
+	Duration int NOT NULL,
+	Price int NOT NULL,
+	FOREIGN KEY (Username) REFERENCES Users(Username),
+	FOREIGN KEY (PlanID) REFERENCES Plans(ID),
+	FOREIGN KEY (AccountID) REFERENCES Accounts(ID)
+)
+
+GO
+insert into Billings values (1, 'plillyman2r',		3, 1, '12/22/2021', 12, 840);
+insert into Billings values (2, 'emcallester2p',	3, 1, '3/14/2021', 11, 770);
+insert into Billings values (3, 'ratcheson2l',		1, 3, '11/15/2021', 3, 210);
+insert into Billings values (4, 'pcarlill2k',		1, 4, '7/3/2020'	, 1, 70);
+insert into Billings values (5, 'dtonnesen2h',		3, 4, '6/28/2020', 1, 70);
+insert into Billings values (6, 'thazlewood2g',		3, 2, '1/17/2022', 3, 210);
+insert into Billings values (7, 'bcrankhorns',			 3, 40, '7/26/2020', 1, 70);
+insert into Billings values (8, 'efairbankt',			 1, 66, '11/1/2020', 8, 70);
+insert into Billings values (9, 'mstonebanksu',			 2, 69, '9/26/2021', 10, 70);
+insert into Billings values (10, 'gattridev',			 3, 11, '12/9/2020', 7, 70);
+insert into Billings values (11, 'anemchinovx',			 3, 68, '1/12/2022', 6, 70);
+insert into Billings values (12, 'csagew',			 1,81, '10/29/2021', 8, 70);
+insert into Billings values (13, 'jminkiny',			 1, 64, '8/20/2020', 8, 70);
+insert into Billings values (14, 'lmuzziniz',			 3, 1, '3/7/2021', 8, 70);
+insert into Billings values (15, 'mlewty10',			 1, 81, '8/25/2021', 3, 70);
+insert into Billings values (16, 'hdarree11',			 3, 27, '6/17/2021', 7, 70);
+insert into Billings values (17, 'dmaus12',			 3, 10, '1/13/2022', 12, 70);
+insert into Billings values (18, 'lklisch13',			 2, 19, '9/25/2021', 8, 70);
+insert into Billings values (19, 'jvonderdell14',			 2, 42, '6/19/2021', 5, 70);
+insert into Billings values (20, 'rdansken15',			 3, 11, '3/13/2021', 3, 70);
+insert into Billings values (21, 'cferrolli16',			 1, 11, '3/22/2021', 4, 70);
+insert into Billings values (22, 'lsagg17',			 2, 35, '8/10/2021', 2, 70);
+insert into Billings values (23, 'igoscar18',			 3, 12, '7/25/2021', 8, 70);
+
+
+--insert into Billings values (24, 'Milo',			 2, 90, '7/29/2021', 12, 70);
+--insert into Billings values (25, 'Muire',			 2, 59, '2/11/2022', 8, 70);
+--insert into Billings values (26, 'Scotty',			 2, 14, '11/29/2021', 12, 70);
+--insert into Billings values (27, 'Sabine',			 3, 63, '3/20/2021', 2, 70);
+--insert into Billings values (28, 'Brianna',			 2, 54, '11/8/2021', 1, 70);
+--insert into Billings values (29, 'Izabel',			 2, 10, '11/12/2021', 1, 70);
+--insert into Billings values (30, 'Filippo',			 2, 41, '1/11/2021', 11, 70);
+--insert into Billings values (31, 'Roana',			 3, 72, '11/23/2020', 11, 70);
+--insert into Billings values (32, 'Bradney',			 2, 77, '6/6/2021', 12, 70);
+--insert into Billings values (33, 'Cheri',			 1, 68, '5/1/2021', 4, 70);
+--insert into Billings values (34, 'Bella',			 1, 32, '5/18/2020', 8, 70);
+--insert into Billings values (35, 'Care',			 3, 19, '4/23/2021', 8, 70);
+--insert into Billings values (36, 'Tiff',			 1, 12, '9/19/2021', 7, 70);
+--insert into Billings values (37, 'Kendal',			 2, 18, '12/12/2021', 6, 70);
+--insert into Billings values (38, 'Estele',			 2, 67, '8/20/2020', 3, 70);
+--insert into Billings values (39, 'Christiano',			 3, 17, '9/14/2021', 4, 70);
+--insert into Billings values (40, 'Kevin',			 3, 12, '10/21/2020', 1, 70);
+--insert into Billings values (41, 'Pat',			 3, 43, '5/22/2020', 3, 70);
+--insert into Billings values (42, 'Thane',			 1, 65, '7/24/2020', 9, 70);
+--insert into Billings values (43, 'Britte',			 3, 26, '7/11/2020', 11, 70);
+--insert into Billings values (44, 'Zarah',			 1, 84, '6/21/2021', 2, 70);
+--insert into Billings values (45, 'Thacher',			 2, 41, '6/20/2020', 10, 70);
+--insert into Billings values (46, 'Gardiner',			 3, 94, '8/6/2020', 1, 70);
+--insert into Billings values (47, 'Denny',			 2, 26, '7/6/2021', 6, 70);
+--insert into Billings values (48, 'Florence',			 1, 13, '6/29/2021', 3, 70);
+--insert into Billings values (49, 'Leslie',			 1, 82, '9/25/2020', 7, 70);
+--insert into Billings values (50, 'Paxton',			 3, 30, '2/19/2021', 6, 70);
+--insert into Billings values (51, 'Coretta',			 2, 34, '6/23/2020', 8, 70);
+--insert into Billings values (52, 'Jana',			 1, 44, '4/3/2021', 3, 70);
+--insert into Billings values (53, 'Chickie',			 1, 3, '3/8/2021', 11, 70);
+--insert into Billings values (54, 'Benton',			 1, 98, '5/3/2021', 11, 70);
+--insert into Billings values (55, 'Joelly',			 3, 62, '9/11/2020', 9, 70);
+--insert into Billings values (56, 'Antonin',			 2, 63, '10/28/2021', 12, 70);
+--insert into Billings values (57, 'Noell',			 1, 32, '2/28/2021', 2, 70);
+--insert into Billings values (58, 'Dion',			 2, 72, '9/1/2020', 12, 70);
+--insert into Billings values (59, 'Rora',			 1, 20, '2/18/2021', 10, 70);
+--insert into Billings values (60, 'Marya',			 3, 50, '3/28/2021', 11, 70);
+--insert into Billings values (61, 'Jasmine',			 2, 60, '9/2/2020', 6, 70);
+--insert into Billings values (62, 'Halsy',			 3, 10, '10/11/2020', 2, 70);
+--insert into Billings values (63, 'Bertine',			 1, 6, '8/9/2020', 11, 70);
+--insert into Billings values (64, 'Karena',			 1, 69, '5/1/2021', 12, 70);
+--insert into Billings values (65, 'Base',			 1, 46, '1/7/2021', 5, 70);
+--insert into Billings values (66, 'Merrill',			 2, 39, '2/23/2021', 6, 70);
+--insert into Billings values (67, 'Sheryl',			 1, 86, '11/12/2020', 5, 70);
+--insert into Billings values (68, 'Bartram',			 2, 5, '3/14/2021', 6, 70);
+--insert into Billings values (69, 'Perri',			 2, 34, '8/25/2020', 4, 70);
+--insert into Billings values (70, 'Lennie',			 1, 3, '10/2/2020', 6, 70);
+--insert into Billings values (71, 'Helge',			 3, 56, '10/13/2020', 6, 70);
+--insert into Billings values (72, 'Laurence',			 2, 17, '2/10/2022', 10, 70);
+--insert into Billings values (73, 'Chantalle',			 3, 89, '9/27/2021', 6, 70);
+--insert into Billings values (74, 'Aimee',			 3, 53, '6/26/2020', 11, 70);
+--insert into Billings values (75, 'Bernette',			 1, 4, '11/18/2020', 2, 70);
+--insert into Billings values (76, 'Lark',			 3, 27, '8/18/2021', 8, 70);
+--insert into Billings values (77, 'Dick',			 1, 7, '10/14/2020', 9, 70);
+--insert into Billings values (78, 'Bethina',			 2, 64, '8/21/2021', 4, 70);
+--insert into Billings values (79, 'Rolland',			 2, 74, '1/19/2022', 5, 70);
+--insert into Billings values (80, 'Merle',			 3, 29, '5/24/2020', 3, 70);
+--insert into Billings values (81, 'Diana',			 2, 83, '11/27/2020', 4, 70);
+--insert into Billings values (82, 'Fanny',			 2, 39, '6/12/2021', 12, 70);
+--insert into Billings values (83, 'Irvine',			 1, 42, '6/19/2020', 9, 70);
+--insert into Billings values (84, 'Jobey',			 3, 82, '10/12/2020', 8, 70);
+--insert into Billings values (85, 'Brian',			 3, 41, '10/5/2020', 5, 70);
+--insert into Billings values (86, 'Meagan',			 1, 60, '2/6/2022', 5, 70);
+--insert into Billings values (87, 'Pate',			 1, 66, '10/6/2020', 9, 70);
+--insert into Billings values (89, 'Nahum',			 3, 15, '9/26/2020', 9, 70);
+--insert into Billings values (90, 'Reginauld',			 3, 42, '9/2/2020', 5, 70);
+--insert into Billings values (91, 'Zoe',			 	 2, 80, '4/12/2021', 2, 70);
+--insert into Billings values (93, 'Christa',			 1, 16, '8/1/2021', 9, 70);
+--insert into Billings values (94, 'Abby',			 3, 51, '3/3/2022', 5, 70);
+--insert into Billings values (95, 'Hadleigh',			 2, 30, '8/30/2021', 10, 70);
+--insert into Billings values (96, 'Chilton',			 1, 65, '4/30/2021', 6, 70);
+--insert into Billings values (97, 'Mikel',			 2, 8, '4/14/2021', 5, 70);
+--insert into Billings values (99, 'Lucius',			 2, 70, '12/16/2021', 5, 70);
+--insert into Billings values (100, 'Ollie',			 2, 90, '3/13/2021', 2, 70);
+GO
+
+select * from billings
+
+SELECT * FROM Billings, Accounts WHERE Billings.AccountID = Accounts.id

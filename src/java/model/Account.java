@@ -19,7 +19,6 @@ public class Account {
     Date	5/5/22
     Status	TRUE
     CurrentUsers	3
-    Capacity	5
     */
     private int id;
     private int planId;
@@ -28,12 +27,11 @@ public class Account {
     private String date;
     private int status;
     private int currentUsers;
-    private int capacity;
 
     public Account() {
     }
 
-    public Account(int id, int planId, String account, String password, String date, int status, int currentUsers, int capacity) {
+    public Account(int id, int planId, String account, String password, String date, int status, int currentUsers) {
         this.id = id;
         this.planId = planId;
         this.account = account;
@@ -41,7 +39,6 @@ public class Account {
         this.date = date;
         this.status = status;
         this.currentUsers = currentUsers;
-        this.capacity = capacity;
     }
 
     public int getId() {
@@ -99,14 +96,4 @@ public class Account {
     public void setCurrentUsers(int currentUsers) {
         this.currentUsers = currentUsers;
     }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-    
-    
 }

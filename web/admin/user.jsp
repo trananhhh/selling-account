@@ -41,7 +41,7 @@
         <h1>User list</h1>
         <form action="" method="POST" id="search-form" class="align-items-center">
             <div class="mb-3" id="search-bar">
-                <input type="text" class="form-control" id="key" name="key"/>
+                <input type="text" class="form-control" id="key" name="key1"/>
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
@@ -51,15 +51,15 @@
             
             if(curPage == 1){
         %>
-        <button class="btn btn-secondary" disabled>
-                <i class="bi bi-caret-left-fill"> </i>
-        </button>
-            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage + 1%>" > <i class="bi bi-caret-right-fill"> </i> </a>    
+            <button class="btn btn-secondary" disabled>
+                    <i class="bi bi-caret-left-fill"> </i>
+            </button>
+            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > <i class="bi bi-caret-right-fill"> </i> </a>    
         <%
             }
-            else if(curPage == numPage){
+            else if(curPage >= numPage){
         %>
-            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage - 1%>" > <i class="bi bi-caret-left-fill"> </i></a>
+            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > <i class="bi bi-caret-left-fill"> </i></a>
             
             <button class="btn btn-secondary" disabled>
                 <i class="bi bi-caret-right-fill"> </i>
@@ -68,12 +68,12 @@
           }
         else{
         %>
-            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage - 1%>" > <i class="bi bi-caret-left-fill"> </i></a>
-            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage + 1%>" > <i class="bi bi-caret-right-fill"> </i> </a>           
+            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > <i class="bi bi-caret-left-fill"> </i></a>
+            <a class="btn btn-secondary" href="/account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > <i class="bi bi-caret-right-fill"> </i> </a>           
         <%
         }
         %>    
-        <table class="table table-responsive">
+        <table class="table table-responsive table-hover">
             <thead>
                 <tr>
                     <th scope="col">Username</th>

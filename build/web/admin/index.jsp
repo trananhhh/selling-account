@@ -69,14 +69,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./user" class="nav-link " aria-current="page">
+                            <a href="./admin/user" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-people-fill"></i>
                                 User management
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./billing" class="nav-link " aria-current="page">
+                            <a href="./admin/billing" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-receipt"></i>
                                 Billing management

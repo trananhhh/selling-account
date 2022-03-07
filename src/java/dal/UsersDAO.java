@@ -72,7 +72,7 @@ public class UsersDAO extends DBContext{
     
     public List<User> getUsersByKey(String key){
         List<User> list = new ArrayList<>();
-        String SQLCommand = "SELECT * FROM Users WHERE Username like  '%" + key + "%' OR Password Like '%" + key + "%' OR Phone like '%" + key + "%'";
+        String SQLCommand = "SELECT * FROM Users WHERE Username like  '%" + key + "%' OR Email Like '%" + key + "%' OR Phone like '%" + key + "%'";
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();

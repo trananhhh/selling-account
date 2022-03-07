@@ -20,6 +20,7 @@ public class Plan {
     private String name, description;
     private int price;
     private String url;
+    private int capacity;
 
     public String getUrl() {
         return url;
@@ -32,12 +33,13 @@ public class Plan {
     public Plan() {
     }
 
-    public Plan(int id, String name, String description, int price, String url) {
+    public Plan(int id, String name, String description, int price, String url, int capacity) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.url = url;
+        this.capacity = capacity;
     }
 
     public int getId() {
@@ -70,5 +72,13 @@ public class Plan {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }
