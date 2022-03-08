@@ -5,19 +5,27 @@
  */
 package controller;
 
-import dal.UsersDAO;
+import dal.AccountsDAO;
+import dal.BillingsDAO;
+import dal.PlansDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Item;
+import java.text.SimpleDateFormat;  
+import java.util.Date;    
 
 /**
  *
  * @author _trananhhh
  */
-public class RegisterServlet extends HttpServlet {
+public class PurchaseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +44,10 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet PurchaseServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getAttribute("email")+ "</h1>");
+            out.println("<h1>Servlet PurchaseServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,38 +65,42 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("./register.jsp").forward(request, response);
+        processRequest(request, response);
     }
-    
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        
-        UsersDAO ud = new UsersDAO();
-        if(ud.checkInfo(username) == 1){
-            request.setAttribute("username", username);
-            request.setAttribute("err", "Username already exist!!!");
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        List<Item> listItems    = (ArrayList) session.getAttribute("itemsInCart");
+        String username         = (String) session.getAttribute("username");
+        BillingsDAO bd = new BillingsDAO();
+        AccountsDAO ad = new AccountsDAO();
+        PlansDAO pd = new PlansDAO();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+        Date date = new Date();  
+        System.out.println();  
+        for(Item i : listItems){
+            int planId = i.getPlan().getId();
+            bd.createBill(
+                username, 
+                planId, 
+                ad.getAccountAvailable(planId), 
+                formatter.format(date).toString(),
+                i.getDuration() + i.getBonus(), 
+                i.getDuration()*pd.getPlanById(planId).getPrice()
+            );
         }
-        if(ud.checkInfo(email) == 1){
-            request.setAttribute("email", email);
-            request.setAttribute("err", "Email already exist!!!");
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
-        }
-        if(ud.checkInfo(phone) == 1){
-            request.setAttribute("phone", phone);
-            request.setAttribute("err", "Phone already exist!!!");
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
-        }
-        
-        ud.createAccount(username, password, email, phone);
-        request.setAttribute("username", username);
-        request.setAttribute("notice", "Register successfully!!!");
-        request.getRequestDispatcher("./login.jsp").forward(request, response);
+        request.setAttribute("notice", "Your purchase was successful!!!");
+        request.getRequestDispatcher("overview.jsp").forward(request, response);
     }
 
     /**

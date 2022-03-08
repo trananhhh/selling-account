@@ -52,6 +52,10 @@
         <servlet-name>AdminBillingSearchServlet</servlet-name>
         <servlet-class>controller.AdminBillingSearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <servlet-class>controller.PurchaseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>AdminBillingSearchServlet</servlet-name>
         <url-pattern>/admin/billing/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseServlet</servlet-name>
+        <url-pattern>/purchase</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

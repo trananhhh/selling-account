@@ -97,37 +97,52 @@ public class BillingsDAO extends DBContext{
         Billing res = null;
         
         try {
-         PreparedStatement ps = connection.prepareStatement(xSql);
-         ResultSet rs = ps.executeQuery();
-         
-         if(rs.next()) {
-            int id = rs.getInt(1);
-            String username = rs.getNString(2);
-            int planId = rs.getInt(3);
-            int accountId = rs.getInt(4);
-            String date = rs.getString(5);
-            int duration = rs.getInt(6);
-            int price = rs.getInt(7);
-            res = new Billing(id, username, planId, accountId, date, duration, price);
+            PreparedStatement ps = connection.prepareStatement(xSql);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                int id = rs.getInt(1);
+                String username = rs.getNString(2);
+                int planId = rs.getInt(3);
+                int accountId = rs.getInt(4);
+                String date = rs.getString(5);
+                int duration = rs.getInt(6);
+                int price = rs.getInt(7);
+                res = new Billing(id, username, planId, accountId, date, duration, price);
             }
-          rs.close();        
-          ps.close();
-         }
-         catch(Exception e) {
-           e.printStackTrace();
-         }       
+            rs.close();        
+            ps.close();
+        }
+            catch(Exception e) {
+            e.printStackTrace();
+        }       
         return res;
+    }
+    
+    public int isOnlyNumber(String xCode){
+        for(int i = 0; i < xCode.length(); i++)
+            if(xCode.charAt(i) < '0' || '9' < xCode.charAt(i))
+                return 0;
+        return 1;
     }
     
     public List<Billing> getBillingsByKey(String key){
         List<Billing> list = new ArrayList<>();
-        String SQLCommand = "SELECT * FROM Billings WHERE id = "+key
-                + "OR username like '%" + key + "%' "
-                + "OR planId = "   + key
-                + "OR accountId = "   + key
-                + "OR date like '%"     + key + "%' "
-                + "OR duration = "   + key
-                + "OR price = "   + key;
+        
+        String SQLCommand = "0";
+        if(isOnlyNumber(key) == 1)
+            SQLCommand = "SELECT * FROM Billings WHERE id = "+key
+                    + "OR username like '%" + key + "%' "
+                    + "OR planId = "   + key
+                    + "OR accountId = "+ key
+                    + "OR date like '%"+ key + "%' "
+                    + "OR duration = " + key
+                    + "OR price = "    + key;
+        else
+            SQLCommand = "SELECT * FROM Billings WHERE"
+                    + "username like '%" + key + "%' "
+                    + "OR date like '%"  + key + "%' ";
+            
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -147,9 +162,28 @@ public class BillingsDAO extends DBContext{
         return list;
     }
     
-//    public static void main(String[] args) {
-//        BillingsDAO bd = new BillingsDAO();
-//        List<Billing> list = bd.getAllBillings();
-//        System.out.println(list.get(0).getUsername());
-//    }
+    
+    public void createBill(String username, int planId, int accountId, String date, int duration, int price){
+        /*
+            Username nvarchar (500) NOT NULL,
+            PlanID int NOT NULL,
+            AccountID int NOT NULL,
+            Date date NOT NULL,
+            Duration int NOT NULL,
+            Price int NOT NULL,
+        */
+        String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "," + duration + "," + price + ");";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        BillingsDAO bd = new BillingsDAO();
+        List<Billing> list = bd.getAllBillings();
+        System.out.println(list.get(0).getUsername());
+    }
 }
