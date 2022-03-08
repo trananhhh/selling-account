@@ -7,8 +7,16 @@ package dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Billing;
 import model.User;
 
@@ -164,14 +172,6 @@ public class BillingsDAO extends DBContext{
     
     
     public void createBill(String username, int planId, int accountId, String date, int duration, int price){
-        /*
-            Username nvarchar (500) NOT NULL,
-            PlanID int NOT NULL,
-            AccountID int NOT NULL,
-            Date date NOT NULL,
-            Duration int NOT NULL,
-            Price int NOT NULL,
-        */
         String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "," + duration + "," + price + ");";
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
@@ -181,9 +181,42 @@ public class BillingsDAO extends DBContext{
         }
     }
     
+    public int getTotalIncomeByMonth(int month, int year){
+        String firstDayOfMonth = month + "/1/" + year;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date convertedDate;
+        try {
+            convertedDate = dateFormat.parse(firstDayOfMonth);    
+            Date today = convertedDate;  
+
+            Calendar calendar = Calendar.getInstance();  
+            calendar.setTime(today);  
+
+            calendar.add(Calendar.MONTH, 1);  
+            calendar.set(Calendar.DAY_OF_MONTH, 1);  
+            calendar.add(Calendar.DATE, -1);  
+
+            Date lastDayOfMonth = calendar.getTime();  
+
+            String SQLCommand = "SELECT SUM(PRICE) FROM BILLINGS WHERE '" + firstDayOfMonth + "' <= Date AND Date <= '" + dateFormat.format(lastDayOfMonth) + "'";
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(BillingsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BillingsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
+    }
+    
     public static void main(String[] args) {
         BillingsDAO bd = new BillingsDAO();
-        List<Billing> list = bd.getAllBillings();
-        System.out.println(list.get(0).getUsername());
+        
+        System.out.println(bd.getTotalIncomeByMonth(6, 2021));
+//        List<Billing> list = bd.getAllBillings();
+//        System.out.println(list.get(0).getUsername());
     }
 }

@@ -1,5 +1,8 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+    <%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="dal.BillingsDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -104,21 +107,20 @@
                         </ul>
                     </div>
                 </div>
+                <%
+                    BillingsDAO bd = new BillingsDAO();
+                    Date now = new Date();
+                    int totalIncomeThisMonth = bd.getTotalIncomeByMonth(6, 2021);
+                    DecimalFormat formatter = new DecimalFormat("#,###");
+                %>
                 <div class="grey-bg container-fluid">
-                    <nav class="navbar navbar-light bg-light mb-4">
-                        <div class="container-fluid">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </nav>
-                    <div class="row g-10">
+                    <div class="row g-10 mt-3">
                         <div class="col-md-3">
                             <div class=" m-1 card text-white bg-primary">
                                 <div class="card-body">
-                                    <h5 class="card-title">10000</h5>
-                                    <p class="card-text">Khách hàng</p>
+                                    <h5 class="card-title"><%= formatter.format(totalIncomeThisMonth*1000) %> vnđ</h5>
+                                    <p class="card-text">Doanh thu tháng này</p>
+                                    <i class="bi bi-wallet-fill card-icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class=" m-1 card text-white bg-primary">
+                            <div class=" m-1 card text-white bg-">
                                 <div class="card-body">
                                     <h5 class="card-title">10000</h5>
                                     <p class="card-text">Khách hàng</p>

@@ -167,8 +167,8 @@
                         <th scope="col" class="md-col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col" class="md-col">Phone</th>
-                        <th scope="col" class="sm-col">Role</th>
-                        <th scope="col" class="sm-col">Edit</th>
+                        <th scope="col" class="sm-col text-center">Role</th>
+                        <th scope="col" class="sm-col text-center">Edit</th>
                     </tr>
                 </thead>
                 
@@ -185,10 +185,10 @@
                                 <td class="md-col">
                                     <%= x.getPhone()%>
                                 </td>
-                                <td class="sm-col">
+                                <td class="sm-col text-center">
                                     <%= x.getRole()%>
                                 </td>
-                                <td class="sm-col"><a class="btn btn-secondary"
+                                <td class="sm-col text-center"><a class="btn btn-secondary"
                                         href="/account/admin/useredit?id=<%=x.getUsername()%>">Edit</a>
                                 </td>
                             </tr>

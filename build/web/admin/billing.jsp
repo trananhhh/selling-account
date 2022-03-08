@@ -99,6 +99,12 @@
             text-decoration: none;
             color: black;
         }
+        #pro_id{
+            padding: 2px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            width: 90%;
+        }
     </style>
 </head>
 
@@ -177,9 +183,9 @@
                 <thead>
                     <tr>
                         <th scope="col" class="sm-col">ID</th>
-                        <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-filter"></i></a></th>
+                        <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-arrow-down-up"></i></a></th>
                         <th scope="col" class="md-col">
-                            <select name="pro_id" class="form-select" >
+                            <select id="pro_id" name="pro_id" class="form-select" >
                                 <option value="0" selected> All plans </option>
                                 <% for(Plan x: lst) { %>
                                 <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
@@ -188,8 +194,8 @@
                         </th>
                         <th scope="col" class="">Account</th>
                         <th scope="col" class="md-col">Username</th>
-                        <th scope="col" class="md-col"><a href="?sort=Duration">Duration <i class="bi bi-filter"></i></a></th>
-                        <th scope="col" class="sm-col"><a href="?sort=Price">Price <i class="bi bi-filter"></i></a></th>
+                        <th scope="col" class="md-col text-center"><a href="?sort=Duration" class=" text-center">Duration <i class="bi bi-arrow-down-up"></i></a></th>
+                        <th scope="col" class="sm-col text-center"><a href="?sort=Price" class=" text-center">Price <i class="bi bi-arrow-down-up"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -217,10 +223,10 @@
                             <td class="md-col">
                                 <%= x.getUsername() %>
                             </td> 
-                            <td class="md-col">
+                            <td class="md-col text-center">
                                 <%= x.getDuration()%> tháng
                             </td>
-                            <td class="sm-col">
+                            <td class="sm-col text-center">
                                 <%= x.getPrice()%>.000 
                             </td>
                         </tr>
