@@ -1,4 +1,4 @@
-﻿DROP DATABASE PRJ301_SellingAccountWebsite
+DROP DATABASE PRJ301_SellingAccountWebsite
 GO
 CREATE DATABASE PRJ301_SellingAccountWebsite
 GO
@@ -67,7 +67,15 @@ insert into Users values ('hdarree11', 'jWxF21De', 'lmartensen11@ucsd.edu', '449
 insert into Users values ('dmaus12', '80hBPQ2SuD5y', 'onerney12@uol.com.br', '3438939373', 1);
 insert into Users values ('lklisch13', 'bqgpit', 'bprator13@arstechnica.com', '8633226436', 1);
 insert into Users values ('jvonderdell14', 'S5QajAXQ', 'dfelten14@upenn.edu', '9094164307', 1);
-insert into Users values ('rdansken15', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('plillyman2r', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('emcallester2p', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('ratcheson2l', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('pcarlill2k', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('dtonnesen2h', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('thazlewood2g', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('mlewty10', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('cferrolli16', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
+insert into Users values ('lsagg17', 'bPznKxYY', 'katwater15@ibm.com', '1064954264', 1);
 GO
 create table Accounts (
 	ID int IDENTITY(1,1) PRIMARY KEY,
@@ -201,6 +209,9 @@ insert into Billings values ( 'ratcheson2l',		1, 3, '11/15/2021', 3, 210);
 insert into Billings values ( 'pcarlill2k',		1, 4, '7/3/2020'	, 1, 70);
 insert into Billings values ( 'dtonnesen2h',		3, 4, '6/28/2020', 1, 70);
 insert into Billings values ( 'thazlewood2g',		3, 2, '1/17/2022', 3, 210);
+insert into Billings values ( 'mlewty10',			 1, 81, '8/25/2021', 3, 70);
+insert into Billings values ( 'cferrolli16',			 1, 11, '3/22/2021', 4, 70);
+insert into Billings values ( 'lsagg17',			 2, 35, '8/10/2021', 2, 70);
 insert into Billings values ( 'bcrankhorns',			 3, 40, '7/26/2020', 1, 70);
 insert into Billings values ( 'efairbankt',			 1, 66, '11/1/2020', 8, 70);
 insert into Billings values ( 'mstonebanksu',			 2, 69, '9/26/2021', 10, 70);
@@ -209,21 +220,12 @@ insert into Billings values ( 'anemchinovx',			 3, 68, '1/12/2022', 6, 70);
 insert into Billings values ( 'csagew',			 1,81, '10/29/2021', 8, 70);
 insert into Billings values ( 'jminkiny',			 1, 64, '8/20/2020', 8, 70);
 insert into Billings values ( 'lmuzziniz',			 3, 1, '3/7/2021', 8, 70);
-insert into Billings values ( 'mlewty10',			 1, 81, '8/25/2021', 3, 70);
 insert into Billings values ( 'hdarree11',			 3, 27, '6/17/2021', 7, 70);
 insert into Billings values ( 'dmaus12',			 3, 10, '1/13/2022', 12, 70);
 insert into Billings values ( 'lklisch13',			 2, 19, '9/25/2021', 8, 70);
 insert into Billings values ( 'jvonderdell14',			 2, 42, '6/19/2021', 5, 70);
-insert into Billings values ( 'rdansken15',			 3, 11, '3/13/2021', 3, 70);
-insert into Billings values ( 'cferrolli16',			 1, 11, '3/22/2021', 4, 70);
-insert into Billings values ( 'lsagg17',			 2, 35, '8/10/2021', 2, 70);
-insert into Billings values ( 'igoscar18',			 3, 12, '7/25/2021', 8, 70);
+
 
 GO
 
-DROP TABLE Billings
-DROP TABLE Accounts
-DROP TABLE Users
-DROP TABLE Plans
-
-select * from Accounts where account = '8867219985@gmail.com'
+select * from billings
