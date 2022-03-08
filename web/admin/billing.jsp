@@ -50,6 +50,8 @@
                                         <% 
                                             int numPage = Integer.parseInt(request.getAttribute("num").toString()); 
                                             int curPage = Integer.parseInt(request.getAttribute("curPage").toString());
+                                            PlansDAO pl=new PlansDAO();
+                                            List<Plan> lst= (List<Plan>) pl.getAllPlans();
                                             if(curPage == 1){ 
                                         %>
                                             <button class="btn btn-secondary" disabled>
@@ -79,7 +81,12 @@
                                                 <tr>
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Date<button><a href="?sort=Date">sort</a></button></th>
-                                                    <th scope="col">Plan</th>
+                                                    <th scope="col">Plan<select name="pro_id">
+                                                                        <option value="0"> All </option>
+                                                                        <% for(Plan x: lst) { %>
+                                                                        <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
+                                                                        <% } %>
+                                                                        </select></th>
                                                     <th scope="col">Account</th>
                                                     <th scope="col">Username</th>
                                                     <th scope="col">Duration<button><a href="?sort=Duration">sort</a></button></th>
@@ -117,9 +124,6 @@
                                                         </td>
                                                         <td>
                                                             <%= x.getPrice()%>
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-secondary" href="/account/admin/billingedit?id=<%=x.getUsername()%>">Edit</a>
                                                         </td>
                                                     </tr>
                                                     <% } %>
