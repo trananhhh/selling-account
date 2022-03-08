@@ -21,7 +21,7 @@
                     height: 100vh;
                 }
 
-                i {
+                #dropdownUser2 i {
                     margin-right: 8px;
                 }
 
@@ -58,7 +58,7 @@
                         <svg class="bi me-2" width="40" height="32">
                             <use xlink:href="#bootstrap"></use>
                         </svg>
-                        <span class="fs-4">Admin CMS</span>
+                        <span class="fs-4 text-center">Admin CMS</span>
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
@@ -69,14 +69,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./admin/user" class="nav-link " aria-current="page">
+                            <a href="./user" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-people-fill"></i>
                                 User management
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./admin/billing" class="nav-link " aria-current="page">
+                            <a href="./billing" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-receipt"></i>
                                 Billing management
