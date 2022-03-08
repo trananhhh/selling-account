@@ -1,5 +1,13 @@
 ﻿DROP DATABASE PRJ301_SellingAccountWebsite
 GO
+DROP TABLE Billings
+GO
+DROP TABLE Accounts
+GO
+DROP TABLE Users
+GO
+DROP TABLE Plans
+GO
 CREATE DATABASE PRJ301_SellingAccountWebsite
 GO
 USE PRJ301_SellingAccountWebsite
@@ -220,10 +228,6 @@ insert into Billings values ( 'lsagg17',			 2, 35, '8/10/2021', 2, 70);
 insert into Billings values ( 'igoscar18',			 3, 12, '7/25/2021', 8, 70);
 
 GO
+select * from Accounts
 
-DROP TABLE Billings
-DROP TABLE Accounts
-DROP TABLE Users
-DROP TABLE Plans
-
-select * from Accounts where account = '8867219985@gmail.com'
+select ID from Accounts where account = '8867219985@gmail.com'
