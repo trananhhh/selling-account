@@ -97,8 +97,8 @@ public class LoginServlet extends HttpServlet {
                 case 0:{
                     session.setAttribute("username", username);
                     session.setAttribute("role", 0);
-//                    response.sendRedirect("./admin/index.jsp");
-                    request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
+                    response.sendRedirect("./admin/index.jsp");
+//                    request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
                     break;
                 }
 
@@ -115,7 +115,6 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("./login.jsp");
 //                request.getRequestDispatcher("./login.jsp").forward(request, response);
         }
-        response.sendRedirect("./login.jsp");
     }
 
     /**

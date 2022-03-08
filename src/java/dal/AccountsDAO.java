@@ -57,7 +57,6 @@ public class AccountsDAO extends DBContext{
                 String date         = rs.getString(5);
                 int status          = rs.getInt(6);
                 int currentUsers    = rs.getInt(7);
-                int capacity        = rs.getInt(8);
                 res = new Account(id, planId, account, password, date, status, currentUsers);
             }
         } catch (Exception e) {
