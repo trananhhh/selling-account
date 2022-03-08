@@ -105,8 +105,8 @@ public class LoginServlet extends HttpServlet {
                 case 1:{
                     session.setAttribute("username", username);
                     session.setAttribute("role", 1);
-//                    response.sendRedirect("./index.jsp");
-                    request.getRequestDispatcher("./index.jsp").forward(request, response);
+                    response.sendRedirect("./index.jsp");
+//                    request.getRequestDispatcher("./index.jsp").forward(request, response);
                     break;
                 }
             }

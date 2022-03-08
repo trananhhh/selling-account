@@ -66,7 +66,7 @@ public class AdminBillingServlet extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        try {
+//        try {
             String userRole = session.getAttribute("role").toString();
             if(userRole.equals("0")){
                 BillingsDAO ud = new BillingsDAO();
@@ -93,7 +93,7 @@ public class AdminBillingServlet extends HttpServlet {
                 }
                 
                 int numPs = list.size();
-                int numperPage = 8;
+                int numperPage = 20;
                 int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
                 int start, end;
                 int page;
@@ -118,9 +118,9 @@ public class AdminBillingServlet extends HttpServlet {
             }
             else
                 response.sendRedirect("../index.jsp");
-        } catch (Exception e) {
-            response.sendRedirect("../login");
-        }
+//        } catch (Exception e) {
+//            response.sendRedirect("../login");
+//        }
     }
 
     /**

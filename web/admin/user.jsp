@@ -18,6 +18,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Admin - User management</title>
     <style>
+        .container-fluid{
+            margin-left: -64px;
+            width: 108%;
+        }
         td {
             padding: 4px 8px;
         }
@@ -68,13 +72,10 @@
             width: 100%;
         }
         table thead {
-            /* head takes the height it requires, 
-            and it's not scaled when table is resized */
             flex: 0 0 auto;
             width: calc(100% - 0.9em);
         }
         table tbody {
-            /* body takes all the remaining available space */
             flex: 1 1 auto;
             display: block;
             overflow-y: scroll;
@@ -88,21 +89,8 @@
             table-layout: fixed;
         }
         #table-container{
-/*            overflow-y: scroll;
-            overflow-x: hidden;*/
             height: 80vh;
         }
-        
-/*        tbody {
-            height: 73vh;         
-            overflow-y: auto;     
-            overflow-x: hidden;   
-        }*/
-/*        thead, tbody { display: block; }
-
-        table {
-            width: 100%;  Optional 
-        }*/
     </style>
 </head>
 
@@ -128,14 +116,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./admin/user" class="nav-link active" aria-current="page">
+                    <a href="#" class="nav-link active" aria-current="page">
 
                         <i class="bi bi-people-fill"></i>
                         User management
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./admin/billing" class="nav-link " aria-current="page">
+                    <a href="./billing" class="nav-link " aria-current="page">
 
                         <i class="bi bi-receipt"></i>
                         Billing management
