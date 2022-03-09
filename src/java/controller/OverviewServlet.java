@@ -5,24 +5,18 @@
  */
 package controller;
 
-import dal.PlansDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Item;
-import model.Plan;
 
 /**
  *
  * @author _trananhhh
  */
-public class CartServlet extends HttpServlet {
+public class OverviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +35,10 @@ public class CartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");            
+            out.println("<title>Servlet OverviewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OverviewServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,29 +56,8 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String planIndex_raw = request.getParameter("plan");
-        String duration_raw = request.getParameter("dur");
-        PlansDAO pd = new PlansDAO();
-        List<Plan> list = pd.getAllPlans();
-        
-        int planIndex, duration;
-            
-        try {
-            planIndex = Integer.parseInt(planIndex_raw) - 1;
-            duration = Integer.parseInt(duration_raw);
-            Plan x = list.get(planIndex);
-            List<Item> listItems = (List<Item>) session.getAttribute("itemsInCart");
-            if(listItems == null)
-                listItems = new ArrayList<>();
-            listItems.add(new Item(x, duration));
-            session.setAttribute("itemsInCart", listItems);
-            request.setAttribute("itemsInCart", listItems);
-        } catch (Exception e) {
-            System.err.println(e);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-        }
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        response.sendRedirect("./overview.jsp");
+//        processRequest(request, response);
     }
 
     /**

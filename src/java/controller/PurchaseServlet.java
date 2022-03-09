@@ -80,25 +80,42 @@ public class PurchaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+        
+        if(session.getAttribute("username") == null){
+            request.setAttribute("err", "Please login before purchase!!!");
+//            request.setAttribute("lastURL", "cart.jsp");
+//            System.out.println("cart.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        
         List<Item> listItems    = (ArrayList) session.getAttribute("itemsInCart");
         String username         = (String) session.getAttribute("username");
         BillingsDAO bd = new BillingsDAO();
         AccountsDAO ad = new AccountsDAO();
         PlansDAO pd = new PlansDAO();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
         Date date = new Date();  
-        System.out.println();  
         for(Item i : listItems){
             int planId = i.getPlan().getId();
-            bd.createBill(
+            
+            System.out.println(username
+                    + " | " + planId
+                    + " | " + ad.getAccountAvailable(planId)
+                    + " | " + formatter.format(date).toString()
+                    + " | " + i.getDuration() + i.getBonus()
+                    + " | " + i.getDuration()*pd.getPlanById(planId).getPrice());
+            
+            System.out.println(bd.createBill(   
                 username, 
                 planId, 
                 ad.getAccountAvailable(planId), 
                 formatter.format(date).toString(),
                 i.getDuration() + i.getBonus(), 
                 i.getDuration()*pd.getPlanById(planId).getPrice()
-            );
+            ));
         }
+        
         request.setAttribute("notice", "Your purchase was successful!!!");
         request.getRequestDispatcher("overview.jsp").forward(request, response);
     }
