@@ -5,27 +5,18 @@
  */
 package controller;
 
-import dal.AccountsDAO;
-import dal.BillingsDAO;
-import dal.PlansDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Item;
-import java.text.SimpleDateFormat;  
-import java.util.Date;    
 
 /**
  *
  * @author _trananhhh
  */
-public class PurchaseServlet extends HttpServlet {
+public class OverviewServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +35,10 @@ public class PurchaseServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PurchaseServlet</title>");            
+            out.println("<title>Servlet OverviewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PurchaseServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OverviewServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +56,8 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("./overview.jsp");
+//        processRequest(request, response);
     }
 
     /**
@@ -79,45 +71,7 @@ public class PurchaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        PrintWriter out = response.getWriter();
-        
-        if(session.getAttribute("username") == null){
-            request.setAttribute("err", "Please login before purchase!!!");
-//            request.setAttribute("lastURL", "cart.jsp");
-//            System.out.println("cart.jsp");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        
-        List<Item> listItems    = (ArrayList) session.getAttribute("itemsInCart");
-        String username         = (String) session.getAttribute("username");
-        BillingsDAO bd = new BillingsDAO();
-        AccountsDAO ad = new AccountsDAO();
-        PlansDAO pd = new PlansDAO();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
-        Date date = new Date();  
-        for(Item i : listItems){
-            int planId = i.getPlan().getId();
-            
-            System.out.println(username
-                    + " | " + planId
-                    + " | " + ad.getAccountAvailable(planId)
-                    + " | " + formatter.format(date).toString()
-                    + " | " + i.getDuration() + i.getBonus()
-                    + " | " + i.getDuration()*pd.getPlanById(planId).getPrice());
-            
-            System.out.println(bd.createBill(   
-                username, 
-                planId, 
-                ad.getAccountAvailable(planId), 
-                formatter.format(date).toString(),
-                i.getDuration() + i.getBonus(), 
-                i.getDuration()*pd.getPlanById(planId).getPrice()
-            ));
-        }
-        
-        request.setAttribute("notice", "Your purchase was successful!!!");
-        request.getRequestDispatcher("overview.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

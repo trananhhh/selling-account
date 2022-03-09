@@ -69,7 +69,7 @@
             display: flex;
             flex-flow: column;
             height: 100%;
-            width: 100%;
+            width: 92% !important;
         }
         table thead {
             flex: 0 0 auto;
@@ -100,11 +100,7 @@
         <div class="col-3">
             <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;"
             bis_skin_checked="1">
-            <a href="/"
-                class="d-flex align-items-center mx-2 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
+            <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
                 <span class="fs-4 text-center">User list</span>
             </a>
             <hr>
@@ -123,7 +119,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./billing" class="nav-link " aria-current="page">
+                    <a href="./billing?sort=Date" class="nav-link " aria-current="page">
 
                         <i class="bi bi-receipt"></i>
                         Billing management

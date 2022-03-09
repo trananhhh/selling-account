@@ -112,8 +112,8 @@ public class AccountsDAO extends DBContext{
     public int getAccountAvailable(int planId){
         Account res = null;
         PlansDAO pd = new PlansDAO();
-        String SQLCommand = "SELECT id FROM Accounts where Capacity - " + pd.getCapacity(planId) + " > 0";
-        
+        String SQLCommand = "SELECT id FROM Accounts where currentUsers < " + pd.getCapacity(planId);
+        System.out.println(SQLCommand);
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -121,7 +121,7 @@ public class AccountsDAO extends DBContext{
                 int id              = rs.getInt(1);
                 SQLCommand = "UPDATE Accounts SET currentUsers = currentUsers + 1 WHERE ID = " + id;
                 st = connection.prepareStatement(SQLCommand);
-                rs = st.executeQuery();
+                st.executeUpdate();
                 return id;
             }
             else
@@ -134,6 +134,6 @@ public class AccountsDAO extends DBContext{
     
     public static void main(String[] args) {
         AccountsDAO ad = new AccountsDAO();
-        System.out.println(ad.generateAccount(1));
+        System.out.println(ad.getAccountAvailable(1));
     }
 }

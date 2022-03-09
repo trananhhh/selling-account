@@ -49,7 +49,7 @@ public class BillingsDAO extends DBContext{
     
     public List<Billing> getAllBillingsSort(String sort){
         List<Billing> list = new ArrayList<>();
-        String SQLCommand = "SELECT * FROM Billings order by "+sort;
+        String SQLCommand = "SELECT * FROM Billings order by " + sort;
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -71,7 +71,7 @@ public class BillingsDAO extends DBContext{
     
      public List<Billing> getAllBillingsSortRev(String sort){
         List<Billing> list = new ArrayList<>();
-        String SQLCommand = "SELECT * FROM Billings order by "+sort+" desc";
+        String SQLCommand = "SELECT * FROM Billings order by " + sort + " desc";
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -185,6 +185,7 @@ public class BillingsDAO extends DBContext{
     
     public int getTotalIncomeByMonth(int month, int year){
         String firstDayOfMonth = month + "/1/" + year;
+        System.out.println(firstDayOfMonth);
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date convertedDate;
         try {
@@ -201,6 +202,9 @@ public class BillingsDAO extends DBContext{
             Date lastDayOfMonth = calendar.getTime();  
 
             String SQLCommand = "SELECT SUM(PRICE) FROM BILLINGS WHERE '" + firstDayOfMonth + "' <= Date AND Date <= '" + dateFormat.format(lastDayOfMonth) + "'";
+            
+            System.out.println(SQLCommand);
+            
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
             if(rs.next()){
@@ -216,8 +220,8 @@ public class BillingsDAO extends DBContext{
     
     public static void main(String[] args) {
         BillingsDAO bd = new BillingsDAO();
-        bd.createBill("admin", 1, 1, "01/01/2022", 12, 720);
-//        System.out.println(bd.getTotalIncomeByMonth(6, 2021));
+//        bd.createBill("admin", 1, 1, "01/01/2022", 12, 720);
+        System.out.println(bd.getTotalIncomeByMonth(3, 2022));
 //        List<Billing> list = bd.getAllBillings();
 //        System.out.println(list.get(0).getUsername());
     }

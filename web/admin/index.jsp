@@ -1,5 +1,6 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
-    <%@page import="dal.UsersDAO"%>
+    <%@page import="java.time.LocalDate"%>
+<%@page import="dal.UsersDAO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="dal.BillingsDAO"%>
@@ -57,11 +58,8 @@
             <main>
                 <!-- Side bar -->
                 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;" bis_skin_checked="1">
-                    <a href="/"
-                        class="d-flex align-items-center mx-2 mb-md-0 me-md-auto link-dark text-decoration-none">
-                        <svg class="bi me-2" width="40" height="32">
-                            <use xlink:href="#bootstrap"></use>
-                        </svg>
+                    
+                    <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
                         <span class="fs-4 text-center">Admin CMS</span>
                     </a>
                     <hr>
@@ -74,14 +72,12 @@
                         </li>
                         <li class="nav-item">
                             <a href="./user" class="nav-link " aria-current="page">
-
                                 <i class="bi bi-people-fill"></i>
                                 User management
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./billing" class="nav-link " aria-current="page">
-
+                            <a href="./billing?sort=Date" class="nav-link " aria-current="page">
                                 <i class="bi bi-receipt"></i>
                                 Billing management
                             </a>
@@ -112,8 +108,9 @@
                     BillingsDAO bd = new BillingsDAO();
                     UsersDAO ud = new UsersDAO();
                     int userCount = ud.getAllUsers().size();
-                    Date now = new Date();
-                    int totalIncomeThisMonth = bd.getTotalIncomeByMonth(6, 2021);
+                    int billCount = bd.getAllBillings().size();
+                    LocalDate now = LocalDate.now();
+                    int totalIncomeThisMonth = bd.getTotalIncomeByMonth(now.getMonthValue(), now.getYear());
                     DecimalFormat formatter = new DecimalFormat("#,###");
                 %>
                 <div class="grey-bg container-fluid">
@@ -121,7 +118,7 @@
                         <div class="col-md-3">
                             <div class=" m-1 card text-white bg-primary">
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= formatter.format(totalIncomeThisMonth*1000) %> vnđ</h5>
+                                    <h5 class="card-title"><%= formatter.format(totalIncomeThisMonth) %> vnd</h5>
                                     <p class="card-text">Doanh thu tháng này</p>
                                     <i class="bi bi-wallet-fill card-icon"></i>
                                 </div>
@@ -133,6 +130,15 @@
                                     <h5 class="card-title"><%= userCount %></h5>
                                     <p class="card-text">Khách hàng đã mua</p>
                                     <i class="bi bi-people-fill card-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class=" m-1 card text-white bg-success">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= billCount %></h5>
+                                    <p class="card-text">Đơn hàng thành công</p>
+                                    <i class="bi bi-receipt-cutoff card-icon"></i>
                                 </div>
                             </div>
                         </div>

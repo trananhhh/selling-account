@@ -1,4 +1,6 @@
 <%-- Document : user Created on : Feb 24, 2022, 8:31:59 AM Author : _trananhhh --%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="dal.AccountsDAO"%>
 <%@page import="model.Billing"%>
 <%@page import="model.Plan"%>
@@ -73,7 +75,7 @@
             display: flex;
             flex-flow: column;
             height: 100%;
-            width: 100%;
+            width: 92% !important;
         }
         table thead {
             flex: 0 0 auto;
@@ -114,11 +116,8 @@
         <div class="col-3">
             <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;"
             bis_skin_checked="1">
-            <a href="/"
-                class="d-flex align-items-center mx-2 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
+            
+            <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
                 <span class="fs-4 text-center">Billing list</span>
             </a>
             <hr>
@@ -182,7 +181,6 @@
                 <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="sm-col">ID</th>
                         <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-arrow-down-up"></i></a></th>
                         <th scope="col" class="md-col">
                             <select id="pro_id" name="pro_id" class="form-select" >
@@ -195,7 +193,7 @@
                         <th scope="col" class="">Account</th>
                         <th scope="col" class="md-col">Username</th>
                         <th scope="col" class="md-col text-center"><a href="?sort=Duration" class=" text-center">Duration <i class="bi bi-arrow-down-up"></i></a></th>
-                        <th scope="col" class="sm-col text-center"><a href="?sort=Price" class=" text-center">Price <i class="bi bi-arrow-down-up"></i></a></th>
+                        <th scope="col" class="md-col text-center"><a href="?sort=Price" class=" text-center">Price <i class="bi bi-arrow-down-up"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,15 +202,13 @@
                         List<Billing> billList = (List<Billing>) request.getAttribute("bill");
                         PlansDAO pd = new PlansDAO();
                         AccountsDAO ad = new AccountsDAO();
-                        // List<Plan> planList = (List<Plan>) request.getAttribute("plan");
+                        DecimalFormat formatter = new DecimalFormat("#,###");
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");  
                         for(Billing x : billList){
                     %>
                         <tr>
-                            <td class="sm-col">
-                                <%= x.getId()%>
-                            </td>
                             <td class="md-col">
-                                <%= x.getDate()%>
+                                <%= x.getDate() %>
                             </td>
                             <td class="md-col">
                                 <%= pd.getPlanById(x.getPlanId()).getName() %>
@@ -227,8 +223,8 @@
                             <td class="md-col text-center">
                                 <%= x.getDuration()%> tháng
                             </td>
-                            <td class="sm-col text-center">
-                                <%= x.getPrice()%>.000 
+                            <td class="md-col text-center">
+                                <%= formatter.format(x.getPrice()) %> vnd
                             </td>
                         </tr>
                         <% }} %>

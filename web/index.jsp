@@ -100,7 +100,7 @@
 
                                                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink">
-                                                        <li><a class="dropdown-item" href="#">Overview</a></li>
+                                                        <li><a class="dropdown-item" href="./overview">Overview</a></li>
                                                         <li><a class="dropdown-item" href="./logout">Sign out</a>
                                                         </li>
                                                     </ul>

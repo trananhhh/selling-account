@@ -77,7 +77,7 @@ public class AdminBillingServlet extends HttpServlet {
                 String sort;
 
                 try{
-                    sort=request.getParameter("sort").trim();
+                    sort = request.getParameter("sort").trim();
                 }catch(Exception e){
                     sort = "";
                 }
@@ -87,17 +87,17 @@ public class AdminBillingServlet extends HttpServlet {
                     list = ud.getAllBillings();
                 }else {
                     if(sort.equalsIgnoreCase((String)session.getAttribute("preSort"))){
-                        list=ud.getAllBillingsSortRev(sort);
-                        session.setAttribute("preSort", null);
-                    }else{
-                        list= ud.getAllBillingsSort(sort);
+                        list = ud.getAllBillingsSort(sort);
                         session.setAttribute("preSort", sort);
+                    }else{
+                        list = ud.getAllBillingsSortRev(sort);
+                        session.setAttribute("preSort", null);
                     }
                 }
                 
                 int numPs = list.size();
                 int numperPage = 20;
-                int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);
+                int numpage = numPs/numperPage + (numPs%numperPage == 0 ? 0 : 1);
                 int start, end;
                 int page;
     
