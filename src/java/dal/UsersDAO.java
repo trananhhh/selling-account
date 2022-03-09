@@ -107,7 +107,7 @@ public class UsersDAO extends DBContext{
         List<User> list = getAllUsers();
         String SQLCommand = "SELECT * FROM Users WHERE Username = '" + data + "' OR Email = '" + data + "' OR Phone = '" + data + "'";
         
-        System.out.println(SQLCommand);
+//        System.out.println(SQLCommand);
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -131,10 +131,11 @@ public class UsersDAO extends DBContext{
     }
     
     public static void main(String[] args) {
-        UsersDAO pd = new UsersDAO();
+        UsersDAO ud = new UsersDAO();
 //        List<User> list = pd.getUsersByKey("a");
 //        User u = pd.getUserByID("aamaya1u");
 //        System.out.println(u.getEmail());
-        System.out.println(pd.checkInfo("admin"));
+//        ud.createAccount("123123", "123", "123123" + "@gmail.com", "0000");
+        System.out.println(ud.checkInfo("2111"));
     }
 }

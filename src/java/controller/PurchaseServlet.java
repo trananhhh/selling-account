@@ -84,8 +84,6 @@ public class PurchaseServlet extends HttpServlet {
         
         if(session.getAttribute("username") == null){
             request.setAttribute("err", "Please login before purchase!!!");
-//            request.setAttribute("lastURL", "cart.jsp");
-//            System.out.println("cart.jsp");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         
@@ -98,14 +96,6 @@ public class PurchaseServlet extends HttpServlet {
         Date date = new Date();  
         for(Item i : listItems){
             int planId = i.getPlan().getId();
-            
-            System.out.println(username
-                    + " | " + planId
-                    + " | " + ad.getAccountAvailable(planId)
-                    + " | " + formatter.format(date).toString()
-                    + " | " + i.getDuration() + i.getBonus()
-                    + " | " + i.getDuration()*pd.getPlanById(planId).getPrice());
-            
             System.out.println(bd.createBill(   
                 username, 
                 planId, 
@@ -115,7 +105,7 @@ public class PurchaseServlet extends HttpServlet {
                 i.getDuration()*pd.getPlanById(planId).getPrice()
             ));
         }
-        
+        session.removeAttribute("itemsInCart");
         request.setAttribute("notice", "Your purchase was successful!!!");
         request.getRequestDispatcher("overview.jsp").forward(request, response);
     }

@@ -173,6 +173,7 @@ public class BillingsDAO extends DBContext{
     
     public int createBill(String username, int planId, int accountId, String date, int duration, int price){
         String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "'," + duration + "," + price + ");";
+        System.out.println(SQLCommand);
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             st.executeUpdate();

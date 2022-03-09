@@ -17,15 +17,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Billing;
-import model.Item;
 
 /**
  *
  * @author _trananhhh
  */
-public class AdminServlet extends HttpServlet {
+public class AddBillServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,33 +41,28 @@ public class AdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminServlet</title>");            
+            out.println("<title>Servlet AddBillServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddBillServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        try {
-            String userRole = session.getAttribute("role").toString();
-            if(userRole.equals("0")){
-                BillingsDAO bd = new BillingsDAO();
-                UsersDAO ud = new UsersDAO();
-//                response.sendRedirect("./admin/index.jsp");
-                request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
-            }
-            else 
-                response.sendRedirect("./index.jsp");
-        } catch (Exception e) {
-            response.sendRedirect("./login");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -84,6 +76,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         //Manual add bill
         
         PrintWriter out = response.getWriter();
