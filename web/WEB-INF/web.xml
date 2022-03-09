@@ -64,6 +64,10 @@
         <servlet-name>DeleteUser</servlet-name>
         <servlet-class>controller.DeleteUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserHistoryServlet</servlet-name>
+        <servlet-class>controller.UserHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>DeleteUser</servlet-name>
         <url-pattern>/admin/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserHistoryServlet</servlet-name>
+        <url-pattern>/user/purchaseHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

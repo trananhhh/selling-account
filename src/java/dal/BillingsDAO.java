@@ -162,23 +162,23 @@ public class BillingsDAO extends DBContext{
         return arr;
     }
     
-    public Billing getBillingsByID(String xCode) {
-        String xSql = "select * from Billings where username = " + xCode;
-        Billing res = null;
-        
+    public List<Billing> getBillingsByName(String xCode) {
+        String xSql = "select * from Billings where username = '" + xCode+"'";
+        List<Billing> list = new ArrayList<Billing>();
         try {
             PreparedStatement ps = connection.prepareStatement(xSql);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
                 int id = rs.getInt(1);
-                String username = rs.getNString(2);
+                String username = rs.getString(2);
                 int planId = rs.getInt(3);
                 int accountId = rs.getInt(4);
                 String date = rs.getString(5);
                 int duration = rs.getInt(6);
                 int price = rs.getInt(7);
-                res = new Billing(id, username, planId, accountId, date, duration, price);
+                Billing res = new Billing(id, username, planId, accountId, date, duration, price);
+                list.add(res);
             }
             rs.close();        
             ps.close();
@@ -186,7 +186,7 @@ public class BillingsDAO extends DBContext{
             catch(Exception e) {
             e.printStackTrace();
         }       
-        return res;
+        return list;
     }
     
     public int isOnlyNumber(String xCode){

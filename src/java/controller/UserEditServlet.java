@@ -68,8 +68,13 @@ public class UserEditServlet extends HttpServlet {
             pr.print("<h2>User not exist</h2>");
             //request.getRequestDispatcher("/admin/user").include(request, response);
         }else{
-            request.setAttribute("user", temp);
-            request.getRequestDispatcher("/admin/userUpdate.jsp").include(request, response);
+            if(request.getSession().getAttribute("role").toString().equals("0")){
+                request.setAttribute("user", temp);
+                request.getRequestDispatcher("/admin/userUpdate.jsp").include(request, response);
+            }else{
+                request.setAttribute("user", temp);
+                request.getRequestDispatcher("/userUpdate.jsp").include(request, response);
+            }
         }
     }
 
@@ -96,7 +101,12 @@ public class UserEditServlet extends HttpServlet {
             if(password==null||password.length()==0)check=false;
             if(email==null||email.length()==0)check=false;
             if(phone==null||phone.length()==0)check=false;
-            String xRole=request.getParameter("role").trim();
+            String xRole;
+            try{
+                xRole=request.getParameter("role").trim();
+            }catch(Exception e){
+                xRole="";
+            }
             int role;
             if(xRole==null||xRole.length()==0){
                 role=1;
@@ -111,7 +121,7 @@ public class UserEditServlet extends HttpServlet {
             }else{
                 UsersDAO f=new UsersDAO();
                 f.update(username, temp);
-                response.sendRedirect("./user");
+                response.sendRedirect("../overview.jsp");
             }
         }catch(Exception e){
             e.printStackTrace();

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+import model.View;
 
 /**
  *
@@ -162,6 +163,30 @@ public class UsersDAO extends DBContext{
            e.printStackTrace();
         }
     }
+    
+    public List<View> getUserAccount(String name){
+        List<View> list = new ArrayList<>();
+        String SQLCommand = "select plans.name,accounts.account,accounts.password,Dateadd(day,billings.duration,accounts.date) as expireDate from users\n" +
+                            "join billings on users.username=billings.username\n" +
+                            "join plans on billings.planid=plans.id\n" +
+                            "join accounts on billings.accountid=accounts.id\n" +
+                            "where users.username ='"+name+"'";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String planname  = rs.getNString(1);
+                String account  = rs.getNString(2);
+                String pasword    = rs.getNString(3);
+                String expireDate  = rs.getString(4);
+                list.add(new View(planname, account, pasword, expireDate));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+    
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
 //        List<User> list = pd.getUsersByKey("a");

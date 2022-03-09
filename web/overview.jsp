@@ -1,4 +1,7 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
+<%@page import="java.util.List"%>
+<%@page import="model.View"%>
+<%@page import="dal.*"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -75,14 +78,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link " aria-current="page">
+                            <a href="./admin/useredit?name=<%= session.getAttribute("username") %>" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-people-fill"></i>
                                 Your accounts
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link " aria-current="page">
+                            <a href="./user/purchaseHistory" class="nav-link " aria-current="page">
 
                                 <i class="bi bi-receipt"></i>
                                 Purchase history
@@ -120,7 +123,29 @@
                     <div class="row g-10 mt-3">
                     </div>
                 </div>
-            </main>
+            </main
+            <table border="1">
+            <tr>
+                <td> Account type: </td>
+                <td> Account username: </td>
+                <td> ACcount password: </td>
+                <td> Date: </td>
+            </tr>
+            <% 
+                UsersDAO ud=new UsersDAO();
+                List<View> list=ud.getUserAccount(session.getAttribute("username").toString());
+                for(View x:list){
+            %>
+            <tr>
+                <td> <%= x.getName()%> </td>
+                <td> <%= x.getAccount()%> </td>
+                <td> <%=x.getPassword()%> </td>
+                <td> <%=x.getDate() %> </td>
+            </tr>   
+            <%
+                }
+            %>
+            </table> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         </body>
 
