@@ -60,6 +60,10 @@
         <servlet-name>OverviewServlet</servlet-name>
         <servlet-class>controller.OverviewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddBillServlet</servlet-name>
+        <servlet-class>controller.AddBillServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>OverviewServlet</servlet-name>
         <url-pattern>/overview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBillServlet</servlet-name>
+        <url-pattern>/add-bill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,5 +1,8 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
-    <%@page import="java.time.LocalDate"%>
+    <%@page import="dal.PlansDAO"%>
+<%@page import="model.Plan"%>
+<%@page import="java.util.List"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="dal.UsersDAO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Date"%>
@@ -51,6 +54,13 @@
                 p {
                     margin-bottom: 0;
                 }
+                
+                #notice {
+                    font-size: 16px;
+                    margin-bottom: 28px;
+                    margin-top: -28px;
+                    color: #57b846;
+                }
             </style>
         </head>
 
@@ -77,7 +87,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./billing?sort=Date" class="nav-link " aria-current="page">
+                            <a href="./admin/billing?sort=Date" class="nav-link " aria-current="page">
                                 <i class="bi bi-receipt"></i>
                                 Billing management
                             </a>
@@ -107,6 +117,7 @@
                 <%
                     BillingsDAO bd = new BillingsDAO();
                     UsersDAO ud = new UsersDAO();
+                    PlansDAO pd = new PlansDAO();
                     int userCount = ud.getAllUsers().size();
                     int billCount = bd.getAllBillings().size();
                     LocalDate now = LocalDate.now();
@@ -114,7 +125,7 @@
                     DecimalFormat formatter = new DecimalFormat("#,###");
                 %>
                 <div class="grey-bg container-fluid">
-                    <div class="row g-10 mt-3">
+                    <div class="row g-10 mt-3 px-2">
                         <div class="col-md-3">
                             <div class=" m-1 card text-white bg-primary">
                                 <div class="card-body">
@@ -142,10 +153,96 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class=" m-1 card text-white bg-warning">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= billCount %></h5>
+                                    <p class="card-text">Đơn hàng thành công</p>
+                                    <i class="bi bi-receipt-cutoff card-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 p-3">
+                            <div class="mx-5">
+                            <form action="../admin" method="POST">
+                                <h3 class="text-center mb-4 mt-4">Create bill</h3>
+                                
+                                <%
+                                    if(request.getAttribute("notice") != null){
+                                        String notice = request.getAttribute("notice").toString();
+                                %>
+                                    <h2 id='notice' class='text-center'><%= notice %></h2>
+                                <%
+                                    }
+                                %>
+                                
+                                <input type="text" class="form-control mt-2"  name="user" placeholder="User" required>
+                                <select class="form-select mt-2" aria-label="Plans" name="plan" required>
+                                    <%
+                                        List<Plan> listPlans = pd.getAllPlans();
+                                        for(int i = 0; i < listPlans.size(); i++){
+                                    %>
+                                        <option value="<%= i+1 %>"> <%= listPlans.get(i).getName() %> </option>
+                                    <% } %>
+                                </select>
+                                <input type="number" class="form-control mt-2"  name="duration" placeholder="Duration" value="1">
+                                <input type="date" class="form-control mt-2"  name="date" placeholder="Date" value="1">
+                                <button type="submit" class="btn btn-primary align-self-center mt-2 px-3">Submit</button>
+                            </form>
+                        </div>
+                        </div>
+                        <div class="col-6 p-3">
+                            <canvas id="myChart"></canvas>
+                            <p class="text-center">Income in <%= now.getYear() %></p>
+                            <ul style="display: none;">
+                                <% for(int i = 1; i <= now.getMonthValue(); i++){%>
+                                <li class="interest-month"> <%= bd.getTotalIncomeByMonth(i, now.getYear()) %></li>
+                                <%}%>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </main>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                const now = new Date();
+                let labels = [];
+                for(let i = 1; i <= now.getMonth()+1; i++)
+                    labels.push(i);
+                let interestRaw = document.getElementsByClassName("interest-month");    
+                let interest = [];
+
+                for(let i = 0; i < interestRaw.length; i++){
+                    interest.push(interestRaw[i].innerHTML);
+                    // console.log(interestRaw[i].innerHTML);
+                }
+
+                const data = {
+                  labels: labels,
+                  datasets: [{
+                    label: 'Income',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: interest,
+                  }]
+                };
+              
+                const config = {
+                  type: 'line',
+                  data: data,
+                  options: {}
+                };
+              </script>
+              <script>
+                const myChart = new Chart(
+                  document.getElementById('myChart'),
+                  config
+                );
+              </script>
+              
         </body>
 
         </html>
