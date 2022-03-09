@@ -176,19 +176,21 @@
                 PlansDAO pl = new PlansDAO();
                 List<Plan> lst= (List<Plan>) pl.getAllPlans();
             %>
-            
+            <form method="GET">
+                <button type="submit" class="btn btn-primary">Apply</button></a>
+                <select id="pro_id" name="pro_id" class="form-select" >
+                    <option value="0" selected>All plans </option>
+                    <% for(Plan x: lst) { %>
+                    <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
+                    <% } %>
+                </select>
+            </form>
             <div id="table-container">
                 <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
                         <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-arrow-down-up"></i></a></th>
                         <th scope="col" class="md-col">
-                            <select id="pro_id" name="pro_id" class="form-select" >
-                                <option value="0" selected> All plans </option>
-                                <% for(Plan x: lst) { %>
-                                <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
-                                <% } %>
-                            </select>
                         </th>
                         <th scope="col" class="">Account</th>
                         <th scope="col" class="md-col">Username</th>
@@ -241,7 +243,7 @@
                         <i class="bi bi-caret-left-fill"> </i>
                     </button>
                 <% }else{ %>
-                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>">
+                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>">
                         <i class="bi bi-caret-left-fill"> </i>
                     </a>
                 <%  }
@@ -251,7 +253,7 @@
                         <i class="bi bi-caret-right-fill"> </i>
                     </button>
                 <% }else{ %>
-                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
+                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>"> 
                         <i class="bi bi-caret-right-fill"> </i> 
                     </a>
                 <% }  %>

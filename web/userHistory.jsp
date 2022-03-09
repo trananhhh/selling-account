@@ -120,49 +120,8 @@
             <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
                 <span class="fs-4 text-center">Billing list</span>
             </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="./" class="nav-link " aria-current="page">
-                        <i class="bi bi-house-fill"></i>
-                        Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="./user" class="nav-link " aria-current="page">
-
-                        <i class="bi bi-people-fill"></i>
-                        User management
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
-
-                        <i class="bi bi-receipt"></i>
-                        Billing management
-                    </a>
-                </li>
-            </ul>
-            <hr>
-            <div class="dropdown" bis_skin_checked="1">
-                <a href="#"
-                    class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-
-                    <i class="bi bi-person-circle"></i>
-                    <strong>
-                        <%= session.getAttribute("username") %>
-                    </strong>
-                </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="../logout">Sign out</a></li>
-                </ul>
-            </div>
         </div>
-    </div>
+        </div>
         <!-- Main -->
         <div class="col-9">
         <div class="container-fluid">
@@ -176,15 +135,6 @@
                 PlansDAO pl = new PlansDAO();
                 List<Plan> lst= (List<Plan>) pl.getAllPlans();
             %>
-            <form method="GET">
-                <button type="submit" class="btn btn-primary">Apply</button></a>
-                <select id="pro_id" name="pro_id" class="form-select" >
-                    <option value="0" selected>All plans </option>
-                    <% for(Plan x: lst) { %>
-                    <option value="<%= x.getId() %>"> <%= x.getName() %> </option>
-                    <% } %>
-                </select>
-            </form>
             <div id="table-container">
                 <table class="table table-responsive table-hover">
                 <thead>
@@ -233,31 +183,6 @@
                 </tbody>
             </table>
                 </div>
-            <div class="row justify-content-center mt-3">
-                <% 
-                int numPage = Integer.parseInt(request.getAttribute("num").toString()); 
-                int curPage = Integer.parseInt(request.getAttribute("curPage").toString());
-                if(curPage == 1){ 
-                %>
-                    <button class="btn btn-secondary nav-btn" disabled>
-                        <i class="bi bi-caret-left-fill"> </i>
-                    </button>
-                <% }else{ %>
-                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>">
-                        <i class="bi bi-caret-left-fill"> </i>
-                    </a>
-                <%  }
-                    if(curPage == numPage){
-                %>
-                    <button class="btn btn-secondary nav-btn" disabled>
-                        <i class="bi bi-caret-right-fill"> </i>
-                    </button>
-                <% }else{ %>
-                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>"> 
-                        <i class="bi bi-caret-right-fill"> </i> 
-                    </a>
-                <% }  %>
-            </div>
         </div>
     </main>
     </div><!-- JavaScript Bundle with Popper -->

@@ -55,11 +55,8 @@
                             <label for="phone" class="form-label">Phone</label>
                             <input type="text" class="form-control" name="phone" value="<%= user.getPhone() %>" /></br>
 
-                            <label for="role" class="form-label">Role</label>
-                            <input type="number" class="form-control" name="role" value="<%= user.getRole() %>" /></br>
                             <input type="submit" class="btn btn-primary" value="Update" />
-                            <a href="./user" class="btn btn-secondary">Cancel</a>
-                            <a href="./DeleteUser?user=<%= user.getUsername() %>" class="btn btn-danger">Delete</a>
+                            <a href="../overview.jsp" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

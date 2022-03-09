@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+import model.View;
 
 /**
  *
@@ -45,7 +46,7 @@ public class UsersDAO extends DBContext{
     }
 
     
-    public User getUserByID(String xCode) {
+    public User getUserByName(String xCode) {
         String xSql = "select * from Users where username like '%" + xCode + "%'";
         User res = null;
         
@@ -128,6 +129,62 @@ public class UsersDAO extends DBContext{
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+    
+    public void update(String xCode,User x) {
+        String xSql = "Update Users set password=?,email=?,phone=?,role=? where username=?";
+        
+        try {
+         PreparedStatement ps = connection.prepareStatement(xSql);
+         ps.setString(1, x.getPassword());
+         ps.setString(2, x.getEmail());
+         ps.setString(3, x.getPhone());
+         ps.setInt(4, x.getRole());
+         ps.setString(5, x.getUsername());
+         ResultSet rs = ps.executeQuery();
+         
+          rs.close();        
+          ps.close();
+         }
+         catch(Exception e) {
+           e.printStackTrace();
+         }      
+    }
+    
+    public void deleteByName(String name) {
+        String xSql = "delete from Users where username=?";
+        try {
+           PreparedStatement ps = connection.prepareStatement(xSql);
+           ps.setString(1, name);
+           ps.executeUpdate();
+           ps.close();
+        }
+        catch(Exception e) {
+           e.printStackTrace();
+        }
+    }
+    
+    public List<View> getUserAccount(String name){
+        List<View> list = new ArrayList<>();
+        String SQLCommand = "select plans.name,accounts.account,accounts.password,Dateadd(day,billings.duration,accounts.date) as expireDate from users\n" +
+                            "join billings on users.username=billings.username\n" +
+                            "join plans on billings.planid=plans.id\n" +
+                            "join accounts on billings.accountid=accounts.id\n" +
+                            "where users.username ='"+name+"'";
+        try {
+            PreparedStatement st = connection.prepareStatement(SQLCommand);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                String planname  = rs.getNString(1);
+                String account  = rs.getNString(2);
+                String pasword    = rs.getNString(3);
+                String expireDate  = rs.getString(4);
+                list.add(new View(planname, account, pasword, expireDate));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return list;
     }
     
     public static void main(String[] args) {

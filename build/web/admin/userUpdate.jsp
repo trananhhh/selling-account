@@ -39,7 +39,7 @@
                 <% User user=(User)request.getAttribute("user"); if(user==null)return; %>
                     <div class="container-fluid d-flex align-content-center justify-content-center">
 
-                        <form action="/admin/user" method="POST">
+                        <form action="./useredit?name=<%= user.getUsername() %>" method="POST">
                             <h1 class="text-center">User update</h1>
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" value="<%= user.getUsername() %>"
@@ -59,6 +59,7 @@
                             <input type="number" class="form-control" name="role" value="<%= user.getRole() %>" /></br>
                             <input type="submit" class="btn btn-primary" value="Update" />
                             <a href="./user" class="btn btn-secondary">Cancel</a>
+                            <a href="./DeleteUser?user=<%= user.getUsername() %>" class="btn btn-danger">Delete</a>
                         </form>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
