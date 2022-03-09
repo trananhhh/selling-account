@@ -75,7 +75,6 @@ public class AdminBillingServlet extends HttpServlet {
                 BillingsDAO ud = new BillingsDAO();
                 PlansDAO pd = new PlansDAO();
                 String sort;
-
                 try{
                     sort = request.getParameter("sort").trim();
                 }catch(Exception e){
@@ -83,17 +82,46 @@ public class AdminBillingServlet extends HttpServlet {
                 }
                 
                 List<Billing> list ;
+                list=ud.getAllBillings();
                 if(sort.equals("")){
-                    list = ud.getAllBillingsSortRev("date");
-                    session.setAttribute("preSort", "date");
+                    
                 }else {
-                    if(sort.equalsIgnoreCase((String)session.getAttribute("preSort"))){
-                        list = ud.getAllBillingsSort(sort);
-                        session.setAttribute("preSort", null);
+                    if(session.getAttribute("sort")!=null){
+                        if(sort.equalsIgnoreCase("date")){
+                            list=ud.sortListBy(list, 0);
+                        }
+                        if(sort.equalsIgnoreCase("duration")){
+                            list=ud.sortListBy(list, 1);
+                        }
+                        if(sort.equalsIgnoreCase("price")){
+                            list=ud.sortListBy(list, 2);
+                        }
+                        session.setAttribute("sort", null);
                     }else{
-                        list = ud.getAllBillingsSortRev(sort);
-                        session.setAttribute("preSort", sort);
+                        if(sort.equalsIgnoreCase("date")){
+                            list=ud.revSortListBy(list, 0);
+                        }
+                        if(sort.equalsIgnoreCase("duration")){
+                            list=ud.revSortListBy(list, 1);
+                        }
+                        if(sort.equalsIgnoreCase("price")){
+                            list=ud.revSortListBy(list, 2);
+                        }
+                        session.setAttribute("sort", sort);
                     }
+                }
+                
+                String plan;
+                try{
+                    plan = request.getParameter("pro_id");
+                }catch(Exception e){
+                    plan = "";
+                }
+                if(plan==null)plan="";
+                if(plan.equals("0")||plan.equals("")){
+                    
+                }else {
+                    list=ud.choseOnly(list, plan);
                 }
                 
                 int numPs = list.size();
@@ -146,7 +174,7 @@ public class AdminBillingServlet extends HttpServlet {
             if(userRole.equals("0")){
                 PlansDAO pd = new PlansDAO();
                 BillingsDAO ud = new BillingsDAO();
-                String key = request.getParameter("key");
+                String key = request.getParameter("key1");
                 List<Billing> list = ud.getBillingsByKey(key);
                 
                 int numPs = list.size();

@@ -150,6 +150,18 @@ public class UsersDAO extends DBContext{
          }      
     }
     
+    public void deleteByName(String name) {
+        String xSql = "delete from Users where username=?";
+        try {
+           PreparedStatement ps = connection.prepareStatement(xSql);
+           ps.setString(1, name);
+           ps.executeUpdate();
+           ps.close();
+        }
+        catch(Exception e) {
+           e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         UsersDAO pd = new UsersDAO();
 //        List<User> list = pd.getUsersByKey("a");
