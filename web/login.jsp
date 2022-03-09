@@ -511,27 +511,32 @@
                                     <form class="login100-form validate-form" method="post" action="./login">
                                         <span class="login100-form-title"> Member Login </span>
 
-
-                                        <% String err; try { err=request.getAttribute("err").toString(); if(err !=null){
-                                            %>
+                                        <%  
+                                            request.setAttribute("lastURL", request.getAttribute("lastURL"));
+                                            String err; 
+                                            try { 
+                                                err = request.getAttribute("err").toString(); 
+                                                if(err != null){%>
                                             <p class="text-center danger" id="err">
                                                 <%= err %>
                                             </p>
-                                            <% } } catch (Exception e) { System.out.println(e); } %>
+                                        <%  }} catch (Exception e) { System.out.println(e); } %>
 
-                                                <% String notice; try {
-                                                    notice=request.getAttribute("notice").toString(); if(notice !=null){
-                                                    %>
-                                                    <p class="text-center" id="notice">
-                                                        <%= notice %>
-                                                    </p>
-                                                    <% } } catch (Exception e) { System.out.println(e); } %>
-                                                        <div class="wrap-input100 validate-input">
-                                                            <input class="input100" type="text" name="username"
-                                                                placeholder="Username" <%
-                                                                if(request.getAttribute("username") !=null){ %>
-                                                            value="<%= request.getAttribute("username") %>"
-                                                                <% } %>
+                                        <%  String notice; 
+                                            try {
+                                                notice=request.getAttribute("notice").toString(); 
+                                                if(notice != null){
+                                        %>
+                                            <p class="text-center" id="notice">
+                                                <%= notice %>
+                                            </p>
+                                        <% } } catch (Exception e) { System.out.println(e); } %>
+                                            <div class="wrap-input100 validate-input">
+                                                <input class="input100" type="text" name="username"
+                                                    placeholder="Username" <%
+                                                    if(request.getAttribute("username") !=null){ %>
+                                                value="<%= request.getAttribute("username") %>"
+                                                    <% } %>
                                                                     required
                                                                     />
                                                                     <span class="focus-input100"></span>

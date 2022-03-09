@@ -62,15 +62,18 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int planIndex = Integer.parseInt(request.getParameter("plan")) - 1;
-        int duration = Integer.parseInt(request.getParameter("dur"));
-
-//        int planIndex = 1;
         HttpSession session = request.getSession();
+        String planIndex_raw = request.getParameter("plan");
+        String duration_raw = request.getParameter("dur");
         PlansDAO pd = new PlansDAO();
         List<Plan> list = pd.getAllPlans();
-        Plan x = list.get(planIndex);
+        
+        int planIndex, duration;
+            
         try {
+            planIndex = Integer.parseInt(planIndex_raw) - 1;
+            duration = Integer.parseInt(duration_raw);
+            Plan x = list.get(planIndex);
             List<Item> listItems = (List<Item>) session.getAttribute("itemsInCart");
             if(listItems == null)
                 listItems = new ArrayList<>();

@@ -58,9 +58,6 @@ public class AdminServlet extends HttpServlet {
             if(userRole.equals("0")){
                 BillingsDAO bd = new BillingsDAO();
                 UsersDAO ud = new UsersDAO();
-                
-                
-                
                 response.sendRedirect("./admin/index.jsp");
             }
             else 

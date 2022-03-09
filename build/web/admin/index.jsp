@@ -1,5 +1,6 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
-    <%@page import="java.text.DecimalFormat"%>
+    <%@page import="dal.UsersDAO"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="dal.BillingsDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -103,12 +104,14 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="./logout">Sign out</a></li>
+                            <li><a class="dropdown-item" href="../logout">Sign out</a></li>
                         </ul>
                     </div>
                 </div>
                 <%
                     BillingsDAO bd = new BillingsDAO();
+                    UsersDAO ud = new UsersDAO();
+                    int userCount = ud.getAllUsers().size();
                     Date now = new Date();
                     int totalIncomeThisMonth = bd.getTotalIncomeByMonth(6, 2021);
                     DecimalFormat formatter = new DecimalFormat("#,###");
@@ -127,24 +130,8 @@
                         <div class="col-md-3">
                             <div class=" m-1 card text-white bg-danger">
                                 <div class="card-body">
-                                    <h5 class="card-title">10000</h5>
-                                    <p class="card-text">Khách hàng</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class=" m-1 card text-white bg-">
-                                <div class="card-body">
-                                    <h5 class="card-title">10000</h5>
-                                    <p class="card-text">Khách hàng</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class=" m-1 card text-white bg-primary">
-                                <div class="card-body">
-                                    <h5 class="card-title">10000</h5>
-                                    <p class="card-text">Khách hàng</p>
+                                    <h5 class="card-title"><%= userCount %></h5>
+                                    <p class="card-text">Khách hàng đã mua</p>
                                     <i class="bi bi-people-fill card-icon"></i>
                                 </div>
                             </div>

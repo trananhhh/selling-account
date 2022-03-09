@@ -161,7 +161,21 @@
                                 <h1>Giỏ hàng</h1>
                                 <div class="item-list">
                                     <a href="./plans" id="back-btn"><i class="fa-solid fa-arrow-left"></i>Mua thêm</a>
-                                    <% List<Item> listItems = (ArrayList) request.getAttribute("itemsInCart");
+                                    <%  
+                                        if(session.getAttribute("itemsInCart") == null){
+                                    %>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <h3 class="text-center">Cart is empty! Let shopping first!!!</h3>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <%
+                                        }
+else{
+
+                                        List<Item> listItems = (ArrayList) session.getAttribute("itemsInCart");
                                         for(Item i : listItems){
                                         Plan p = i.getPlan();
                                         int duration = i.getDuration();
@@ -187,7 +201,7 @@
                                                     onclick="removeItem(<%= idx %>)"></i>
                                             </div>
                                         </div>
-                                        <% } %>
+                                        <% }} %>
                                             <div class="purchase-box">
                                                 <p>Tổng cộng: </p>
                                                 <h4 class="total" id="total"></h4>

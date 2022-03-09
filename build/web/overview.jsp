@@ -18,10 +18,25 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
             integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        <style>
+            
+            #notice {
+                font-size: 16px;
+                margin-bottom: 28px;
+                margin-top: -28px;
+                color: #57b846;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            String notice = request.getAttribute("notice").toString();
+            if(notice != null){
+        %>
+        <h3 id='notice' class='text-center'><%= notice %></h3>
+        <%
+            }
+        %>
        <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>

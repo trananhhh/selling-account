@@ -159,7 +159,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="./logout">Sign out</a></li>
+                    <li><a class="dropdown-item" href="../logout">Sign out</a></li>
                 </ul>
             </div>
         </div>
@@ -174,7 +174,7 @@
                 <button type="submit" id="submit-btn" class="btn btn-primary">Search</button>
             </form>
             <%
-                PlansDAO pl=new PlansDAO();
+                PlansDAO pl = new PlansDAO();
                 List<Plan> lst= (List<Plan>) pl.getAllPlans();
             %>
             
@@ -200,6 +200,7 @@
                 </thead>
                 <tbody>
                     <% 
+                        if(request.getAttribute("bill") != null){
                         List<Billing> billList = (List<Billing>) request.getAttribute("bill");
                         PlansDAO pd = new PlansDAO();
                         AccountsDAO ad = new AccountsDAO();
@@ -230,7 +231,7 @@
                                 <%= x.getPrice()%>.000 
                             </td>
                         </tr>
-                        <% } %>
+                        <% }} %>
                 </tbody>
             </table>
                 </div>
@@ -239,29 +240,25 @@
                 int numPage = Integer.parseInt(request.getAttribute("num").toString()); 
                 int curPage = Integer.parseInt(request.getAttribute("curPage").toString());
                 if(curPage == 1){ 
-            %>
-                <button class="btn btn-secondary nav-btn" disabled>
-                    <i class="bi bi-caret-left-fill"> </i>
-                </button>
-                <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
-                    <i class="bi bi-caret-right-fill"> </i> 
-                </a>
-            <% } else if(curPage == numPage){ %>
-                <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>">
-                    <i class="bi bi-caret-left-fill"> </i>
-                </a>
-
-                <button class="btn btn-secondary nav-btn" disabled>
-                    <i class="bi bi-caret-right-fill"> </i>
-                </button>
-            <% } else { %>
-                <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
-                    <i class="bi bi-caret-left-fill"> </i>
-                </a>
-                <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
-                    <i class="bi bi-caret-right-fill"> </i> 
-                </a>
-            <% } %>
+                %>
+                    <button class="btn btn-secondary nav-btn" disabled>
+                        <i class="bi bi-caret-left-fill"> </i>
+                    </button>
+                <% }else{ %>
+                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage - 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>">
+                        <i class="bi bi-caret-left-fill"> </i>
+                    </a>
+                <%  }
+                    if(curPage == numPage){
+                %>
+                    <button class="btn btn-secondary nav-btn" disabled>
+                        <i class="bi bi-caret-right-fill"> </i>
+                    </button>
+                <% }else{ %>
+                    <a class="btn btn-secondary nav-btn" href="/account/admin/billing?page=<%=curPage + 1%>&sort=<%= request.getAttribute("sort")==null?"":request.getAttribute("sort") %>"> 
+                        <i class="bi bi-caret-right-fill"> </i> 
+                    </a>
+                <% }  %>
             </div>
         </div>
     </main>

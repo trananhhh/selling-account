@@ -171,13 +171,15 @@ public class BillingsDAO extends DBContext{
     }
     
     
-    public void createBill(String username, int planId, int accountId, String date, int duration, int price){
-        String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "," + duration + "," + price + ");";
+    public int createBill(String username, int planId, int accountId, String date, int duration, int price){
+        String SQLCommand = "INSERT INTO Billings VALUES ('" + username + "', " + planId + ", " + accountId + ", '" + date + "'," + duration + "," + price + ");";
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
-            ResultSet rs = st.executeQuery();
+            st.executeUpdate();
+            return 1;
         } catch (Exception e) {
             System.err.println(e);
+            return -1;
         }
     }
     
@@ -214,8 +216,8 @@ public class BillingsDAO extends DBContext{
     
     public static void main(String[] args) {
         BillingsDAO bd = new BillingsDAO();
-        
-        System.out.println(bd.getTotalIncomeByMonth(6, 2021));
+        bd.createBill("admin", 1, 1, "01/01/2022", 12, 720);
+//        System.out.println(bd.getTotalIncomeByMonth(6, 2021));
 //        List<Billing> list = bd.getAllBillings();
 //        System.out.println(list.get(0).getUsername());
     }

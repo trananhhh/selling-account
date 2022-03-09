@@ -239,3 +239,7 @@ select * from Accounts
 
 select ID from Accounts where account = '8867219985@gmail.com'
 select * from billings
+
+SELECT SUM(PRICE) FROM BILLINGS WHERE '6/1/2021' <= Date AND Date <= '06/30/2021'
+
+SELECT SUM(Price) FROM BILLINGS WHERE Date <= '6/30/2021' AND Date >= '6/1/2021'

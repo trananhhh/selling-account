@@ -66,7 +66,10 @@ public class AdminBillingServlet extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-//        try {
+        out.println(session.getAttribute("role"));
+        try {
+            if(session.getAttribute("role") == null)
+                response.sendRedirect("../index.jsp");
             String userRole = session.getAttribute("role").toString();
             if(userRole.equals("0")){
                 BillingsDAO ud = new BillingsDAO();
@@ -118,9 +121,9 @@ public class AdminBillingServlet extends HttpServlet {
             }
             else
                 response.sendRedirect("../index.jsp");
-//        } catch (Exception e) {
-//            response.sendRedirect("../login");
-//        }
+        } catch (Exception e) {
+            response.sendRedirect("../login");
+        }
     }
 
     /**
@@ -136,6 +139,8 @@ public class AdminBillingServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         try {
+            if(session.getAttribute("role") == null)
+                response.sendRedirect("../index.jsp");
             String userRole = session.getAttribute("role").toString();
             if(userRole.equals("0")){
                 PlansDAO pd = new PlansDAO();
@@ -168,8 +173,6 @@ public class AdminBillingServlet extends HttpServlet {
                 request.setAttribute("curPage", page);
                 request.getRequestDispatcher("/admin/billing.jsp").forward(request, response);
             }
-            else
-                response.sendRedirect("../index.jsp");
         } catch (Exception e) {
             response.sendRedirect("../login");
         }

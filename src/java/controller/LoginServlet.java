@@ -77,12 +77,15 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session=request.getSession();
-        try {
+//        try {
             String username = request.getParameter("username").toString();
             String password = request.getParameter("password").toString();
         
             UsersDAO ud = new UsersDAO();
             int status = ud.checkLogin(username, password);
+            
+            PrintWriter out = response.getWriter();
+            
             switch(status){
                 case -2:
                     request.setAttribute("err", "Username bạn vừa nhập không tồn tại, hãy kiểm tra lại hoặc tạo tài khoản mới!");
@@ -97,7 +100,13 @@ public class LoginServlet extends HttpServlet {
                 case 0:{
                     session.setAttribute("username", username);
                     session.setAttribute("role", 0);
-                    response.sendRedirect("./admin/index.jsp");
+//                    String lastURL = request.getAttribute("lastURL").toString();
+                    
+//                    out.println("./" + lastURL);
+//                    if(lastURL != null)
+//                        request.getRequestDispatcher(lastURL).forward(request, response);
+//                    else
+                        response.sendRedirect("./admin/index.jsp");
 //                    request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
                     break;
                 }
@@ -105,16 +114,22 @@ public class LoginServlet extends HttpServlet {
                 case 1:{
                     session.setAttribute("username", username);
                     session.setAttribute("role", 1);
-                    response.sendRedirect("./index.jsp");
+//                    String lastURL = request.getAttribute("lastURL").toString();
+//                    out.println("./" + lastURL);
+//                    if(lastURL != null)
+//                        request.getRequestDispatcher(lastURL).forward(request, response);
+//                        response.sendRedirect("./" + lastURL);
+//                    else
+                        response.sendRedirect("./index.jsp");
 //                    request.getRequestDispatcher("./index.jsp").forward(request, response);
                     break;
                 }
             }
             
-        } catch (Exception e) { 
-            response.sendRedirect("./login.jsp");
+//        } catch (Exception e) { 
+//            response.sendRedirect("./login.jsp");
 //                request.getRequestDispatcher("./login.jsp").forward(request, response);
-        }
+//        }
     }
 
     /**
