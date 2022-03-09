@@ -87,11 +87,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-<<<<<<< HEAD
                             <a href="./admin/billing?sort=Date" class="nav-link " aria-current="page">
-=======
-                            <a href="./billing" class="nav-link " aria-current="page">
->>>>>>> b189db3bc9693b90b01d4840ac31c34369ee74b2
                                 <i class="bi bi-receipt"></i>
                                 Billing management
                             </a>

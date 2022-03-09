@@ -61,17 +61,8 @@
         <servlet-class>controller.OverviewServlet</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>AddBillServlet</servlet-name>
         <servlet-class>controller.AddBillServlet</servlet-class>
-=======
-        <servlet-name>DeleteUser</servlet-name>
-        <servlet-class>controller.DeleteUser</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserHistoryServlet</servlet-name>
-        <servlet-class>controller.UserHistoryServlet</servlet-class>
->>>>>>> b189db3bc9693b90b01d4840ac31c34369ee74b2
     </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
@@ -136,14 +127,6 @@
     <servlet-mapping>
         <servlet-name>AddBillServlet</servlet-name>
         <url-pattern>/add-bill</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteUser</servlet-name>
-        <url-pattern>/admin/DeleteUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserHistoryServlet</servlet-name>
-        <url-pattern>/user/purchaseHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
