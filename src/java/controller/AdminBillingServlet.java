@@ -84,14 +84,15 @@ public class AdminBillingServlet extends HttpServlet {
                 
                 List<Billing> list ;
                 if(sort.equals("")){
-                    list = ud.getAllBillings();
+                    list = ud.getAllBillingsSortRev("date");
+                    session.setAttribute("preSort", "date");
                 }else {
                     if(sort.equalsIgnoreCase((String)session.getAttribute("preSort"))){
                         list = ud.getAllBillingsSort(sort);
-                        session.setAttribute("preSort", sort);
+                        session.setAttribute("preSort", null);
                     }else{
                         list = ud.getAllBillingsSortRev(sort);
-                        session.setAttribute("preSort", null);
+                        session.setAttribute("preSort", sort);
                     }
                 }
                 

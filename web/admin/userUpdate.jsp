@@ -39,7 +39,7 @@
                 <% User user=(User)request.getAttribute("user"); if(user==null)return; %>
                     <div class="container-fluid d-flex align-content-center justify-content-center">
 
-                        <form action="/admin/user" method="POST">
+                        <form action="./useredit?name=<%= user.getUsername() %>" method="POST">
                             <h1 class="text-center">User update</h1>
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" name="username" value="<%= user.getUsername() %>"

@@ -45,7 +45,7 @@ public class UsersDAO extends DBContext{
     }
 
     
-    public User getUserByID(String xCode) {
+    public User getUserByName(String xCode) {
         String xSql = "select * from Users where username like '%" + xCode + "%'";
         User res = null;
         
@@ -128,6 +128,26 @@ public class UsersDAO extends DBContext{
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+    
+    public void update(String xCode,User x) {
+        String xSql = "Update Users set password=?,email=?,phone=?,role=? where username=?";
+        
+        try {
+         PreparedStatement ps = connection.prepareStatement(xSql);
+         ps.setString(1, x.getPassword());
+         ps.setString(2, x.getEmail());
+         ps.setString(3, x.getPhone());
+         ps.setInt(4, x.getRole());
+         ps.setString(5, x.getUsername());
+         ResultSet rs = ps.executeQuery();
+         
+          rs.close();        
+          ps.close();
+         }
+         catch(Exception e) {
+           e.printStackTrace();
+         }      
     }
     
     public static void main(String[] args) {

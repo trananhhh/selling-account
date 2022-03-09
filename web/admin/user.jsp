@@ -185,7 +185,7 @@
                                     <%= x.getRole()%>
                                 </td>
                                 <td class="sm-col text-center"><a class="btn btn-secondary"
-                                        href="/account/admin/useredit?id=<%=x.getUsername()%>">Edit</a>
+                                        href="/account/admin/useredit?name=<%=x.getUsername()%>">Edit</a>
                                 </td>
                             </tr>
                         <% } %>

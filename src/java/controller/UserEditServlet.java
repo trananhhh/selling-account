@@ -60,9 +60,9 @@ public class UserEditServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
-        String id = request.getParameter("id");
+        String name = request.getParameter("name");
         UsersDAO f = new UsersDAO();
-        User temp = f.getUserByID(id);
+        User temp = f.getUserByName(name);
         
         if(temp == null){
             pr.print("<h2>User not exist</h2>");
@@ -84,7 +84,38 @@ public class UserEditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        try{
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter pr = response.getWriter();
+            String username=request.getParameter("name").trim();
+            String password=request.getParameter("password").trim();
+            String email=request.getParameter("email").trim();
+            String phone=request.getParameter("phone").trim();
+            boolean check=true;
+            if(username==null||username.length()==0)check=false;
+            if(password==null||password.length()==0)check=false;
+            if(email==null||email.length()==0)check=false;
+            if(phone==null||phone.length()==0)check=false;
+            String xRole=request.getParameter("role").trim();
+            int role;
+            if(xRole==null||xRole.length()==0){
+                role=1;
+            }else{
+                role=Integer.parseInt(xRole);
+            }
+            User temp=new User(username,password,email,phone,role);
+            if(!check){
+                request.setAttribute("user", temp);
+                pr.print("<h1>Update failed succesfully</h1>");
+                request.getRequestDispatcher("./userUpdate.jsp").include(request, response);
+            }else{
+                UsersDAO f=new UsersDAO();
+                f.update(username, temp);
+                response.sendRedirect("./user");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

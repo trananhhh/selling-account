@@ -115,7 +115,7 @@ public class PurchaseServlet extends HttpServlet {
                 i.getDuration()*pd.getPlanById(planId).getPrice()
             ));
         }
-        
+        session.removeAttribute("itemsInCart");
         request.setAttribute("notice", "Your purchase was successful!!!");
         request.getRequestDispatcher("overview.jsp").forward(request, response);
     }
