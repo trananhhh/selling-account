@@ -244,6 +244,9 @@ SELECT SUM(PRICE) FROM BILLINGS WHERE '6/1/2021' <= Date AND Date <= '06/30/2021
 
 SELECT SUM(Price) FROM BILLINGS WHERE Date <= '6/30/2021' AND Date >= '6/1/2021'
 
-SELECT * From Billings
+SELECT * From Billings 
+
 
 SELECT * FROM BILLINGS WHERE '3/1/2022' <= Date AND Date <= '03/31/2022'
+
+select * from Users where username like '%user%'

@@ -100,7 +100,16 @@
 
                                                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink">
-                                                        <li><a class="dropdown-item" href="./overview">Overview</a></li>
+                                                        <%
+                                                            if(session.getAttribute("role").toString().equals("0")){
+                                                        %>
+                                                            <li><a class="dropdown-item" href="./admin">Overview</a></li>
+                                                        <%
+                                                            }else{
+                                                        %>
+                                                            <li><a class="dropdown-item" href="./user">Overview</a></li>
+                                                        <%  }
+                                                        %>
                                                         <li><a class="dropdown-item" href="./logout">Sign out</a>
                                                         </li>
                                                     </ul>

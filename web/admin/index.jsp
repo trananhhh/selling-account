@@ -69,7 +69,7 @@
                 <!-- Side bar -->
                 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;" bis_skin_checked="1">
                     
-                    <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
+                    <a href="#" class="d-flex justify-content-center link-dark text-decoration-none">
                         <span class="fs-4 text-center">Admin CMS</span>
                     </a>
                     <hr>

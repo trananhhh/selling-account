@@ -67,7 +67,7 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
             }
             else 
-                response.sendRedirect("./index.jsp");
+                response.sendRedirect("./");
         } catch (Exception e) {
             response.sendRedirect("./login");
         }

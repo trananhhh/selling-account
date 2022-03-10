@@ -64,6 +64,10 @@
         <servlet-name>AddBillServlet</servlet-name>
         <servlet-class>controller.AddBillServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserHistoryServlet</servlet-name>
+        <servlet-class>controller.UserHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlansServlet</servlet-name>
         <url-pattern>/plans</url-pattern>
@@ -98,7 +102,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserEditServlet</servlet-name>
-        <url-pattern>/admin/useredit</url-pattern>
+        <url-pattern>/useredit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>AddBillServlet</servlet-name>
         <url-pattern>/add-bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserHistoryServlet</servlet-name>
+        <url-pattern>/user/billings</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

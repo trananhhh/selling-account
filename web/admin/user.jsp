@@ -100,7 +100,7 @@
         <div class="col-3">
             <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;"
             bis_skin_checked="1">
-            <a href="/" class="d-flex justify-content-center link-dark text-decoration-none">
+            <a href="#" class="d-flex justify-content-center link-dark text-decoration-none">
                 <span class="fs-4 text-center">User list</span>
             </a>
             <hr>
@@ -185,7 +185,7 @@
                                     <%= x.getRole()%>
                                 </td>
                                 <td class="sm-col text-center"><a class="btn btn-secondary"
-                                        href="/account/admin/useredit?id=<%=x.getUsername()%>">Edit</a>
+                                        href="/account/useredit?name=<%=x.getUsername()%>">Edit</a>
                                 </td>
                             </tr>
                         <% } %>
