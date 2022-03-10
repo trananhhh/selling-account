@@ -508,7 +508,7 @@
                                         <img src="./assests/img/img-01.png" alt="IMG" />
                                     </div>
 
-                                    <form class="login100-form validate-form" method="post" action="./login">
+                                    <form class="login100-form validate-form" method="post" action="../../account/login">
                                         <span class="login100-form-title"> Member Login </span>
 
                                         <%  

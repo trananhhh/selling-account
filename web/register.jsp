@@ -487,7 +487,7 @@
                             <img src="./assests/img/img-01.png" alt="IMG" />
                         </div>
     
-                        <form class="login100-form validate-form" method="post" action="./register">
+                        <form class="login100-form validate-form" method="post" action="../../account/register">
                             <span class="login100-form-title"> Member Register </span>
                             <p class="text-center danger" id="err">
                             <%

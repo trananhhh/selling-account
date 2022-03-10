@@ -141,13 +141,13 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="./" class="nav-link " aria-current="page">
+                        <a href="../../account/user" class="nav-link " aria-current="page">
                             <i class="bi bi-house-fill"></i>
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a  href="../useredit?name=<%= session.getAttribute("username") %>" 
+                        <a  href="../../account/useredit?name=<%= session.getAttribute("username") %>" 
                             class="nav-link"
                             aria-current="page">
                             <i class="bi bi-people-fill"></i>
@@ -177,7 +177,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="./logout">Sign
+                            <a class="dropdown-item" href="../../account/logout">Sign
                                 out</a>
                         </li>
                     </ul>
@@ -188,7 +188,7 @@
         <!-- Main -->
         <div class="col-9">
             <div class="container-fluid">
-                <form action="" method="POST" id="search-form"
+                <form action="../../account/user" method="POST" id="search-form"
                     class="align-items-center">
                     <div class="mb-3" id="search-bar">
                         <input type="text" class="form-control" id="key"

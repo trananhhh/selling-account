@@ -161,56 +161,51 @@
                                 <h1>Giỏ hàng</h1>
                                 <div class="item-list">
                                     <a href="./plans" id="back-btn"><i class="fa-solid fa-arrow-left"></i>Mua thêm</a>
-                                    <%  
-                                        if(session.getAttribute("itemsInCart") == null){
-                                    %>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <h3 class="text-center">Cart is empty! Let shopping first!!!</h3>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <%
-                                        }
-else{
-
-                                        List<Item> listItems = (ArrayList) session.getAttribute("itemsInCart");
-                                        for(Item i : listItems){
-                                        Plan p = i.getPlan();
-                                        int duration = i.getDuration();
-                                        int idx = listItems.indexOf(i);
-                                        %>
-                                        <div class="item-container" id="item-<%= idx %>">
-                                            <div class="left-box">
-                                                <h3>
-                                                    <%= p.getName() %>
-                                                </h3>
+                                    <% if(session.getAttribute("itemsInCart")==null){ %>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <h3 class="text-center">Cart is empty! Let shopping first!!!</h3>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <% } else{ List<Item> listItems = (ArrayList)
+                                            session.getAttribute("itemsInCart");
+                                            for(Item i : listItems){
+                                            Plan p = i.getPlan();
+                                            int duration = i.getDuration();
+                                            int idx = listItems.indexOf(i);
+                                            %>
+                                            <div class="item-container" id="item-<%= idx %>">
+                                                <div class="left-box">
+                                                    <h3>
+                                                        <%= p.getName() %>
+                                                    </h3>
+                                                </div>
+                                                <div class="right-box">
+                                                    <span>
+                                                        <%= duration %>
+                                                    </span> x
+                                                    <span>
+                                                        <%= p.getPrice() %>
+                                                    </span>
+                                                    <h4 class="final-price">
+                                                        <%= duration*p.getPrice() %>
+                                                    </h4>
+                                                    <i class="fa-solid fa-trash-can remove-btn"
+                                                        onclick="removeItem(<%= idx %>)"></i>
+                                                </div>
                                             </div>
-                                            <div class="right-box">
-                                                <span>
-                                                    <%= duration %>
-                                                </span> x
-                                                <span>
-                                                    <%= p.getPrice() %>
-                                                </span>
-                                                <h4 class="final-price">
-                                                    <%= duration*p.getPrice() %>
-                                                </h4>
-                                                <i class="fa-solid fa-trash-can remove-btn"
-                                                    onclick="removeItem(<%= idx %>)"></i>
-                                            </div>
-                                        </div>
-                                        <% }} %>
-                                            <div class="purchase-box">
-                                                <p>Tổng cộng: </p>
-                                                <h4 class="total" id="total"></h4>
-                                                <p>vnd</p>
-                                                <button id="purchase" type="button" class="btn btn-primary"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Thanh toán
-                                                </button>
-                                            </div>
+                                            <% }} %>
+                                                <div class="purchase-box">
+                                                    <p>Tổng cộng: </p>
+                                                    <h4 class="total" id="total"></h4>
+                                                    <p>vnd</p>
+                                                    <button id="purchase" type="button" class="btn btn-primary"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        Thanh toán
+                                                    </button>
+                                                </div>
                                 </div>
                                 <div class="modal fade" id="exampleModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -235,15 +230,16 @@ else{
                                                                 </div>
                                                                 <div class="form-group CVV col-4">
                                                                     <input type="text" class="form-control" id="cvv"
-                                                                        placeholder="CVV" minlength="3" maxlength="3" required>
+                                                                        placeholder="CVV" minlength="3" maxlength="3"
+                                                                        required>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
 
                                                                 <div class="form-group" id="card-number-field">
                                                                     <input type="text" class="form-control"
-                                                                        id="cardNumber" placeholder="Card Number" minlength="16" maxlength="16"
-                                                                        required>
+                                                                        id="cardNumber" placeholder="Card Number"
+                                                                        minlength="16" maxlength="16" required>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">

@@ -53,7 +53,7 @@
                             <hr>
                             <ul class="nav nav-pills flex-column mb-auto">
                                 <li class="nav-item">
-                                    <a href="./user" class="nav-link " aria-current="page">
+                                    <a href="../../account/user" class="nav-link " aria-current="page">
                                         <i class="bi bi-house-fill"></i>
                                         Home
                                     </a>
@@ -67,7 +67,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./user/billings" class="nav-link " aria-current="page">
+                                    <a href="../../account/user/billings" class="nav-link " aria-current="page">
                                         <i class="bi bi-receipt"></i>
                                         Purchase history
                                     </a>
@@ -104,7 +104,7 @@
                         if(user == null)return; 
                     %>
                         <div class="container-fluid d-flex align-content-center justify-content-center">
-                            <form action="./useredit?name=<%= user.getUsername() %>" method="POST">
+                            <form action="../../account/useredit?name=<%= user.getUsername() %>" method="POST">
                                 <h1 class="text-center">User update</h1>
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" name="username" value="<%= user.getUsername() %>"

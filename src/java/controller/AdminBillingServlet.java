@@ -64,12 +64,13 @@ public class AdminBillingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         out.println(session.getAttribute("role"));
         try {
             if(session.getAttribute("role") == null)
-                response.sendRedirect("../index.jsp");
+                response.sendRedirect("../../account/index.jsp");
             String userRole = session.getAttribute("role").toString();
             if(userRole.equals("0")){
                 BillingsDAO ud = new BillingsDAO();
@@ -83,17 +84,47 @@ public class AdminBillingServlet extends HttpServlet {
                 }
                 
                 List<Billing> list ;
+                list = ud.getAllBillings();
                 if(sort.equals("")){
-                    list = ud.getAllBillings();
+
                 }else {
-                    if(sort.equalsIgnoreCase((String)session.getAttribute("preSort"))){
-                        list = ud.getAllBillingsSort(sort);
-                        session.setAttribute("preSort", sort);
+                    if(session.getAttribute("sort")!=null){
+                        if(sort.equalsIgnoreCase("date")){
+                            list=ud.sortListBy(list, 0);
+                        }
+                        if(sort.equalsIgnoreCase("duration")){
+                            list=ud.sortListBy(list, 1);
+                        }
+                        if(sort.equalsIgnoreCase("price")){
+                            list=ud.sortListBy(list, 2);
+                        }
+                        session.setAttribute("sort", null);
                     }else{
-                        list = ud.getAllBillingsSortRev(sort);
-                        session.setAttribute("preSort", null);
+                        if(sort.equalsIgnoreCase("date")){
+                            list=ud.revSortListBy(list, 0);
+                        }
+                        if(sort.equalsIgnoreCase("duration")){
+                            list=ud.revSortListBy(list, 1);
+                        }
+                        if(sort.equalsIgnoreCase("price")){
+                            list=ud.revSortListBy(list, 2);
+                        }
+                        session.setAttribute("sort", sort);
                     }
                 }
+                
+                String plan;
+                try{
+                    plan = request.getParameter("pro_id");
+                }catch(Exception e){
+                    plan = "";
+                }
+                if(plan==null)plan="";
+                if(plan.equals("0")||plan.equals("")){
+                    
+                }else {
+                    list=ud.choseOnly(list, plan);
+               }
                 
                 int numPs = list.size();
                 int numperPage = 20;
@@ -117,12 +148,12 @@ public class AdminBillingServlet extends HttpServlet {
                 request.setAttribute("num", numpage);
                 request.setAttribute("curPage", page);
                 request.setAttribute("sort", sort);
-                request.getRequestDispatcher("./billing.jsp").forward(request, response);
+                request.getRequestDispatcher("../../account/admin/billing.jsp").forward(request, response);
             }
             else
-                response.sendRedirect("../index.jsp");
+                response.sendRedirect("../../account/index.jsp");
         } catch (Exception e) {
-            response.sendRedirect("../login");
+            response.sendRedirect("../../account/login");
         }
     }
 
@@ -137,6 +168,7 @@ public class AdminBillingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         try {
             if(session.getAttribute("role") == null)
@@ -145,7 +177,7 @@ public class AdminBillingServlet extends HttpServlet {
             if(userRole.equals("0")){
                 PlansDAO pd = new PlansDAO();
                 BillingsDAO ud = new BillingsDAO();
-                String key = request.getParameter("key");
+                String key = request.getParameter("key1");
                 List<Billing> list = ud.getBillingsByKey(key);
                 
                 int numPs = list.size();

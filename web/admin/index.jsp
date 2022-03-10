@@ -23,7 +23,7 @@
                 integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-            <title>Admin -CMS</title>
+            <title>Admin - CMS</title>
             <style>
                 body {
                     height: 100vh;
@@ -81,13 +81,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./user" class="nav-link " aria-current="page">
+                            <a href="../../account/admin/user" class="nav-link " aria-current="page">
                                 <i class="bi bi-people-fill"></i>
                                 User management
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./admin/billing?sort=Date" class="nav-link " aria-current="page">
+                            <a href="../../account/admin/billing?sort=Date" class="nav-link " aria-current="page">
                                 <i class="bi bi-receipt"></i>
                                 Billing management
                             </a>

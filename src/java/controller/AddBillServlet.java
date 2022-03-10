@@ -62,6 +62,7 @@ public class AddBillServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         processRequest(request, response);
     }
 
@@ -76,6 +77,7 @@ public class AddBillServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
         //Manual add bill
         
@@ -117,7 +119,7 @@ public class AddBillServlet extends HttpServlet {
         ));
         
         request.setAttribute("notice", "Created successfully!!!");
-        request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
+        request.getRequestDispatcher("../../account/admin/index.jsp").forward(request, response);
     }
 
     /**

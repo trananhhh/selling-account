@@ -106,7 +106,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="./" class="nav-link " aria-current="page">
+                    <a href="../../account/admin" class="nav-link " aria-current="page">
                         <i class="bi bi-house-fill"></i>
                         Home
                     </a>
@@ -119,7 +119,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./billing?sort=Date" class="nav-link " aria-current="page">
+                    <a href="../../account/admin/billing?sort=Date" class="nav-link " aria-current="page">
 
                         <i class="bi bi-receipt"></i>
                         Billing management
@@ -141,7 +141,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="../logout">Sign out</a></li>
+                    <li><a class="dropdown-item" href="../../account/logout">Sign out</a></li>
                 </ul>
             </div>
         </div>
@@ -185,7 +185,7 @@
                                     <%= x.getRole()%>
                                 </td>
                                 <td class="sm-col text-center"><a class="btn btn-secondary"
-                                        href="/account/useredit?name=<%=x.getUsername()%>">Edit</a>
+                                        href="../../account/useredit?name=<%=x.getUsername()%>">Edit</a>
                                 </td>
                             </tr>
                         <% } %>
@@ -200,12 +200,12 @@
                     <i class="bi bi-caret-left-fill"> </i>
                 </button>
                 <a  class="btn btn-secondary nav-btn"
-                    href="/account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
+                    href="../../account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
                     <i class="bi bi-caret-right-fill"> </i> 
                 </a>
                 <% } else if(curPage>= numPage){ %>
                 <a  class="btn btn-secondary nav-btn"
-                    href="/account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
+                    href="../../account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
                     <i class="bi bi-caret-left-fill"> </i>
                 </a>
                 <button class="btn btn-secondary nav-btn" disabled>
@@ -213,11 +213,11 @@
                 </button>
                 <% } else{ %>
                 <a  class="btn btn-secondary nav-btn"
-                    href="/account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
+                    href="../../account/admin/user?page=<%=curPage - 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
                     <i class="bi bi-caret-left-fill"> </i>
                 </a>
                 <a  class="btn btn-secondary nav-btn"
-                    href="/account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
+                    href="../../account/admin/user?page=<%=curPage + 1%>&key=<%= request.getAttribute("key")==null?"":request.getAttribute("key") %>" > 
                     <i class="bi bi-caret-right-fill"> </i> 
                 </a>
                 <% } %>

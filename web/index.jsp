@@ -6,8 +6,7 @@
                     <%@page contentType="text/html" pageEncoding="UTF-8" %>
                         <!DOCTYPE html>
 
-                        <html>
-
+                        <html>  
                         <head>
                             <meta charset="utf-8" />
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -103,23 +102,23 @@
                                                         <%
                                                             if(session.getAttribute("role").toString().equals("0")){
                                                         %>
-                                                            <li><a class="dropdown-item" href="./admin">Overview</a></li>
+                                                            <li><a class="dropdown-item" href="../../account/admin">Overview</a></li>
                                                         <%
                                                             }else{
                                                         %>
-                                                            <li><a class="dropdown-item" href="./user">Overview</a></li>
+                                                            <li><a class="dropdown-item" href="../../account/user">Overview</a></li>
                                                         <%  }
                                                         %>
-                                                        <li><a class="dropdown-item" href="./logout">Sign out</a>
+                                                        <li><a class="dropdown-item" href="../../account/logout">Sign out</a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <% } else { %>
 
-                                                    <a id="login-btn" class="btn btn-secondary" href="./login">
+                                                    <a id="login-btn" class="btn btn-secondary" href="../../account/login">
                                                         Login
                                                     </a>
-                                                    <a href="./register" id="login-btn"
+                                                    <a href="../../account/register" id="login-btn"
                                                         class="btn btn-outline-secondary">
                                                         Register
                                                     </a>
@@ -140,7 +139,7 @@
                                                     </p>
                                                     <div
                                                         class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                                        <a class="btn btn-danger btn-lg px-4 me-sm-3" href="./plans">Mua
+                                                        <a class="btn btn-danger btn-lg px-4 me-sm-3" href="../../account/plans">Mua
                                                             ngay</a>
                                                         <a href="#features"
                                                             class="btn btn-outline-danger btn-lg px-4 me-sm-3">

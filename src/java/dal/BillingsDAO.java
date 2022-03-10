@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -98,60 +99,96 @@ public class BillingsDAO extends DBContext{
         }
         return arr;
     }
-    
-     public List<Billing> getBillingsByName(String xCode) {
-        String xSql = "select * from Billings where username = '" + xCode+"'";
-        List<Billing> list = new ArrayList<Billing>();
-        try {
-            PreparedStatement ps = connection.prepareStatement(xSql);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                int id = rs.getInt(1);
-                String username = rs.getString(2);
-                int planId = rs.getInt(3);
-                int accountId = rs.getInt(4);
-                String date = rs.getString(5);
-                int duration = rs.getInt(6);
-                int price = rs.getInt(7);
-                Billing res = new Billing(id, username, planId, accountId, date, duration, price);
-                list.add(res);
-            }
-            rs.close();        
-            ps.close();
-        }
-            catch(Exception e) {
-            e.printStackTrace();
-        }       
-        return list;
+
+    public List<Billing> choseOnly(List<Billing> list,String plan){	
+        List<Billing> arr = new ArrayList<>();	
+        for(int i = 0; i < list.size(); i++){	
+            if(list.get(i).getPlanId()==Integer.parseInt(plan))	
+                arr.add(list.get(i));	
+        }	
+        return arr;	
     }
 
-    
-    public Billing getBillingsByID(String xCode) {
-        String xSql = "select * from Billings where username = " + xCode;
-        Billing res = null;
-        
-        try {
-            PreparedStatement ps = connection.prepareStatement(xSql);
-            ResultSet rs = ps.executeQuery();
-
-            if(rs.next()) {
-                int id = rs.getInt(1);
-                String username = rs.getNString(2);
-                int planId = rs.getInt(3);
-                int accountId = rs.getInt(4);
-                String date = rs.getString(5);
-                int duration = rs.getInt(6);
-                int price = rs.getInt(7);
-                res = new Billing(id, username, planId, accountId, date, duration, price);
-            }
-            rs.close();        
-            ps.close();
-        }
-            catch(Exception e) {
-            e.printStackTrace();
-        }       
-        return res;
+    public List<Billing> revSortListBy(List<Billing> list,int mode){	
+        for(int i = 0; i < list.size(); i++){	
+            for(int j=i+1;j<list.size();j++){	
+                int check=0;	
+                if(mode==0)check=(list.get(j).getDate().compareTo(list.get(i).getDate()));	
+                if(mode==1){	
+                    if(list.get(j).getDuration()>list.get(i).getDuration()){	
+                        check=1;	
+                    }else{	
+                        check=-1;	
+                    }	
+                }	
+                if(mode==2){	
+                    if(list.get(j).getPrice()>list.get(i).getPrice()){	
+                        check=1;	
+                    }else{	
+                        check=-1;	
+                    }	
+                }	
+                if(check<0){	
+                    Collections.swap(list, i, j);	
+                }	
+            }	
+        }	
+        return list;	
     }
+
+    public List<Billing> sortListBy(List<Billing> list,int mode){	
+        for(int i = 0; i < list.size(); i++){	
+            for(int j=i+1;j<list.size();j++){	
+                int check=0;	
+                if(mode==0)check=(list.get(j).getDate().compareTo(list.get(i).getDate()));	
+                if(mode==1){	
+                    if(list.get(j).getDuration()>list.get(i).getDuration()){	
+                        check=1;	
+                    }else{	
+                        check=-1;	
+                    }	
+                }	
+                if(mode==2){	
+                    if(list.get(j).getPrice()>list.get(i).getPrice()){	
+                        check=1;	
+                    }else{	
+                        check=-1;	
+                    }	
+                }	
+                if(check>0){	
+                    Collections.swap(list, i, j);	
+                }	
+            }	
+        }	
+        return list;	
+    }
+
+    public List<Billing> getBillingsByName(String xCode) {	
+        String xSql = "select * from Billings where username = '" + xCode+"'";	
+        List<Billing> list = new ArrayList<Billing>();	
+        try {	
+            PreparedStatement ps = connection.prepareStatement(xSql);	
+            ResultSet rs = ps.executeQuery();	
+            while(rs.next()) {	
+                int id = rs.getInt(1);	
+                String username = rs.getString(2);	
+                int planId = rs.getInt(3);	
+                int accountId = rs.getInt(4);	
+                String date = rs.getString(5);	
+                int duration = rs.getInt(6);	
+                int price = rs.getInt(7);	
+                Billing res = new Billing(id, username, planId, accountId, date, duration, price);	
+                list.add(res);	
+            }	
+            rs.close();        	
+            ps.close();	
+        }	
+            catch(Exception e) {	
+            e.printStackTrace();	
+        }       	
+        return list;	
+    }
+    
     
     public int isOnlyNumber(String xCode){
         for(int i = 0; i < xCode.length(); i++)
@@ -160,40 +197,38 @@ public class BillingsDAO extends DBContext{
         return 1;
     }
     
-    public List<Billing> getBillingsByKey(String key){
-        List<Billing> list = new ArrayList<>();
-        
-        String SQLCommand = "0";
-        if(isOnlyNumber(key) == 1)
-            SQLCommand = "SELECT * FROM Billings WHERE id = "+key
-                    + "OR username like '%" + key + "%' "
-                    + "OR planId = "   + key
-                    + "OR accountId = "+ key
-                    + "OR date like '%"+ key + "%' "
-                    + "OR duration = " + key
-                    + "OR price = "    + key;
-        else
-            SQLCommand = "SELECT * FROM Billings WHERE"
-                    + "username like '%" + key + "%' "
-                    + "OR date like '%"  + key + "%' ";
-            
-        try {
-            PreparedStatement st = connection.prepareStatement(SQLCommand);
-            ResultSet rs = st.executeQuery();
-            while(rs.next()){
-                int id = rs.getInt(1);
-                String username = rs.getNString(2);
-                int planId = rs.getInt(3);
-                int accountId = rs.getInt(4);
-                String date = rs.getString(5);
-                int duration = rs.getInt(6);
-                int price = rs.getInt(7);
-                list.add(new Billing(id, username, planId, accountId, date, duration, price));
-            }
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return list;
+    public List<Billing> getBillingsByKey(String key){	
+        List<Billing> list = new ArrayList<>();	
+        	
+        String SQLCommand;	
+        if(isOnlyNumber(key) == 1)	
+            SQLCommand = "SELECT * FROM Billings WHERE id = "+key	
+                    + "OR username like '%" + key + "%' "	
+                    + "OR planId = "   + key	
+                    + "OR accountId = "+ key	
+                    + "OR date like '%"+ key + "%' "	
+                    + "OR duration = " + key	
+                    + "OR price = "    + key;	
+        else	
+            SQLCommand = "SELECT * FROM Billings where  username like '%" + key + "%' OR date like '%"  + key + "%' ";	
+            	
+        try {	
+            PreparedStatement st = connection.prepareStatement(SQLCommand);	
+            ResultSet rs = st.executeQuery();	
+            while(rs.next()){	
+                int id = rs.getInt(1);	
+                String username = rs.getNString(2);	
+                int planId = rs.getInt(3);	
+                int accountId = rs.getInt(4);	
+                String date = rs.getString(5);	
+                int duration = rs.getInt(6);	
+                int price = rs.getInt(7);	
+                list.add(new Billing(id, username, planId, accountId, date, duration, price));	
+            }	
+        } catch (Exception e) {	
+            System.err.println(e);	
+        }	
+        return list;	
     }
     
     
@@ -243,6 +278,19 @@ public class BillingsDAO extends DBContext{
             Logger.getLogger(BillingsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
+    }
+
+    public void deleteUserBill(String name) {	
+        String xSql = "delete from billings where username=?";	
+        try {	
+           PreparedStatement ps = connection.prepareStatement(xSql);	
+           ps.setString(1, name);	
+           ps.executeUpdate();	
+           ps.close();	
+        }	
+        catch(Exception e) {	
+           e.printStackTrace();	
+        }	
     }
     
     public static void main(String[] args) {

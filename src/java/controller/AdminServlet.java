@@ -57,6 +57,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         try {
             String userRole = session.getAttribute("role").toString();
@@ -67,9 +68,9 @@ public class AdminServlet extends HttpServlet {
                 request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
             }
             else 
-                response.sendRedirect("./");
+                response.sendRedirect("../../account");
         } catch (Exception e) {
-            response.sendRedirect("./login");
+            response.sendRedirect("../../account/login");
         }
     }
 
@@ -86,6 +87,7 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
         //Manual add bill
         
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
         BillingsDAO bd = new BillingsDAO();
