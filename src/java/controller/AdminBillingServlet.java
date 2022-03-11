@@ -10,6 +10,7 @@ import dal.PlansDAO;
 import dal.UsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -148,7 +149,7 @@ public class AdminBillingServlet extends HttpServlet {
                 request.setAttribute("num", numpage);
                 request.setAttribute("curPage", page);
                 request.setAttribute("sort", sort);
-                request.getRequestDispatcher("../../account/admin/billing.jsp").forward(request, response);
+                request.getRequestDispatcher("billing.jsp").forward(request, response);
             }
             else
                 response.sendRedirect("../../account/index.jsp");
@@ -178,8 +179,12 @@ public class AdminBillingServlet extends HttpServlet {
                 PlansDAO pd = new PlansDAO();
                 BillingsDAO ud = new BillingsDAO();
                 String key = request.getParameter("key1");
-                List<Billing> list = ud.getBillingsByKey(key);
-                
+                List<Billing> list;
+                if(key.equals("")){
+                    list = ud.getAllBillings();
+                }else{
+                    list = ud.getBillingsByKey(key);
+                }
                 int numPs = list.size();
                 int numperPage = 20;
                 int numpage = numPs/numperPage+(numPs%numperPage==0?0:1);

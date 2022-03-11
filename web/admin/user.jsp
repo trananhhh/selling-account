@@ -106,7 +106,7 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="../../account/admin" class="nav-link " aria-current="page">
+                    <a href="../../account/admin/" class="nav-link " aria-current="page">
                         <i class="bi bi-house-fill"></i>
                         Home
                     </a>

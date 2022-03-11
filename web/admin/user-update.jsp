@@ -59,6 +59,7 @@
                             <input type="number" class="form-control" name="role" value="<%= user.getRole() %>" /></br>
                             <input type="submit" class="btn btn-primary" value="Update" />
                             <a href="../../account/admin/user" class="btn btn-secondary">Cancel</a>
+                            <a href="../../account/admin/deleteUser?user=<%= user.getUsername() %>" class="btn btn-danger">Delete</a>
                         </form>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

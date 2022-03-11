@@ -65,6 +65,7 @@ public class AdminServlet extends HttpServlet {
                 BillingsDAO bd = new BillingsDAO();
                 UsersDAO ud = new UsersDAO();
 //                response.sendRedirect("./admin/index.jsp");
+                request.setAttribute("notice", request.getAttribute("notice"));
                 request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
             }
             else 
@@ -126,7 +127,7 @@ public class AdminServlet extends HttpServlet {
         ));
         
         request.setAttribute("notice", "Created successfully!!!");
-        request.getRequestDispatcher("./admin/index.jsp").forward(request, response);
+        request.getRequestDispatcher("./admin/").forward(request, response);
     }
 
     /**

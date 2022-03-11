@@ -123,7 +123,7 @@
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a href="../../account/admin" class="nav-link " aria-current="page">
+                            <a href="../../account/admin/" class="nav-link " aria-current="page">
                                 <i class="bi bi-house-fill"></i>
                                 Home
                             </a>
@@ -176,19 +176,22 @@
                         PlansDAO pl = new PlansDAO();
                         List<Plan> lst = (List<Plan>) pl.getAllPlans();
                     %>
-
+                    
                     <div id="table-container">
                         <table class="table table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-arrow-down-up"></i></a></th>
                                     <th scope="col" class="md-col">
-                                        <select id="pro_id" name="pro_id" class="form-select" >
-                                            <option value="0" selected> All plans </option>
-                                            <% for (Plan x : lst) {%>
-                                            <option value="<%= x.getId()%>"> <%= x.getName()%> </option>
-                                            <% } %>
-                                        </select>
+                                        <form method="GET">	
+                                            <button type="submit" class="btn btn-primary">Apply</button></a>	
+                                            <select id="pro_id" name="pro_id" class="form-select" >	
+                                                <option value="0" selected>All plans </option>	
+                                                <% for(Plan x: lst) { %>	
+                                                <option value="<%= x.getId() %>"> <%= x.getName() %> </option>	
+                                                <% } %>	
+                                            </select>	
+                                        </form>
                                     </th>
                                     <th scope="col" class="">Account</th>
                                     <th scope="col" class="md-col">Username</th>
