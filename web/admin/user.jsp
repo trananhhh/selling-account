@@ -24,6 +24,7 @@
         }
         td {
             padding: 4px 8px;
+                overflow: auto;
         }
         html{
             overflow: hidden;

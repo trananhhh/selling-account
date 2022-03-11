@@ -31,6 +31,7 @@
 
         td {
             padding: 4px 8px;
+            overflow: auto;
         }
 
         html {
@@ -213,11 +214,9 @@
                                         href="?sort=Date">Date <i
                                             class="bi bi-arrow-down-up"></i></a>
                                 </th>
-                                <th scope="col" class="md-col">
+                                <th scope="col" class="md-col">Plan
                                 </th>
                                 <th scope="col" class="">Account</th>
-                                <th scope="col" class="md-col">Username
-                                </th>
                                 <th scope="col"
                                     class="md-col text-center"><a
                                         href="?sort=Duration"
@@ -255,9 +254,6 @@
                                                 %>
                                                 <%--<%= x.getAccountId()
                                                     %>--%>
-                                        </td>
-                                        <td class="md-col">
-                                            <%= x.getUsername() %>
                                         </td>
                                         <td class="md-col text-center">
                                             <%= x.getDuration()%> tháng

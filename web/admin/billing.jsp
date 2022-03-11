@@ -30,6 +30,7 @@
             }
             td {
                 padding: 4px 8px;
+                overflow: auto;
             }
             html{
                 overflow: hidden;
@@ -62,14 +63,14 @@
             #dropdownUser2 i {
                 margin-right: 8px;
             }
-            #submit-btn{
-                margin-top: -6px;
-            }
             .sm-col{
                 width: 80px;
             }
             .md-col{
-                width: 160px;
+                width: 128px;
+            }
+            .mmd-col{
+                width: 150px;
             }
             table {
                 display: flex;
@@ -102,11 +103,23 @@
                 color: black;
             }
             #pro_id{
-                padding: 2px 10px;
-                font-size: 13px;
-                font-weight: 700;
-                width: 90%;
+                display: inline-block;
+                width: 180px;
             }
+            #filter-btn, #submit-btn{
+                
+                margin-top: -6px;
+            }
+            #header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-right: 90px;
+            }
+            #filter-container{
+                margin-top: 8px;
+            }
+            
         </style>
     </head>
 
@@ -164,37 +177,37 @@
                 </div>
             </div>
             <!-- Main -->
+            <%
+                PlansDAO pl = new PlansDAO();
+                List<Plan> lst = (List<Plan>) pl.getAllPlans();
+            %>
             <div class="col-9">
                 <div class="container-fluid">
+                    <div id="header">
                     <form action="" method="POST" id="search-form" class="align-items-center">
                         <div class="mb-3" id="search-bar">
                             <input type="text" class="form-control" id="key" name="key1" />
                         </div>
                         <button type="submit" id="submit-btn" class="btn btn-primary">Search</button>
                     </form>
-                    <%
-                        PlansDAO pl = new PlansDAO();
-                        List<Plan> lst = (List<Plan>) pl.getAllPlans();
-                    %>
-                    
+                    <form method="GET" id="filter-container">	
+                        <select id="pro_id" name="pro_id" class="form-select" >	
+                            <option value="0" selected>All plans </option>	
+                            <% for(Plan x: lst) { %>	
+                            <option value="<%= x.getId() %>"> <%= x.getName() %> </option>	
+                            <% } %>	
+                        </select>	
+                        <button type="submit" id="filter-btn" class="btn btn-primary">Apply</button>	
+                    </form>
+                </div>
                     <div id="table-container">
                         <table class="table table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col" class="md-col"><a href="?sort=Date">Date <i class="bi bi-arrow-down-up"></i></a></th>
-                                    <th scope="col" class="md-col">
-                                        <form method="GET">	
-                                            <button type="submit" class="btn btn-primary">Apply</button></a>	
-                                            <select id="pro_id" name="pro_id" class="form-select" >	
-                                                <option value="0" selected>All plans </option>	
-                                                <% for(Plan x: lst) { %>	
-                                                <option value="<%= x.getId() %>"> <%= x.getName() %> </option>	
-                                                <% } %>	
-                                            </select>	
-                                        </form>
-                                    </th>
+                                    <th scope="col" class="mmd-col">Plan</th>
                                     <th scope="col" class="">Account</th>
-                                    <th scope="col" class="md-col">Username</th>
+                                    <th scope="col" class="mmd-col">Username</th>
                                     <th scope="col" class="md-col text-center"><a href="?sort=Duration" class=" text-center">Duration <i class="bi bi-arrow-down-up"></i></a></th>
                                     <th scope="col" class="md-col text-center"><a href="?sort=Price" class=" text-center">Price <i class="bi bi-arrow-down-up"></i></a></th>
                                 </tr>
@@ -213,14 +226,14 @@
                                     <td class="md-col">
                                         <%= x.getDate()%>
                                     </td>
-                                    <td class="md-col">
+                                    <td class="mmd-col">
                                         <%= pd.getPlanById(x.getPlanId()).getName()%>
                                     </td>
                                     <td>
                                         <%= ad.getAccountById(x.getAccountId()).getAccount()%>
                                         <%--<%= x.getAccountId() %>--%>
                                     </td>
-                                    <td class="md-col">
+                                    <td class="mmd-col">
                                         <%= x.getUsername()%>
                                     </td> 
                                     <td class="md-col text-center">

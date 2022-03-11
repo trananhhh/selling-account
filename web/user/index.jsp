@@ -54,12 +54,13 @@
             }
             
             .container-fluid {
-                margin-left: -64px;
-                width: 108%;
+                width: 100%;
+                margin: 0 auto;
             }
 
             td {
                 padding: 4px 8px;
+                overflow: auto;
             }
 
             html {
@@ -104,9 +105,11 @@
             .sm-col {
                 width: 80px;
             }
-
-            .md-col {
-                width: 160px;
+            .md-col{
+                width: 128px;
+            }
+            .mmd-col{
+                width: 150px;
             }
 
             table {
@@ -153,9 +156,6 @@
                 font-size: 13px;
                 font-weight: 700;
                 width: 90%;
-            }
-            #shopping-btn{
-
             }
         </style>
     </head>
@@ -228,10 +228,10 @@
                         <table class="table table-responsive table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="md-col">Plan </td>
-                                    <th scope="col" class="md-col">Account</td>
-                                    <th scope="col" class="md-col">Password</td>
-                                    <th scope="col" class="md-col">Due date</td>
+                                    <th scope="col" class="mmd-col">Plan </td>
+                                    <th scope="col" class="">Account</td>
+                                    <th scope="col" class="mmd-col">Password</td>
+                                    <th scope="col" class="mmd-col">Due date</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -241,10 +241,10 @@
                                     for (View x : list) {
                                 %>
                                 <tr>
-                                    <td class="md-col"> <%= x.getName()%> </td>
-                                    <td class="md-col"> <%= x.getAccount()%> </td>
-                                    <td class="md-col"> <%=x.getPassword()%> </td>
-                                    <td class="md-col"> <%=x.getDate()%> </td>
+                                    <td class="mmd-col"> <%= x.getName()%> </td>
+                                    <td class=""> <%= x.getAccount()%> </td>
+                                    <td class="mmd-col"> <%= x.getPassword()%> </td>
+                                    <td class="mmd-col"> <%= x.getDate()%> </td>
                                 </tr>   
                                 <%
                                     }
