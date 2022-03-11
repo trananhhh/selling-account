@@ -35,7 +35,6 @@ public class AccountsDAO extends DBContext{
                 String date         = rs.getString(5);
                 int status          = rs.getInt(6);
                 int currentUsers    = rs.getInt(7);
-                int capacity        = rs.getInt(8);
                 list.add(new Account(id, planId, account, password, date, status, currentUsers));
             }
         } catch (Exception e) {
@@ -134,6 +133,6 @@ public class AccountsDAO extends DBContext{
     
     public static void main(String[] args) {
         AccountsDAO ad = new AccountsDAO();
-        System.out.println(ad.getAccountAvailable(1));
+        System.out.println(ad.getAllAccounts().get(0).getAccount());
     }
 }

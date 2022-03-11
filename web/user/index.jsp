@@ -19,9 +19,9 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Account Overview</title>
         <style>
-            body {
+            /* body {
                 height: 100vh;
-            }
+            } */
             #dropdownUser2 i {
                 margin-right: 8px;
             }
@@ -46,11 +46,14 @@
             }
 
             #notice {
-                font-size: 16px;
-                margin-bottom: 28px;
-                margin-top: -28px;
                 color: #57b846;
-            }.container-fluid {
+                position: absolute;
+                font-size: 20px;
+                top: 23px;
+                left: 360px;
+            }
+            
+            .container-fluid {
                 margin-left: -64px;
                 width: 108%;
             }
@@ -151,6 +154,9 @@
                 font-weight: 700;
                 width: 90%;
             }
+            #shopping-btn{
+
+            }
         </style>
     </head>
     <body>
@@ -182,10 +188,16 @@
                             </a>
                         </li>
                     </ul>
+                    
+                    <a href="../../account/plans" class="text-white nav-link btn btn-danger" aria-current="page">
+                        <i class="bi bi-cart"></i>
+                        Shopping
+                    </a>
+                    
                     <hr>
                     <div class="dropdown" bis_skin_checked="1">
                         <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                        id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                           id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
                             <strong>
                                 <%= session.getAttribute("username")%>
@@ -200,46 +212,46 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-9 position-relative">
+                <%--<%= request.getAttribute("notice") %>--%>
+                <%
+                    if (request.getAttribute("notice") != null) {
+                        String notice = request.getAttribute("notice").toString();
+                %>
+                    <h2 id='notice' class='text-center'><%= notice%></h2>
+                <%
+                    }
+                %>
                 <div class="grey-bg container-fluid">   
                     <div id="table-container">
 
-                    <table class="table table-responsive table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="md-col">Plan </td>
-                                <th scope="col" class="md-col">Account</td>
-                                <th scope="col" class="md-col">Password</td>
-                                <th scope="col" class="md-col">Due date</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                UsersDAO ud = new UsersDAO();
-                                List<View> list = ud.getUserAccount(session.getAttribute("username").toString());
-                                for (View x : list) {
-                            %>
-                            <tr>
-                                <td class="md-col"> <%= x.getName()%> </td>
-                                <td class="md-col"> <%= x.getAccount()%> </td>
-                                <td class="md-col"> <%=x.getPassword()%> </td>
-                                <td class="md-col"> <%=x.getDate()%> </td>
-                            </tr>   
-                            <%
-                                }
-                            %>
-                        </tbody>
-                    </table> 
-                    <%
-                        if (request.getAttribute("notice") != null) {
-                            String notice = request.getAttribute("notice").toString();
-                    %>
-                    <h2 id='notice' class='text-center'><%= notice%></h2>
-                    <%
-                        }
-                    %><div class="row g-10 mt-3">
+                        <table class="table table-responsive table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="md-col">Plan </td>
+                                    <th scope="col" class="md-col">Account</td>
+                                    <th scope="col" class="md-col">Password</td>
+                                    <th scope="col" class="md-col">Due date</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    UsersDAO ud = new UsersDAO();
+                                    List<View> list = ud.getUserAccount(session.getAttribute("username").toString());
+                                    for (View x : list) {
+                                %>
+                                <tr>
+                                    <td class="md-col"> <%= x.getName()%> </td>
+                                    <td class="md-col"> <%= x.getAccount()%> </td>
+                                    <td class="md-col"> <%=x.getPassword()%> </td>
+                                    <td class="md-col"> <%=x.getDate()%> </td>
+                                </tr>   
+                                <%
+                                    }
+                                %>
+                            </tbody>
+                        </table> 
                     </div>
-                </div>
                 </div>
             </div>
 

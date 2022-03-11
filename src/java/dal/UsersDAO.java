@@ -47,11 +47,12 @@ public class UsersDAO extends DBContext{
 
     public List<View> getUserAccount(String name){
         List<View> list = new ArrayList<>();
-        String SQLCommand = "select plans.name,accounts.account,accounts.password,Dateadd(day,billings.duration,accounts.date) as expireDate from users\n" +
+        String SQLCommand = "select plans.name,accounts.account,accounts.password, Dateadd(day, billings.duration * 30, billings.date) as expireDate from users\n" +
                             "join billings on users.username=billings.username\n" +
                             "join plans on billings.planid=plans.id\n" +
                             "join accounts on billings.accountid=accounts.id\n" +
-                            "where users.username ='"+name+"'";
+                            "where users.username ='"+name+"'  and Dateadd(day, billings.duration * 30, billings.date) >= GETDATE()";
+        System.out.println(SQLCommand);
         try {
             PreparedStatement st = connection.prepareStatement(SQLCommand);
             ResultSet rs = st.executeQuery();
@@ -187,10 +188,11 @@ public class UsersDAO extends DBContext{
     
     public static void main(String[] args) {
         UsersDAO ud = new UsersDAO();
+        System.out.println(ud.getUserAccount("user"));
 //        List<User> list = pd.getUsersByKey("a");
 //        User u = pd.getUserByID("aamaya1u");
 //        System.out.println(u.getEmail());
 //        ud.createAccount("123123", "123", "123123" + "@gmail.com", "0000");
-        System.out.println(ud.getUserByID("user").getEmail());
+//        System.out.println(ud.getUserByID("user").getEmail());
     }
 }

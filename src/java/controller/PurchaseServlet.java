@@ -107,7 +107,7 @@ public class PurchaseServlet extends HttpServlet {
         }
         session.removeAttribute("itemsInCart");
         request.setAttribute("notice", "Your purchase was successful!!!");
-        request.getRequestDispatcher("overview.jsp").forward(request, response);
+        request.getRequestDispatcher("./user/index.jsp").forward(request, response);
     }
 
     /**

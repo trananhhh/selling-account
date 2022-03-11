@@ -1,5 +1,8 @@
 <%-- Document : index Created on : Feb 24, 2022, 4:52:37 PM Author : _trananhhh --%>
-    <%@page import="dal.PlansDAO"%>
+    <%@page import="model.Billing"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="dal.AccountsDAO"%>
+<%@page import="dal.PlansDAO"%>
 <%@page import="model.Plan"%>
 <%@page import="java.util.List"%>
 <%@page import="java.time.LocalDate"%>
@@ -61,6 +64,9 @@
                     margin-top: -28px;
                     color: #57b846;
                 }
+                #main-container{
+                    margin-top: 100px;
+                }
             </style>
         </head>
 
@@ -118,8 +124,12 @@
                     BillingsDAO bd = new BillingsDAO();
                     UsersDAO ud = new UsersDAO();
                     PlansDAO pd = new PlansDAO();
+                    List<Plan> plansList = pd.getAllPlans();
+                    AccountsDAO ad = new AccountsDAO();
+                    int accCount = ad.getAllAccounts().size();
                     int userCount = ud.getAllUsers().size();
-                    int billCount = bd.getAllBillings().size();
+                    List<Billing> billList = bd.getAllBillings();
+                    int billCount = billList.size();
                     LocalDate now = LocalDate.now();
                     int totalIncomeThisMonth = bd.getTotalIncomeByMonth(now.getMonthValue(), now.getYear());
                     DecimalFormat formatter = new DecimalFormat("#,###");
@@ -130,7 +140,7 @@
                             <div class=" m-1 card text-white bg-primary">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= formatter.format(totalIncomeThisMonth) %> vnd</h5>
-                                    <p class="card-text">Doanh thu tháng này</p>
+                                    <p class="card-text">This month's revenue</p>
                                     <i class="bi bi-wallet-fill card-icon"></i>
                                 </div>
                             </div>
@@ -139,7 +149,7 @@
                             <div class=" m-1 card text-white bg-danger">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= userCount %></h5>
-                                    <p class="card-text">Khách hàng đã mua</p>
+                                    <p class="card-text">Customers</p>
                                     <i class="bi bi-people-fill card-icon"></i>
                                 </div>
                             </div>
@@ -148,7 +158,7 @@
                             <div class=" m-1 card text-white bg-success">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= billCount %></h5>
-                                    <p class="card-text">Đơn hàng thành công</p>
+                                    <p class="card-text">Orders</p>
                                     <i class="bi bi-receipt-cutoff card-icon"></i>
                                 </div>
                             </div>
@@ -156,18 +166,18 @@
                         <div class="col-md-3">
                             <div class=" m-1 card text-white bg-warning">
                                 <div class="card-body">
-                                    <h5 class="card-title"><%= billCount %></h5>
-                                    <p class="card-text">Đơn hàng thành công</p>
-                                    <i class="bi bi-receipt-cutoff card-icon"></i>
+                                    <h5 class="card-title"><%= accCount %></h5>
+                                    <p class="card-text">Accounts</p>
+                                    <i class="bi bi-bookmark-fill card-icon"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="main-container">
                         <div class="col-6 p-3">
                             <div class="mx-5">
                             <form action="../admin" method="POST">
-                                <h3 class="text-center mb-4 mt-4">Create bill</h3>
+                                <h3 class="text-center mb-4">Create bill</h3>
                                 
                                 <%
                                     if(request.getAttribute("notice") != null){
@@ -193,7 +203,7 @@
                             </form>
                         </div>
                         </div>
-                        <div class="col-6 p-3">
+                                <div class="col-6 p-3" style="padding-right: 36px !important;">
                             <canvas id="myChart"></canvas>
                             <p class="text-center">Income in <%= now.getYear() %></p>
                             <ul style="display: none;">
@@ -210,7 +220,8 @@
             <script>
                 const now = new Date();
                 let labels = [];
-                for(let i = 1; i <= now.getMonth()+1; i++)
+                // for(let i = 1; i <= now.getMonth()+1; i++)
+                for(let i = 1; i <=12; i++)
                     labels.push(i);
                 let interestRaw = document.getElementsByClassName("interest-month");    
                 let interest = [];

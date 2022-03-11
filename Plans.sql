@@ -12,6 +12,8 @@ CREATE DATABASE PRJ301_SellingAccountWebsite
 GO
 USE PRJ301_SellingAccountWebsite
 GO
+Drop table plans
+
 CREATE TABLE Plans(
 	ID int IDENTITY(1,1) PRIMARY KEY,
 	Name nvarchar (500) NOT NULL,
@@ -26,6 +28,12 @@ GO
 INSERT INTO Plans VALUES ('Spotify Premium', N'Nghe nhạc offline;Chuyển bài không giới hạn;AI gợi ý bài hát', 30000, N'spotify', 6);
 GO
 INSERT INTO Plans VALUES ('Youtube Premium', N'Phát nhạc trong nền;Không quảng cáo;Download tất cả video', 50000, N'youtube', 6);
+GO
+INSERT INTO Plans VALUES ('Grammarly Pro', N'Grammarly là một công cụ kiểm tra lỗi chính tả tiếng Anh, bao gồm ngữ pháp, từ vựng, sự hoà hợp giữa chủ ngữ và động từ trong câu,...', 50000, N'grammarly', 4);
+GO
+INSERT INTO Plans VALUES ('Elsa Speak Pro', N'ELSA là một ứng dụng phát âm tiếng Anh giúp bạn nói tiếng Anh một cách tự tin và rõ ràng.', 100000, N'elsa', 2);
+GO
+INSERT INTO Plans VALUES ('Canva Pro', N'Canva là một công cụ thiết kế online miễn phí cho phép người dùng sử dụng miễn phí trên cả máy tính và điện thoại vô cùng tiện lợi.', 65000, N'canva', 4);
 GO
 CREATE TABLE Users(
 	Username nvarchar (500) NOT NULL PRIMARY KEY,
@@ -250,3 +258,11 @@ SELECT * From Billings
 SELECT * FROM BILLINGS WHERE '3/1/2022' <= Date AND Date <= '03/31/2022'
 
 select * from Users where username like '%user%'
+
+select * from billings order by Date desc
+
+select plans.name,accounts.account,accounts.password, billings.date, billings.Duration, Dateadd(day, billings.duration * 30, billings.date) as expireDate from users
+join billings on users.username=billings.username
+join plans on billings.planid=plans.id
+join accounts on billings.accountid=accounts.id
+where users.username ='user'

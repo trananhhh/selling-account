@@ -161,6 +161,10 @@
                         </a>
                     </li>
                 </ul>
+                <a href="../../account/plans" class="text-white nav-link btn btn-danger" aria-current="page">
+                    <i class="bi bi-cart"></i>
+                    Shopping
+                </a>
                 <hr>
                 <div class="dropdown" bis_skin_checked="1">
                     <a href="#"
