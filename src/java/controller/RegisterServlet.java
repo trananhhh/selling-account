@@ -74,20 +74,23 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("err", "Username already exist!!!");
             request.getRequestDispatcher("./register.jsp").forward(request, response);
         }
+        else
         if(ud.checkInfo(email) == 1){
             request.setAttribute("email", email);
             request.setAttribute("err", "Email already exist!!!");
             request.getRequestDispatcher("./register.jsp").forward(request, response);
         }
+        else
         if(ud.checkInfo(phone) == 1){
             request.setAttribute("phone", phone);
             request.setAttribute("err", "Phone already exist!!!");
             request.getRequestDispatcher("./register.jsp").forward(request, response);
         }
-        
-        ud.createAccount(username, password, email, phone);
-        request.setAttribute("username", username);
-        request.setAttribute("notice", "Register successfully!!!");
+        else{
+            ud.createAccount(username, password, email, phone);
+            request.setAttribute("username", username);
+            request.setAttribute("notice", "Register successfully!!!");
+        }
         request.getRequestDispatcher("./login.jsp").forward(request, response);
     }
 
